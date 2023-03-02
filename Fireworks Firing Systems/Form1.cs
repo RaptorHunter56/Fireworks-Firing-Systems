@@ -45,8 +45,10 @@ namespace Fireworks_Firing_Systems
         public Form1()
         {
             InitializeComponent();
+            tabControl1.DrawItem += new DrawItemEventHandler(OnDrawItem);
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
+            BntClick(BntSequencer);
         }
 
         const int _ = 5;
@@ -67,9 +69,9 @@ namespace Fireworks_Firing_Systems
         protected override void OnPaint(PaintEventArgs e) // you can safely omit this method if you want
         {
             //System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(52)))), ((int)(((byte)(51)))))
-            e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(52)))), ((int)(((byte)(51)))))), Left);
-            e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(52)))), ((int)(((byte)(51)))))), TopSmall);
-            e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(52)))), ((int)(((byte)(51)))))), BottomSmall);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), Left);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), TopSmall);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), BottomSmall);
         }
         protected override void WndProc(ref Message message)
         {
@@ -89,6 +91,52 @@ namespace Fireworks_Firing_Systems
                 else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
                 else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
             }
+        }
+
+        private void OnDrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.FromArgb(42, 39, 39), 10);
+            g.DrawRectangle(p, this.tabSetings.Bounds);
+        }
+
+        private void BntClick(Button button)
+        {
+            panel2.Height = button.Height;
+            panel2.Top = button.Top;
+            panel2.Left = button.Left;
+            button.BackColor = Color.FromArgb(42, 39, 39);
+            if (button != BntSequencer) BntSequencer.BackColor = Color.FromArgb(57, 52, 51);
+            if (button != BntDatabase) BntDatabase.BackColor = Color.FromArgb(57, 52, 51);
+            if (button != BntSettings) BntSettings.BackColor = Color.FromArgb(57, 52, 51);
+            switch (button.Name)
+            {
+                case "BntSequencer":
+                    tabControl1.SelectedTab = tabControl1.TabPages[0];
+                    break;
+                case "BntDatabase":
+                    tabControl1.SelectedTab = tabControl1.TabPages[1];
+                    break;
+                case "BntSettings":
+                    tabControl1.SelectedTab = tabControl1.TabPages[2];
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void BntSequencer_Click(object sender, EventArgs e)
+        {
+            BntClick((Button)sender);
+        }
+
+        private void BntDatabase_Click(object sender, EventArgs e)
+        {
+            BntClick((Button)sender);
+        }
+
+        private void BntSettings_Click(object sender, EventArgs e)
+        {
+            BntClick((Button)sender);
         }
     }
 }

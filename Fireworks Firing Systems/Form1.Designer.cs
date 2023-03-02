@@ -43,11 +43,17 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabSequencer = new System.Windows.Forms.TabPage();
+            this.tabDatabase = new System.Windows.Forms.TabPage();
+            this.tabSetings = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -61,6 +67,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tabControl1, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -109,6 +116,7 @@
             this.BntSettings.Text = "Settings";
             this.BntSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BntSettings.UseVisualStyleBackColor = true;
+            this.BntSettings.Click += new System.EventHandler(this.BntSettings_Click);
             // 
             // BntDatabase
             // 
@@ -125,6 +133,7 @@
             this.BntDatabase.Text = "Database";
             this.BntDatabase.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BntDatabase.UseVisualStyleBackColor = true;
+            this.BntDatabase.Click += new System.EventHandler(this.BntDatabase_Click);
             // 
             // BntSequencer
             // 
@@ -141,6 +150,7 @@
             this.BntSequencer.Text = "Sequencer";
             this.BntSequencer.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.BntSequencer.UseVisualStyleBackColor = true;
+            this.BntSequencer.Click += new System.EventHandler(this.BntSequencer_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -258,12 +268,66 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.Buttons;
+            this.tabControl1.Controls.Add(this.tabSequencer);
+            this.tabControl1.Controls.Add(this.tabDatabase);
+            this.tabControl1.Controls.Add(this.tabSetings);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
+            this.tabControl1.Location = new System.Drawing.Point(271, 43);
+            this.tabControl1.Multiline = true;
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1439, 927);
+            this.tabControl1.TabIndex = 2;
+            // 
+            // tabSequencer
+            // 
+            this.tabSequencer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.tabSequencer.Location = new System.Drawing.Point(4, 5);
+            this.tabSequencer.Name = "tabSequencer";
+            this.tabSequencer.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSequencer.Size = new System.Drawing.Size(1431, 918);
+            this.tabSequencer.TabIndex = 0;
+            this.tabSequencer.Text = "Sequencer";
+            // 
+            // tabDatabase
+            // 
+            this.tabDatabase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.tabDatabase.Location = new System.Drawing.Point(4, 5);
+            this.tabDatabase.Name = "tabDatabase";
+            this.tabDatabase.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDatabase.Size = new System.Drawing.Size(1431, 918);
+            this.tabDatabase.TabIndex = 1;
+            this.tabDatabase.Text = "Database";
+            // 
+            // tabSetings
+            // 
+            this.tabSetings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.tabSetings.Location = new System.Drawing.Point(4, 5);
+            this.tabSetings.Name = "tabSetings";
+            this.tabSetings.Size = new System.Drawing.Size(1431, 918);
+            this.tabSetings.TabIndex = 2;
+            this.tabSetings.Text = "Setings";
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(275, 40);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(250, 10);
+            this.panel4.TabIndex = 99;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(1719, 979);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -277,6 +341,7 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -297,5 +362,10 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Panel panel4;
+        private TabControl tabControl1;
+        private TabPage tabSequencer;
+        private TabPage tabDatabase;
+        private TabPage tabSetings;
     }
 }
