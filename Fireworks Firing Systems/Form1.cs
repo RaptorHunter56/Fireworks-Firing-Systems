@@ -51,27 +51,28 @@ namespace Fireworks_Firing_Systems
             BntClick(BntSequencer);
         }
 
+        #region Side Bars
         const int _ = 5;
 
-        Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
-        Rectangle Left { get { return new Rectangle(0, 0, _, this.ClientSize.Height); } }
-        Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
-        Rectangle Right { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
+        Rectangle TopBars { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
+        Rectangle LeftBars { get { return new Rectangle(0, 0, _, this.ClientSize.Height); } }
+        Rectangle BottomBars { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
+        Rectangle RightBars { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
 
-        Rectangle TopSmall { get { return new Rectangle(0, 0, panel1.ClientSize.Width + 3, _); } }
-        Rectangle BottomSmall { get { return new Rectangle(0, this.ClientSize.Height - _, panel1.ClientSize.Width + 3, _); } }
+        Rectangle TopSmallBars { get { return new Rectangle(0, 0, panel1.ClientSize.Width + 3, _); } }
+        Rectangle BottomSmallBars { get { return new Rectangle(0, this.ClientSize.Height - _, panel1.ClientSize.Width + 3, _); } }
 
-        Rectangle TopLeft { get { return new Rectangle(0, 0, _, _); } }
-        Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
-        Rectangle BottomLeft { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
-        Rectangle BottomRight { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
+        Rectangle TopLeftBars { get { return new Rectangle(0, 0, _, _); } }
+        Rectangle TopRightBars { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
+        Rectangle BottomLeftBars { get { return new Rectangle(0, this.ClientSize.Height - _, _, _); } }
+        Rectangle BottomRightBars { get { return new Rectangle(this.ClientSize.Width - _, this.ClientSize.Height - _, _, _); } }
 
         protected override void OnPaint(PaintEventArgs e) // you can safely omit this method if you want
         {
             //System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(52)))), ((int)(((byte)(51)))))
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), Left);
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), TopSmall);
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), BottomSmall);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), LeftBars);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), TopSmallBars);
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(57, 52, 51)), BottomSmallBars);
         }
         protected override void WndProc(ref Message message)
         {
@@ -81,17 +82,18 @@ namespace Fireworks_Firing_Systems
             {
                 var cursor = this.PointToClient(Cursor.Position);
 
-                if (TopLeft.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
-                else if (TopRight.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
-                else if (BottomLeft.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
-                else if (BottomRight.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
+                if (TopLeftBars.Contains(cursor)) message.Result = (IntPtr)HTTOPLEFT;
+                else if (TopRightBars.Contains(cursor)) message.Result = (IntPtr)HTTOPRIGHT;
+                else if (BottomLeftBars.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMLEFT;
+                else if (BottomRightBars.Contains(cursor)) message.Result = (IntPtr)HTBOTTOMRIGHT;
 
-                else if (Top.Contains(cursor)) message.Result = (IntPtr)HTTOP;
-                else if (Left.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
-                else if (Right.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
-                else if (Bottom.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
+                else if (TopBars.Contains(cursor)) message.Result = (IntPtr)HTTOP;
+                else if (LeftBars.Contains(cursor)) message.Result = (IntPtr)HTLEFT;
+                else if (RightBars.Contains(cursor)) message.Result = (IntPtr)HTRIGHT;
+                else if (BottomBars.Contains(cursor)) message.Result = (IntPtr)HTBOTTOM;
             }
         }
+        #endregion
 
         private void OnDrawItem(object sender, DrawItemEventArgs e)
         {
