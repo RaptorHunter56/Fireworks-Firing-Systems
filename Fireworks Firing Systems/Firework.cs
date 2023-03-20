@@ -13,6 +13,7 @@ namespace Fireworks_Firing_Systems
         public int Delay { get; set; }
         public int Length { get; set; }
 
+        public Firework() { }
         public Firework(string Json)
         {
             Firework input = Newtonsoft.Json.JsonConvert.DeserializeObject<Firework>(Json);
