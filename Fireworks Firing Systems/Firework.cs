@@ -13,6 +13,9 @@ namespace Fireworks_Firing_Systems
         public int Delay { get; set; }
         public int Length { get; set; }
 
+        /// var temp = new Firework(File.ReadAllText("Fireworks\\0.json"));
+        /// temp.Colour = Color.Blue;
+        /// File.WriteAllTextAsync("Fireworks\\1.json", temp.ToJson());
         public Firework() { }
         public Firework(string Json)
         {
@@ -36,7 +39,7 @@ namespace Fireworks_Firing_Systems
 
         public override string ToString() => $"[{ID.ToString()}]{FireworkName}:{Type}({Colour})";
         public string ToJson() => Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        public string GetImage() => $"Images\\icons8_Firework_{Type}_100px.png";
+        public string GetIcon() => $"Images\\icons8_Firework_{Type}_100px.png";
     }
 
     /// <summary>
