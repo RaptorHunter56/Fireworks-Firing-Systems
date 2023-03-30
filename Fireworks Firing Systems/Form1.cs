@@ -49,6 +49,7 @@ namespace Fireworks_Firing_Systems
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             BntClick(BntSequencer);
+            zzpanel11.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, 20, 20, 20, 20));
         }
 
         #region Side Bars
@@ -139,6 +140,11 @@ namespace Fireworks_Firing_Systems
         private void BntSettings_Click(object sender, EventArgs e)
         {
             BntClick((Button)sender);
+        }
+
+        private void flowLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
