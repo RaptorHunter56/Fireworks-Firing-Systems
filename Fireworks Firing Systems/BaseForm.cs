@@ -16,5 +16,10 @@ namespace Fireworks_Firing_Systems
         {
             InitializeComponent();
         }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new DataBase().ShowDialog();
+        }
     }
 }
