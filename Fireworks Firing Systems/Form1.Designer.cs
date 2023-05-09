@@ -251,7 +251,7 @@
             // 
             // zzpictureBox6
             // 
-            this.zzpictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("zzpictureBox6.Image")));
+            this.zzpictureBox6.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Sparkler_100px;
             this.zzpictureBox6.Location = new System.Drawing.Point(3, 3);
             this.zzpictureBox6.Name = "zzpictureBox6";
             this.zzpictureBox6.Size = new System.Drawing.Size(41, 41);
@@ -535,7 +535,7 @@
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel6.Location = new System.Drawing.Point(268, 46);
+            this.panel6.Location = new System.Drawing.Point(271, 46);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(15, 928);
             this.panel6.TabIndex = 3;
