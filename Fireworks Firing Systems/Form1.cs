@@ -18,7 +18,9 @@ namespace Fireworks_Firing_Systems
         private const int HTBOTTOMRIGHT = 17;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipes, int nHeightEllipes);
+        public static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipes, int nHeightEllipes);
+        [DllImport("Gdi32.dll", EntryPoint = "DeleteObject")]
+        public static extern bool DeleteObject(IntPtr hObject);
         [DllImportAttribute("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
@@ -49,7 +51,9 @@ namespace Fireworks_Firing_Systems
             this.DoubleBuffered = true;
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             BntClick(BntSequencer);
-            zzpanel11.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, 20, 20, 20, 20));
+
+            this.panel7.Controls.Add(new Firework(100, "Test", FireworkType.Missile, Color.Green, 10, 11).GetPanel());
+            this.panel7.Controls.Add(new Firework(101, "Test2", FireworkType.Cake, Color.Blue, 10, 11).GetPanel());
         }
 
         #region Side Bars
@@ -140,11 +144,6 @@ namespace Fireworks_Firing_Systems
         private void BntSettings_Click(object sender, EventArgs e)
         {
             BntClick((Button)sender);
-        }
-
-        private void flowLayoutPanel5_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

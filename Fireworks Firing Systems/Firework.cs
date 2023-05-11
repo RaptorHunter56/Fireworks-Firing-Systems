@@ -1,4 +1,8 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using Fireworks_Firing_Systems.Properties;
+using System.Drawing;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Resources;
 
 namespace Fireworks_Firing_Systems
 {
@@ -49,16 +53,16 @@ namespace Fireworks_Firing_Systems
 
     public class FireworkDisplay
     {
-        private Panel zzpanel8;
-        private TableLayoutPanel zztableLayoutPanel7;
-        private Label zzlabel11;
-        private PictureBox zzpictureBox6;
-        private FlowLayoutPanel zzflowLayoutPanel6;
-        private Label zzlabel12;
-        private Label zzlabel13;
-        private Panel zzpanel11;
-        private Button zzbutton4;
-        private Label zzlabel14;
+        private Panel panel1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label label1;
+        private PictureBox pictureBox1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label label2;
+        private Label label3;
+        private Panel panel2;
+        private Button button1;
+        private Label label4;
 
         public Firework firework;
 
@@ -70,166 +74,193 @@ namespace Fireworks_Firing_Systems
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.zzpanel8 = new Panel();
-            this.zztableLayoutPanel7 = new TableLayoutPanel();
-            this.zzlabel11 = new Label();
-            this.zzpictureBox6 = new PictureBox();
-            this.zzflowLayoutPanel6 = new FlowLayoutPanel();
-            this.zzlabel12 = new Label();
-            this.zzlabel13 = new Label();
-            this.zzpanel11 = new Panel();
-            this.zzbutton4 = new Button();
-            this.zzlabel14 = new Label();
-            this.zzpanel8.SuspendLayout();
-            this.zztableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zzpictureBox6)).BeginInit();
-            this.zzflowLayoutPanel6.SuspendLayout();
+            this.panel1 = new Panel();
+            this.tableLayoutPanel1 = new TableLayoutPanel();
+            this.label1 = new Label();
+            this.pictureBox1 = new PictureBox();
+            this.flowLayoutPanel1 = new FlowLayoutPanel();
+            this.label2 = new Label();
+            this.label3 = new Label();
+            this.panel2 = new Panel();
+            this.button1 = new Button();
+            this.label4 = new Label();
+            this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             // 
-            // zzpanel8
+            // panel1
             // 
-            this.zzpanel8.AutoSize = true;
-            this.zzpanel8.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            this.zzpanel8.BorderStyle = BorderStyle.FixedSingle;
-            this.zzpanel8.Controls.Add(this.zztableLayoutPanel7);
-            this.zzpanel8.Dock = DockStyle.Top;
-            this.zzpanel8.Location = new Point(0, 0);
-            this.zzpanel8.MaximumSize = new Size(935, 49);
-            this.zzpanel8.MinimumSize = new Size(680, 49);
-            this.zzpanel8.Name = "zzpanel8";
-            this.zzpanel8.Size = new Size(935, 49);
-            this.zzpanel8.TabIndex = 3;
+            this.panel1.AutoSize = true;
+            this.panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.panel1.BorderStyle = BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Dock = DockStyle.Top;
+            this.panel1.Location = new Point(0, 0);
+            this.panel1.MaximumSize = new Size(935, 49);
+            this.panel1.MinimumSize = new Size(680, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new Size(935, 49);
+            this.panel1.TabIndex = 3;
             // 
-            // zztableLayoutPanel7
+            // tableLayoutPanel1
             // 
-            this.zztableLayoutPanel7.AutoSize = true;
-            this.zztableLayoutPanel7.ColumnCount = 6;
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 45F));
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
-            this.zztableLayoutPanel7.ColumnStyles.Add(new ColumnStyle());
-            this.zztableLayoutPanel7.Controls.Add(this.zzlabel11, 3, 0);
-            this.zztableLayoutPanel7.Controls.Add(this.zzpictureBox6, 0, 0);
-            this.zztableLayoutPanel7.Controls.Add(this.zzflowLayoutPanel6, 1, 0);
-            this.zztableLayoutPanel7.Controls.Add(this.zzpanel11, 2, 0);
-            this.zztableLayoutPanel7.Controls.Add(this.zzbutton4, 5, 0);
-            this.zztableLayoutPanel7.Controls.Add(this.zzlabel14, 4, 0);
-            this.zztableLayoutPanel7.Dock = DockStyle.Fill;
-            this.zztableLayoutPanel7.Location = new Point(0, 0);
-            this.zztableLayoutPanel7.MaximumSize = new Size(933, 47);
-            this.zztableLayoutPanel7.MinimumSize = new Size(678, 47);
-            this.zztableLayoutPanel7.Name = "zztableLayoutPanel7";
-            this.zztableLayoutPanel7.RowCount = 1;
-            this.zztableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            this.zztableLayoutPanel7.Size = new Size(933, 47);
-            this.zztableLayoutPanel7.TabIndex = 2;
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 6;
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.label1, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button1, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 4, 0);
+            this.tableLayoutPanel1.Dock = DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new Point(0, 0);
+            this.tableLayoutPanel1.MaximumSize = new Size(933, 47);
+            this.tableLayoutPanel1.MinimumSize = new Size(678, 47);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new Size(933, 47);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // zzlabel11
+            // label1
             // 
-            this.zzlabel11.AutoSize = true;
-            this.zzlabel11.Dock = DockStyle.Left;
-            this.zzlabel11.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            this.zzlabel11.ForeColor = SystemColors.ControlDark;
-            this.zzlabel11.ImageAlign = ContentAlignment.BottomCenter;
-            this.zzlabel11.Location = new Point(776, 0);
-            this.zzlabel11.Name = firework.Delay.ToString();
-            this.zzlabel11.Size = new Size(46, 47);
-            this.zzlabel11.TabIndex = 5;
-            this.zzlabel11.Text = "label11";
-            this.zzlabel11.TextAlign = ContentAlignment.MiddleLeft;
+            this.label1.AutoSize = true;
+            this.label1.Dock = DockStyle.Left;
+            this.label1.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            this.label1.ForeColor = SystemColors.ControlDark;
+            this.label1.ImageAlign = ContentAlignment.BottomCenter;
+            this.label1.Location = new Point(776, 0);
+            this.label1.Name = firework.Delay.ToString();
+            this.label1.Size = new Size(46, 47);
+            this.label1.TabIndex = 5;
+            this.label1.Text = firework.Delay.ToString();
+            this.label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // zzpictureBox6
+            // pictureBox1
             // 
-            this.zzpictureBox6.Image = (Image)resources.GetObject("zzpictureBox6.Image");
-            this.zzpictureBox6.Location = new Point(3, 3);
-            this.zzpictureBox6.Name = "zzpictureBox6";
-            this.zzpictureBox6.Size = new Size(41, 41);
-            this.zzpictureBox6.SizeMode = PictureBoxSizeMode.Zoom;
-            this.zzpictureBox6.TabIndex = 0;
-            this.zzpictureBox6.TabStop = false;
+            switch (firework.Type)
+            {
+                case FireworkType.Sparkler:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Sparkler_100px;
+                    break;
+                case FireworkType.Fountain:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Fountain_100px;
+                    break;
+                case FireworkType.Smoke_Ball:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Smoke_Ball_100px;
+                    break;
+                case FireworkType.Missile:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Missile_100px;
+                    break;
+                case FireworkType.Mine:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Mine_100px;
+                    break;
+                case FireworkType.Cake:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Cake_100px;
+                    break;
+                case FireworkType.Roman_Candle:
+                    this.pictureBox1.Image = global::Fireworks_Firing_Systems.Properties.Resources.icons8_Firework_Roman_Candle_100px;
+                    break;
+                default:
+                    break;
+            }
+            this.pictureBox1.Location = new Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new Size(41, 41);
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
-            // zzflowLayoutPanel6
+            // flowLayoutPanel1
             // 
-            this.zzflowLayoutPanel6.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            this.zzflowLayoutPanel6.Controls.Add(this.zzlabel12);
-            this.zzflowLayoutPanel6.Controls.Add(this.zzlabel13);
-            this.zzflowLayoutPanel6.Location = new Point(50, 13);
-            this.zzflowLayoutPanel6.Name = "zzflowLayoutPanel6";
-            this.zzflowLayoutPanel6.Size = new Size(675, 21);
-            this.zzflowLayoutPanel6.TabIndex = 1;
+            this.flowLayoutPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            this.flowLayoutPanel1.Controls.Add(this.label2);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Location = new Point(50, 13);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new Size(675, 21);
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
-            // zzlabel12
+            // label2
             // 
-            this.zzlabel12.AutoSize = true;
-            this.zzlabel12.Dock = DockStyle.Left;
-            this.zzlabel12.ForeColor = SystemColors.Control;
-            this.zzlabel12.Location = new Point(3, 0);
-            this.zzlabel12.Name = firework.FireworkName;
-            this.zzlabel12.Size = new Size(61, 18);
-            this.zzlabel12.TabIndex = 2;
-            this.zzlabel12.Text = "label12";
+            this.label2.AutoSize = true;
+            this.label2.Dock = DockStyle.Left;
+            this.label2.ForeColor = SystemColors.Control;
+            this.label2.Location = new Point(3, 0);
+            this.label2.Name = firework.FireworkName;
+            this.label2.Size = new Size(61, 18);
+            this.label2.TabIndex = 2;
+            this.label2.Text = firework.FireworkName;
             // 
-            // zzlabel13
+            // label3
             // 
-            this.zzlabel13.AutoSize = true;
-            this.zzlabel13.Dock = DockStyle.Left;
-            this.zzlabel13.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            this.zzlabel13.ForeColor = SystemColors.ControlDark;
-            this.zzlabel13.ImageAlign = ContentAlignment.BottomCenter;
-            this.zzlabel13.Location = new Point(70, 0);
-            this.zzlabel13.Name = firework.ID.ToString();
-            this.zzlabel13.Size = new Size(46, 18);
-            this.zzlabel13.TabIndex = 3;
-            this.zzlabel13.Text = "label13";
-            this.zzlabel13.TextAlign = ContentAlignment.MiddleLeft;
+            this.label3.AutoSize = true;
+            this.label3.Dock = DockStyle.Left;
+            this.label3.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            this.label3.ForeColor = SystemColors.ControlDark;
+            this.label3.ImageAlign = ContentAlignment.BottomCenter;
+            this.label3.Location = new Point(70, 0);
+            this.label3.Name = firework.ID.ToString();
+            this.label3.Size = new Size(46, 18);
+            this.label3.TabIndex = 3;
+            this.label3.Text = firework.ID.ToString();
+            this.label3.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // zzpanel11
+            // panel2
             // 
-            this.zzpanel11.Anchor = AnchorStyles.None;
-            this.zzpanel11.BackColor = firework.Colour;
-            this.zzpanel11.Location = new Point(740, 13);
-            this.zzpanel11.Name = "zzpanel11";
-            this.zzpanel11.Size = new Size(20, 20);
-            this.zzpanel11.TabIndex = 2;
+            this.panel2.Anchor = AnchorStyles.None;
+            this.panel2.BackColor = firework.Colour;
+            this.panel2.Location = new Point(740, 13);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new Size(20, 20);
+            this.panel2.TabIndex = 2;
+            IntPtr handle = Form1.CreateRoundRectRgn(0, 0, panel2.Width, panel2.Height, 20, 20);
+            this.panel2.Region = System.Drawing.Region.FromHrgn(handle);
+            Form1.DeleteObject(handle);
             // 
-            // zzbutton4
+            // button1
             // 
-            this.zzbutton4.FlatAppearance.BorderSize = 0;
-            this.zzbutton4.FlatStyle = FlatStyle.Flat;
-            this.zzbutton4.Font = new Font("Verdana", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            this.zzbutton4.ForeColor = Color.FromArgb(200, 200, 201);
-            this.zzbutton4.Image = Properties.Resources.icons8_Settings_32px;
-            this.zzbutton4.Location = new Point(896, 3);
-            this.zzbutton4.Name = "zzbutton4";
-            this.zzbutton4.Size = new Size(34, 40);
-            this.zzbutton4.TabIndex = 4;
-            this.zzbutton4.TextImageRelation = TextImageRelation.TextBeforeImage;
-            this.zzbutton4.UseVisualStyleBackColor = true;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = FlatStyle.Flat;
+            this.button1.Font = new Font("Verdana", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            this.button1.ForeColor = Color.FromArgb(200, 200, 201);
+            this.button1.Image = Properties.Resources.icons8_Settings_32px;
+            this.button1.Location = new Point(896, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new Size(34, 40);
+            this.button1.TabIndex = 4;
+            this.button1.TextImageRelation = TextImageRelation.TextBeforeImage;
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // zzlabel14
+            // label4
             // 
-            this.zzlabel14.AutoSize = true;
-            this.zzlabel14.Dock = DockStyle.Left;
-            this.zzlabel14.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            this.zzlabel14.ForeColor = SystemColors.ControlDark;
-            this.zzlabel14.ImageAlign = ContentAlignment.BottomCenter;
-            this.zzlabel14.Location = new Point(836, 0);
-            this.zzlabel14.Name = firework.Length.ToString();
-            this.zzlabel14.Size = new Size(46, 47);
-            this.zzlabel14.TabIndex = 6;
-            this.zzlabel14.Text = "label14";
-            this.zzlabel14.TextAlign = ContentAlignment.MiddleLeft;
+            this.label4.AutoSize = true;
+            this.label4.Dock = DockStyle.Left;
+            this.label4.Font = new Font("Verdana", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            this.label4.ForeColor = SystemColors.ControlDark;
+            this.label4.ImageAlign = ContentAlignment.BottomCenter;
+            this.label4.Location = new Point(836, 0);
+            this.label4.Name = firework.Length.ToString();
+            this.label4.Size = new Size(46, 47);
+            this.label4.TabIndex = 6;
+            this.label4.Text = firework.Length.ToString();
+            this.label4.TextAlign = ContentAlignment.MiddleLeft;
 
-            this.zzpanel8.ResumeLayout(false);
-            this.zzpanel8.PerformLayout();
-            this.zztableLayoutPanel7.ResumeLayout(false);
-            this.zztableLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zzpictureBox6)).EndInit();
-            this.zzflowLayoutPanel6.ResumeLayout(false);
-            this.zzflowLayoutPanel6.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
         }
-        public Panel GetPanel() => zzpanel8;
+        public Panel GetPanel() => panel1;
     }
 }
