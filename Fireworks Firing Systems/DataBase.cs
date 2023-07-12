@@ -16,16 +16,14 @@ namespace Fireworks_Firing_Systems
         {
             InitializeComponent();
             foreach (FireworkType type in (FireworkType[])Enum.GetValues(typeof(FireworkType))) { comboBox1.Items.Add(type); }
-        }
+            folderBrowserDialog1.SelectedPath = textBox3.Text = (Properties.Settings.Default.DataBaseLocatrion.Length > 0) ? Properties.Settings.Default.DataBaseLocatrion : System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
-        {
-
+            bindingSource1.Add(new Firework(1, "Test", FireworkType.Missile, Color.Blue, 0, 0));
+            bindingSource1.Add(new Firework(2, "Test", FireworkType.Missile, Color.DarkRed, 0, 0));
+            Firework.DataGridViewSetup(dataGridView1);
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSize = true;
+            dataGridView1.DataSource = bindingSource1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,34 +33,29 @@ namespace Fireworks_Firing_Systems
             panel1.BackColor = colorDialog1.Color;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-
+            folderBrowserDialog1.ShowDialog();
+            textBox3.Text = Properties.Settings.Default.DataBaseLocatrion = folderBrowserDialog1.SelectedPath;
+            Properties.Settings.Default.Save();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-
+            if ((sender as DataGridView).Columns[e.ColumnIndex].Tag == "Color")
+            {
+                colorDialog1.ShowDialog();
+                dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = colorDialog1.Color;
+                e.Cancel = true;
+            }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DataBase_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                row.Cells["🎨"].Style.BackColor = (Color)row.Cells["Colour"].Value;
+            }
         }
     }
 }

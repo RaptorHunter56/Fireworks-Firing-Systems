@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 
@@ -8,6 +10,7 @@ namespace Fireworks_Firing_Systems
     public class Firework
     {
         public int ID { get; set; }
+        [ShortHand("AuthorName")]
         public string FireworkName { get; set; }
         public FireworkType Type { get; set; }
         public Color Colour { get; set; }
@@ -17,6 +20,7 @@ namespace Fireworks_Firing_Systems
         /// var temp = new Firework(File.ReadAllText("Fireworks\\0.json"));
         /// temp.Colour = Color.Blue;
         /// File.WriteAllTextAsync("Fireworks\\1.json", temp.ToJson());
+        private Firework() { }
         public Firework(int ID_, string Name_, FireworkType Type_, Color Colour_, int Delay_, int Length_)
         {
             ID = ID_;
@@ -30,6 +34,49 @@ namespace Fireworks_Firing_Systems
         public override string ToString() => $"[{ID.ToString()}]{FireworkName}:{Type}({Colour})";
         public string ToJson() => Newtonsoft.Json.JsonConvert.SerializeObject(this);
         public string GetIcon() => $"Images\\icons8_Firework_{Type}_100px.png";
+
+        public static void DataGridViewSetup(DataGridView gridView)
+        {
+            foreach (var propertyInfo in (new Firework()).GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                if (propertyInfo.PropertyType == typeof(Color))
+                    gridView.Columns.Add(CreateIndicatorColoumn());
+                gridView.Columns.Add(CreateColoumn(propertyInfo));
+            }
+        }
+        private static DataGridViewColumn CreateColoumn(PropertyInfo propertyInfo)
+        {
+            return (propertyInfo.PropertyType == typeof(FireworkType)) ? 
+                new DataGridViewComboBoxColumn()
+                {
+                    DataPropertyName = propertyInfo.Name,
+                    Name = (propertyInfo.GetCustomAttributes(false).ToDictionary(a => a.GetType().Name, a => a).ContainsKey("ShortHand")) ? propertyInfo.GetCustomAttributes(false).ToDictionary(a => a.GetType().Name, a => a)["ShortHand"].ToString() : propertyInfo.Name,
+                    AutoSizeMode = (propertyInfo.Name == "FireworkName") ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.AllCells,
+                    DataSource = Enum.GetValues(typeof(FireworkType))
+                } :
+                new DataGridViewTextBoxColumn()
+                {
+                    DataPropertyName = propertyInfo.Name,
+                    Name = (propertyInfo.GetCustomAttributes(false).ToDictionary(a => a.GetType().Name, a => a).ContainsKey("ShortHand")) ? propertyInfo.GetCustomAttributes(false).ToDictionary(a => a.GetType().Name, a => a)["ShortHand"].ToString() : propertyInfo.Name,
+                    AutoSizeMode = (propertyInfo.Name == "FireworkName") ? DataGridViewAutoSizeColumnMode.Fill : DataGridViewAutoSizeColumnMode.AllCells,
+                    Tag = (propertyInfo.PropertyType == typeof(Color)) ? "Color" : null
+                };
+        }
+        private static DataGridViewColumn CreateIndicatorColoumn()
+        {
+            return new DataGridViewTextBoxColumn()
+            {
+                Name = "🎨",
+                ReadOnly = true,
+                Width = 10
+            };
+        }
+
+    class ShortHandAttribute : Attribute
+        {
+            public string Name { get; }
+            public ShortHandAttribute(string name) => Name = name;
+        }
     }
 
     /// <summary>
