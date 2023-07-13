@@ -17,9 +17,7 @@ namespace Fireworks_Firing_Systems
             InitializeComponent();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            new DataBase().ShowDialog();
-        }
+        private void toolStripMenuItem1_Click(object sender, EventArgs e) => new DataBase().ShowDialog();
+        private void serialPortToolStripMenuItem_Click(object sender, EventArgs e) => new SerialPort().ShowDialog();
     }
 }

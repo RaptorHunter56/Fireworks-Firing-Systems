@@ -256,7 +256,7 @@
             this.groupBox2.Size = new System.Drawing.Size(648, 453);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "DataBase";
+            this.groupBox2.Text = "Data Base";
             // 
             // dataGridView1
             // 
