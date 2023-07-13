@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -64,6 +65,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -84,6 +86,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Firework";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(99, 225);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(148, 23);
+            this.button3.TabIndex = 14;
+            this.button3.Text = "Add";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // panel1
             // 
@@ -260,6 +272,7 @@
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
             // 
             // button2
             // 
@@ -298,6 +311,8 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "DataBase";
             this.Text = "DataBase";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DataBase_FormClosing);
+            this.Load += new System.EventHandler(this.DataBase_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -335,5 +350,6 @@
         private FolderBrowserDialog folderBrowserDialog1;
         private DataGridView dataGridView1;
         private BindingSource bindingSource1;
+        private Button button3;
     }
 }
