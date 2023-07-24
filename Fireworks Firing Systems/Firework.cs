@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Serialization;
 using System.Xml.Linq;
 
 namespace Fireworks_Firing_Systems
@@ -78,6 +79,12 @@ namespace Fireworks_Firing_Systems
             public string Name { get; }
             public ShortHandAttribute(string name) => Name = name;
         }
+    }
+
+    public class IgnitionObject
+    {
+        public List<Firework> fireworks = new List<Firework>();
+        public int Length = 0;
     }
 
     /// <summary>

@@ -19,5 +19,7 @@ namespace Fireworks_Firing_Systems
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e) => new DataBase().ShowDialog();
         private void serialPortToolStripMenuItem_Click(object sender, EventArgs e) => new SerialPort().ShowDialog();
+
+        private void orderSettingsToolStripMenuItem_Click(object sender, EventArgs e) => new Order().ShowDialog();
     }
 }

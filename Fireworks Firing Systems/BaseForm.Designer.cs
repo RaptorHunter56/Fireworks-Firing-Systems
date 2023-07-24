@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orderSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
-            this.serialPortToolStripMenuItem});
+            this.serialPortToolStripMenuItem,
+            this.orderSettingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -67,6 +69,13 @@
             this.serialPortToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.serialPortToolStripMenuItem.Text = "Serial Port";
             this.serialPortToolStripMenuItem.Click += new System.EventHandler(this.serialPortToolStripMenuItem_Click);
+            // 
+            // orderSettingsToolStripMenuItem
+            // 
+            this.orderSettingsToolStripMenuItem.Name = "orderSettingsToolStripMenuItem";
+            this.orderSettingsToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.orderSettingsToolStripMenuItem.Text = "Order Settings";
+            this.orderSettingsToolStripMenuItem.Click += new System.EventHandler(this.orderSettingsToolStripMenuItem_Click);
             // 
             // BaseForm
             // 
@@ -91,5 +100,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem toolStripMenuItem1;
         private ToolStripMenuItem serialPortToolStripMenuItem;
+        private ToolStripMenuItem orderSettingsToolStripMenuItem;
     }
 }
