@@ -29,9 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -61,7 +63,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
@@ -87,6 +88,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Order Presets";
             // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Enabled = false;
+            this.button3.Location = new System.Drawing.Point(122, 301);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Delete";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -96,6 +109,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // treeView1
             // 
@@ -106,12 +120,14 @@
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(272, 273);
             this.treeView1.TabIndex = 0;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.label20);
@@ -149,15 +165,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Settings";
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(6, 301);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(243, 23);
+            this.textBox1.TabIndex = 29;
+            // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(6, 301);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(255, 301);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 28;
             this.button2.Text = "Edit";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label19
             // 
@@ -197,6 +223,7 @@
             this.trackBar7.Name = "trackBar7";
             this.trackBar7.Size = new System.Drawing.Size(242, 45);
             this.trackBar7.TabIndex = 24;
+            this.trackBar7.Tag = "Roman_Candle";
             this.trackBar7.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label16
@@ -237,6 +264,7 @@
             this.trackBar6.Name = "trackBar6";
             this.trackBar6.Size = new System.Drawing.Size(242, 45);
             this.trackBar6.TabIndex = 20;
+            this.trackBar6.Tag = "Cake";
             this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label13
@@ -277,6 +305,7 @@
             this.trackBar5.Name = "trackBar5";
             this.trackBar5.Size = new System.Drawing.Size(242, 45);
             this.trackBar5.TabIndex = 16;
+            this.trackBar5.Tag = "Mine";
             this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label10
@@ -317,6 +346,7 @@
             this.trackBar4.Name = "trackBar4";
             this.trackBar4.Size = new System.Drawing.Size(242, 45);
             this.trackBar4.TabIndex = 12;
+            this.trackBar4.Tag = "Missile";
             this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label7
@@ -357,6 +387,7 @@
             this.trackBar3.Name = "trackBar3";
             this.trackBar3.Size = new System.Drawing.Size(242, 45);
             this.trackBar3.TabIndex = 8;
+            this.trackBar3.Tag = "Smoke_Ball";
             this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label4
@@ -397,6 +428,7 @@
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(242, 45);
             this.trackBar2.TabIndex = 4;
+            this.trackBar2.Tag = "Fountain";
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // label3
@@ -437,18 +469,8 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(242, 45);
             this.trackBar1.TabIndex = 0;
+            this.trackBar1.Tag = "Sparkler";
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(122, 301);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // Order
             // 
@@ -459,6 +481,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Order";
             this.Text = "Order";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Order_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -509,5 +532,6 @@
         private TrackBar trackBar2;
         private Button button2;
         private Button button3;
+        private TextBox textBox1;
     }
 }

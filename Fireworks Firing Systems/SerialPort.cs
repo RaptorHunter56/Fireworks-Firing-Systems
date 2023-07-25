@@ -26,12 +26,6 @@ namespace Fireworks_Firing_Systems
             comboBox2.SelectedItem = (Properties.Settings.Default.BaudRate > 0) ? Properties.Settings.Default.BaudRate : 9600;
 
             UpdateSerialList();
-            button2.Enabled = button3.Enabled = textBox1.Enabled = false;
-
-            //foreach (string port in System.IO.Ports.SerialPort.GetPortNames())
-            //{
-            //    treeView1.Nodes.Add(port);
-            //}
         }
 
         private void UpdateSerialList()

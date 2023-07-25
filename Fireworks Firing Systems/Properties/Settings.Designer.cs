@@ -58,5 +58,16 @@ namespace Fireworks_Firing_Systems.Properties {
                 this["BaudRate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection Orders {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["Orders"]));
+            }
+            set {
+                this["Orders"] = value;
+            }
+        }
     }
 }
