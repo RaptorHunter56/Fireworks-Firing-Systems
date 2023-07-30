@@ -106,7 +106,7 @@ namespace Fireworks_Firing_Systems
             public int NullWeight => Weighted.Values.Sum() / Weighted.Count;
             public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects)
             {
-                ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(x => x.Type).Distinct().Select(x => Weighted[x]).DefaultIfEmpty(0).Sum() / x.fireworks.Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
+                ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(y => y.Type).Distinct().Select(y => Weighted[y]).DefaultIfEmpty(0).Sum() / x.fireworks.Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
             }
             public override string ToString() => "Order - Weighted";
             public string ToJson() => Newtonsoft.Json.JsonConvert.SerializeObject(this);
