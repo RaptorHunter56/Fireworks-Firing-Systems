@@ -29,6 +29,7 @@ namespace Fireworks_Firing_Systems
         private void button1_Click(object sender, EventArgs e) => Connect_Disconnect();
         private void disConnectToolStripMenuItem_Click(object sender, EventArgs e) => Connect_Disconnect(false);
 
+        #region SerialPort
         private void Connect_Disconnect(bool connect = true)
         {
             tabControl1.Enabled = connect;
@@ -61,7 +62,6 @@ namespace Fireworks_Firing_Systems
                 toolStripStatusLabel1.Text = "Error opening to serial port :: " + ex.Message;
             }
         }
-        #region SerialPort
         private delegate void SetTextDeleg(string text);
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
@@ -72,5 +72,9 @@ namespace Fireworks_Firing_Systems
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
         #endregion
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new Setup().ShowDialog();
+        }
     }
 }

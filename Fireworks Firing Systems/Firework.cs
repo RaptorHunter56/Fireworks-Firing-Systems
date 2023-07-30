@@ -74,7 +74,7 @@ namespace Fireworks_Firing_Systems
             };
         }
 
-    class ShortHandAttribute : Attribute
+        class ShortHandAttribute : Attribute
         {
             public string Name { get; }
             public ShortHandAttribute(string name) => Name = name;

@@ -39,6 +39,7 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             disConnectToolStripMenuItem = new ToolStripMenuItem();
             tabPage1 = new TabPage();
+            button3 = new Button();
             tabPage2 = new TabPage();
             button2 = new Button();
             textBox1 = new TextBox();
@@ -48,6 +49,7 @@
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             SuspendLayout();
             // 
@@ -123,6 +125,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button3);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
@@ -130,6 +133,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Setup";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(144, 395);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 0;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // tabPage2
             // 
@@ -191,10 +204,10 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(962, 599);
+            Controls.Add(button1);
             Controls.Add(tabControl1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
-            Controls.Add(button1);
             MainMenuStrip = menuStrip1;
             Name = "BaseForm";
             Text = "BaseForm";
@@ -204,6 +217,7 @@
             menuStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
             contextMenuStrip1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             ResumeLayout(false);
@@ -227,5 +241,6 @@
         private Button button2;
         private TextBox textBox1;
         private ToolStripStatusLabel toolStripStatusLabel1;
+        private Button button3;
     }
 }
