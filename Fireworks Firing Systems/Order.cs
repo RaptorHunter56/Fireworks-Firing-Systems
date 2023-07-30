@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static Fireworks_Firing_Systems.OrderType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using TrackBar = System.Windows.Forms.TrackBar;
 
 namespace Fireworks_Firing_Systems
 {
@@ -40,6 +42,7 @@ namespace Fireworks_Firing_Systems
         {
             if (treeView1.SelectedNode.Tag?.ToString() == "Order - Weighted")
             {
+                treeView1.SelectedNode.Text = $"Order - {((textBox1.Text.Length > 0) ? textBox1.Text : "Weighted")}";
                 foreach (var item in groupBox2.Controls.OfType<TrackBar>())
                 {
                     treeView1.SelectedNode.Nodes.OfType<TreeNode>().FirstOrDefault(x => x.Text.Contains((string)item.Tag)).Text = $"{item.Tag} - {item.Value}";
@@ -58,6 +61,7 @@ namespace Fireworks_Firing_Systems
             ToggleEnabled(e.Node);
             if (e.Node.Tag?.ToString() == "Order - Weighted")
             {
+                textBox1.Text = e.Node.Text.Split('-')[1].Trim();
                 foreach (var item in groupBox2.Controls.OfType<TrackBar>())
                 {
                     item.Value = int.Parse(e.Node.Nodes.OfType<TreeNode>().FirstOrDefault(x => x.Text.Contains((string)item.Tag)).Text.Split('-')[1].Trim());
@@ -74,27 +78,30 @@ namespace Fireworks_Firing_Systems
         }
 
         private void ToggleEnabled(TreeNode node) => button3.Enabled = groupBox2.Enabled = (node.Tag?.ToString() == "Order - Weighted");
+        private void trackBar_ValueChanged(object sender, EventArgs e) => toolTip1.SetToolTip((TrackBar)sender, ((TrackBar)sender).Value.ToString());
     }
 
     public abstract class OrderType
     {
         private static Random rng = new Random();
+        public string Name;
         public abstract void Order(ref Dictionary<int, IgnitionObject> ignitionObjects);
         public abstract override string ToString();
 
         public class OrderRandom : OrderType
         {
+            public new string Name = "Order - Random";
             public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects)
             {
                 ignitionObjects = ignitionObjects.Values.OrderBy(a => rng.Next()).ToList().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
             }
-            public override string ToString() => "Order - Random";
+            public override string ToString() => Name;
         }
 
         public class OrderWeighted : OrderType
         {
             public Dictionary<FireworkType, int> Weighted = new Dictionary<FireworkType, int>
-            { 
+            {
                 {FireworkType.Cake, 1 },
                 {FireworkType.Fountain, 1 },
                 {FireworkType.Mine, 1 },
@@ -104,15 +111,13 @@ namespace Fireworks_Firing_Systems
                 {FireworkType.Sparkler, 1 }
             };
             public int NullWeight => Weighted.Values.Sum() / Weighted.Count;
-            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects)
-            {
-                ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(y => y.Type).Distinct().Select(y => Weighted[y]).DefaultIfEmpty(0).Sum() / x.fireworks.Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
-            }
-            public override string ToString() => "Order - Weighted";
+            public new string Name = "Order - Weighted";
+            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects) => ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(y => y.Type).Distinct().Select(y => Weighted[y]).DefaultIfEmpty(0).Sum() / x.fireworks.Select(y => y.Type).Distinct().Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
+            public override string ToString() => Name;
             public string ToJson() => Newtonsoft.Json.JsonConvert.SerializeObject(this);
-            internal TreeNode ToTreeNode() => new TreeNode("Order - Weighted", Weighted.Select(x => new TreeNode($"{x.Key} - {x.Value}")).ToArray());
+            internal TreeNode ToTreeNode() => new TreeNode(Name, Weighted.Select(x => new TreeNode($"{x.Key} - {x.Value}")).ToArray());
             public static OrderWeighted FromJson(string json) => Newtonsoft.Json.JsonConvert.DeserializeObject<OrderWeighted>(json);
-            internal static OrderWeighted FromTreeNode(TreeNode node) => new OrderWeighted() { Weighted = new OrderWeighted().Weighted.Select(x => new KeyValuePair<FireworkType, int>(x.Key, int.Parse(node.Nodes.OfType<TreeNode>().FirstOrDefault(y => y.Text.Contains(x.Key.ToString())).Text.Split('-')[1].Trim()))).ToDictionary(x => x.Key, x => x.Value) };
+            internal static OrderWeighted FromTreeNode(TreeNode node) => new OrderWeighted() { Weighted = new OrderWeighted().Weighted.Select(x => new KeyValuePair<FireworkType, int>(x.Key, int.Parse(node.Nodes.OfType<TreeNode>().FirstOrDefault(y => y.Text.Contains(x.Key.ToString())).Text.Split('-')[1].Trim()))).ToDictionary(x => x.Key, x => x.Value), Name = node.Text };
         }
     }
 }

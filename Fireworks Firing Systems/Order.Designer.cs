@@ -28,472 +28,481 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.trackBar7 = new System.Windows.Forms.TrackBar();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.trackBar6 = new System.Windows.Forms.TrackBar();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.trackBar5 = new System.Windows.Forms.TrackBar();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.trackBar4 = new System.Windows.Forms.TrackBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            groupBox1 = new GroupBox();
+            button3 = new Button();
+            button1 = new Button();
+            treeView1 = new TreeView();
+            groupBox2 = new GroupBox();
+            textBox1 = new TextBox();
+            button2 = new Button();
+            label19 = new Label();
+            label20 = new Label();
+            label21 = new Label();
+            trackBar7 = new TrackBar();
+            label16 = new Label();
+            label17 = new Label();
+            label18 = new Label();
+            trackBar6 = new TrackBar();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            trackBar5 = new TrackBar();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            trackBar4 = new TrackBar();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            trackBar3 = new TrackBar();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            trackBar2 = new TrackBar();
+            label3 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            trackBar1 = new TrackBar();
+            toolTip1 = new ToolTip(components);
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.treeView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(284, 330);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Order Presets";
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            groupBox1.Controls.Add(button3);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(treeView1);
+            groupBox1.Location = new Point(12, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(284, 330);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Order Presets";
             // 
             // button3
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(122, 301);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Delete";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button3.Enabled = false;
+            button3.Location = new Point(122, 301);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 2;
+            button3.Text = "Delete";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(203, 301);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.Location = new Point(203, 301);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 1;
+            button1.Text = "Add";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.Location = new System.Drawing.Point(6, 22);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(272, 273);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            treeView1.Location = new Point(6, 22);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(272, 273);
+            treeView1.TabIndex = 0;
+            treeView1.AfterSelect += treeView1_AfterSelect;
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.label20);
-            this.groupBox2.Controls.Add(this.label21);
-            this.groupBox2.Controls.Add(this.trackBar7);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.trackBar6);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.trackBar5);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.trackBar4);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.trackBar3);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.trackBar2);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.trackBar1);
-            this.groupBox2.Enabled = false;
-            this.groupBox2.Location = new System.Drawing.Point(302, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(336, 330);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Settings";
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(textBox1);
+            groupBox2.Controls.Add(button2);
+            groupBox2.Controls.Add(label19);
+            groupBox2.Controls.Add(label20);
+            groupBox2.Controls.Add(label21);
+            groupBox2.Controls.Add(trackBar7);
+            groupBox2.Controls.Add(label16);
+            groupBox2.Controls.Add(label17);
+            groupBox2.Controls.Add(label18);
+            groupBox2.Controls.Add(trackBar6);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(label14);
+            groupBox2.Controls.Add(label15);
+            groupBox2.Controls.Add(trackBar5);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Controls.Add(label12);
+            groupBox2.Controls.Add(trackBar4);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(label8);
+            groupBox2.Controls.Add(label9);
+            groupBox2.Controls.Add(trackBar3);
+            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(trackBar2);
+            groupBox2.Controls.Add(label3);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(trackBar1);
+            groupBox2.Enabled = false;
+            groupBox2.Location = new Point(302, 12);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(336, 330);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Settings";
             // 
             // textBox1
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(6, 301);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(243, 23);
-            this.textBox1.TabIndex = 29;
+            textBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(6, 301);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(243, 23);
+            textBox1.TabIndex = 29;
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(255, 301);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "Edit";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button2.Location = new Point(255, 301);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 28;
+            button2.Text = "Edit";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // label19
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(305, 281);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(25, 15);
-            this.label19.TabIndex = 27;
-            this.label19.Text = "100";
+            label19.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label19.AutoSize = true;
+            label19.Location = new Point(305, 281);
+            label19.Name = "label19";
+            label19.Size = new Size(25, 15);
+            label19.TabIndex = 27;
+            label19.Text = "100";
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(95, 281);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(13, 15);
-            this.label20.TabIndex = 26;
-            this.label20.Text = "0";
+            label20.AutoSize = true;
+            label20.Location = new Point(95, 281);
+            label20.Name = "label20";
+            label20.Size = new Size(13, 15);
+            label20.TabIndex = 26;
+            label20.Text = "1";
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(6, 262);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(85, 15);
-            this.label21.TabIndex = 25;
-            this.label21.Text = "Roman Candle";
+            label21.AutoSize = true;
+            label21.Location = new Point(6, 262);
+            label21.Name = "label21";
+            label21.Size = new Size(85, 15);
+            label21.TabIndex = 25;
+            label21.Text = "Roman Candle";
             // 
             // trackBar7
             // 
-            this.trackBar7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar7.LargeChange = 10;
-            this.trackBar7.Location = new System.Drawing.Point(88, 259);
-            this.trackBar7.Maximum = 100;
-            this.trackBar7.Name = "trackBar7";
-            this.trackBar7.Size = new System.Drawing.Size(242, 45);
-            this.trackBar7.TabIndex = 24;
-            this.trackBar7.Tag = "Roman_Candle";
-            this.trackBar7.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar7.LargeChange = 10;
+            trackBar7.Location = new Point(88, 259);
+            trackBar7.Maximum = 100;
+            trackBar7.Minimum = 1;
+            trackBar7.Name = "trackBar7";
+            trackBar7.Size = new Size(242, 45);
+            trackBar7.TabIndex = 24;
+            trackBar7.Tag = "Roman_Candle";
+            trackBar7.TickStyle = TickStyle.None;
+            trackBar7.Value = 1;
+            trackBar7.ValueChanged += trackBar_ValueChanged;
             // 
             // label16
             // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(305, 241);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(25, 15);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "100";
+            label16.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label16.AutoSize = true;
+            label16.Location = new Point(305, 241);
+            label16.Name = "label16";
+            label16.Size = new Size(25, 15);
+            label16.TabIndex = 23;
+            label16.Text = "100";
             // 
             // label17
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(95, 241);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(13, 15);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "0";
+            label17.AutoSize = true;
+            label17.Location = new Point(95, 241);
+            label17.Name = "label17";
+            label17.Size = new Size(13, 15);
+            label17.TabIndex = 22;
+            label17.Text = "1";
             // 
             // label18
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(6, 222);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(33, 15);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "Cake";
+            label18.AutoSize = true;
+            label18.Location = new Point(6, 222);
+            label18.Name = "label18";
+            label18.Size = new Size(33, 15);
+            label18.TabIndex = 21;
+            label18.Text = "Cake";
             // 
             // trackBar6
             // 
-            this.trackBar6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar6.LargeChange = 10;
-            this.trackBar6.Location = new System.Drawing.Point(88, 219);
-            this.trackBar6.Maximum = 100;
-            this.trackBar6.Name = "trackBar6";
-            this.trackBar6.Size = new System.Drawing.Size(242, 45);
-            this.trackBar6.TabIndex = 20;
-            this.trackBar6.Tag = "Cake";
-            this.trackBar6.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar6.LargeChange = 10;
+            trackBar6.Location = new Point(88, 219);
+            trackBar6.Maximum = 100;
+            trackBar6.Minimum = 1;
+            trackBar6.Name = "trackBar6";
+            trackBar6.Size = new Size(242, 45);
+            trackBar6.TabIndex = 20;
+            trackBar6.Tag = "Cake";
+            trackBar6.TickStyle = TickStyle.None;
+            trackBar6.Value = 1;
+            trackBar6.ValueChanged += trackBar_ValueChanged;
             // 
             // label13
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(305, 201);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(25, 15);
-            this.label13.TabIndex = 19;
-            this.label13.Text = "100";
+            label13.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label13.AutoSize = true;
+            label13.Location = new Point(305, 201);
+            label13.Name = "label13";
+            label13.Size = new Size(25, 15);
+            label13.TabIndex = 19;
+            label13.Text = "100";
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(95, 201);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(13, 15);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "0";
+            label14.AutoSize = true;
+            label14.Location = new Point(95, 201);
+            label14.Name = "label14";
+            label14.Size = new Size(13, 15);
+            label14.TabIndex = 18;
+            label14.Text = "1";
             // 
             // label15
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 182);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(34, 15);
-            this.label15.TabIndex = 17;
-            this.label15.Text = "Mine";
+            label15.AutoSize = true;
+            label15.Location = new Point(6, 182);
+            label15.Name = "label15";
+            label15.Size = new Size(34, 15);
+            label15.TabIndex = 17;
+            label15.Text = "Mine";
             // 
             // trackBar5
             // 
-            this.trackBar5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar5.LargeChange = 10;
-            this.trackBar5.Location = new System.Drawing.Point(88, 179);
-            this.trackBar5.Maximum = 100;
-            this.trackBar5.Name = "trackBar5";
-            this.trackBar5.Size = new System.Drawing.Size(242, 45);
-            this.trackBar5.TabIndex = 16;
-            this.trackBar5.Tag = "Mine";
-            this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar5.LargeChange = 10;
+            trackBar5.Location = new Point(88, 179);
+            trackBar5.Maximum = 100;
+            trackBar5.Minimum = 1;
+            trackBar5.Name = "trackBar5";
+            trackBar5.Size = new Size(242, 45);
+            trackBar5.TabIndex = 16;
+            trackBar5.Tag = "Mine";
+            trackBar5.TickStyle = TickStyle.None;
+            trackBar5.Value = 1;
+            trackBar5.ValueChanged += trackBar_ValueChanged;
             // 
             // label10
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(305, 161);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(25, 15);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "100";
+            label10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label10.AutoSize = true;
+            label10.Location = new Point(305, 161);
+            label10.Name = "label10";
+            label10.Size = new Size(25, 15);
+            label10.TabIndex = 15;
+            label10.Text = "100";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(95, 161);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(13, 15);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "0";
+            label11.AutoSize = true;
+            label11.Location = new Point(95, 161);
+            label11.Name = "label11";
+            label11.Size = new Size(13, 15);
+            label11.TabIndex = 14;
+            label11.Text = "1";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 142);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(43, 15);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "Missile";
+            label12.AutoSize = true;
+            label12.Location = new Point(6, 142);
+            label12.Name = "label12";
+            label12.Size = new Size(43, 15);
+            label12.TabIndex = 13;
+            label12.Text = "Missile";
             // 
             // trackBar4
             // 
-            this.trackBar4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar4.LargeChange = 10;
-            this.trackBar4.Location = new System.Drawing.Point(88, 139);
-            this.trackBar4.Maximum = 100;
-            this.trackBar4.Name = "trackBar4";
-            this.trackBar4.Size = new System.Drawing.Size(242, 45);
-            this.trackBar4.TabIndex = 12;
-            this.trackBar4.Tag = "Missile";
-            this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar4.LargeChange = 10;
+            trackBar4.Location = new Point(88, 139);
+            trackBar4.Maximum = 100;
+            trackBar4.Minimum = 1;
+            trackBar4.Name = "trackBar4";
+            trackBar4.Size = new Size(242, 45);
+            trackBar4.TabIndex = 12;
+            trackBar4.Tag = "Missile";
+            trackBar4.TickStyle = TickStyle.None;
+            trackBar4.Value = 1;
+            trackBar4.ValueChanged += trackBar_ValueChanged;
             // 
             // label7
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(305, 121);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(25, 15);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "100";
+            label7.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label7.AutoSize = true;
+            label7.Location = new Point(305, 121);
+            label7.Name = "label7";
+            label7.Size = new Size(25, 15);
+            label7.TabIndex = 11;
+            label7.Text = "100";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(95, 121);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 15);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "0";
+            label8.AutoSize = true;
+            label8.Location = new Point(95, 121);
+            label8.Name = "label8";
+            label8.Size = new Size(13, 15);
+            label8.TabIndex = 10;
+            label8.Text = "1";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 102);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(65, 15);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Smoke Ball";
+            label9.AutoSize = true;
+            label9.Location = new Point(6, 102);
+            label9.Name = "label9";
+            label9.Size = new Size(65, 15);
+            label9.TabIndex = 9;
+            label9.Text = "Smoke Ball";
             // 
             // trackBar3
             // 
-            this.trackBar3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar3.LargeChange = 10;
-            this.trackBar3.Location = new System.Drawing.Point(88, 99);
-            this.trackBar3.Maximum = 100;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(242, 45);
-            this.trackBar3.TabIndex = 8;
-            this.trackBar3.Tag = "Smoke_Ball";
-            this.trackBar3.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar3.LargeChange = 10;
+            trackBar3.Location = new Point(88, 99);
+            trackBar3.Maximum = 100;
+            trackBar3.Minimum = 1;
+            trackBar3.Name = "trackBar3";
+            trackBar3.Size = new Size(242, 45);
+            trackBar3.TabIndex = 8;
+            trackBar3.Tag = "Smoke_Ball";
+            trackBar3.TickStyle = TickStyle.None;
+            trackBar3.Value = 1;
+            trackBar3.ValueChanged += trackBar_ValueChanged;
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 15);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "100";
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Location = new Point(305, 81);
+            label4.Name = "label4";
+            label4.Size = new Size(25, 15);
+            label4.TabIndex = 7;
+            label4.Text = "100";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(95, 81);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 15);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "0";
+            label5.AutoSize = true;
+            label5.Location = new Point(95, 81);
+            label5.Name = "label5";
+            label5.Size = new Size(13, 15);
+            label5.TabIndex = 6;
+            label5.Text = "1";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 62);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Fountain";
+            label6.AutoSize = true;
+            label6.Location = new Point(6, 62);
+            label6.Name = "label6";
+            label6.Size = new Size(54, 15);
+            label6.TabIndex = 5;
+            label6.Text = "Fountain";
             // 
             // trackBar2
             // 
-            this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar2.LargeChange = 10;
-            this.trackBar2.Location = new System.Drawing.Point(88, 59);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(242, 45);
-            this.trackBar2.TabIndex = 4;
-            this.trackBar2.Tag = "Fountain";
-            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar2.LargeChange = 10;
+            trackBar2.Location = new Point(88, 59);
+            trackBar2.Maximum = 100;
+            trackBar2.Minimum = 1;
+            trackBar2.Name = "trackBar2";
+            trackBar2.Size = new Size(242, 45);
+            trackBar2.TabIndex = 4;
+            trackBar2.Tag = "Fountain";
+            trackBar2.TickStyle = TickStyle.None;
+            trackBar2.Value = 1;
+            trackBar2.ValueChanged += trackBar_ValueChanged;
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(305, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "100";
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Location = new Point(305, 41);
+            label3.Name = "label3";
+            label3.Size = new Size(25, 15);
+            label3.TabIndex = 3;
+            label3.Text = "100";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(95, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(13, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "0";
+            label2.AutoSize = true;
+            label2.Location = new Point(95, 41);
+            label2.Name = "label2";
+            label2.Size = new Size(13, 15);
+            label2.TabIndex = 2;
+            label2.Text = "1";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Sparkler";
+            label1.AutoSize = true;
+            label1.Location = new Point(6, 22);
+            label1.Name = "label1";
+            label1.Size = new Size(49, 15);
+            label1.TabIndex = 1;
+            label1.Text = "Sparkler";
             // 
             // trackBar1
             // 
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.LargeChange = 10;
-            this.trackBar1.Location = new System.Drawing.Point(88, 19);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(242, 45);
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.Tag = "Sparkler";
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            trackBar1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            trackBar1.LargeChange = 10;
+            trackBar1.Location = new Point(88, 19);
+            trackBar1.Maximum = 100;
+            trackBar1.Minimum = 1;
+            trackBar1.Name = "trackBar1";
+            trackBar1.Size = new Size(242, 45);
+            trackBar1.TabIndex = 0;
+            trackBar1.Tag = "Sparkler";
+            trackBar1.TickStyle = TickStyle.None;
+            trackBar1.Value = 1;
+            trackBar1.ValueChanged += trackBar_ValueChanged;
             // 
             // Order
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 354);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "Order";
-            this.Text = "Order";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Order_FormClosing);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(650, 354);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Name = "Order";
+            Text = "Order";
+            FormClosing += Order_FormClosing;
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBar7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -533,5 +542,6 @@
         private Button button2;
         private Button button3;
         private TextBox textBox1;
+        private ToolTip toolTip1;
     }
 }
