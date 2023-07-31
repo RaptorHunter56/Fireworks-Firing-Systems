@@ -40,7 +40,7 @@ namespace Fireworks_Firing_Systems
             treeView1.ExpandAll();
         }
 
-        public static string[] Port = new[] { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "COM10"};
+        public static string[] Port = new[] { "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "COM10" };
         public static int[] BaudRate = new[] { 75, 110, 134, 150, 300, 600, 1200, 1800, 2400, 4800, 7200, 9600, 14400, 19200, 38400, 57600, 115200, 128000 };
 
 

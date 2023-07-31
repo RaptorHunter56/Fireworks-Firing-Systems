@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Order));
             groupBox1 = new GroupBox();
             button3 = new Button();
             button1 = new Button();
@@ -489,6 +490,7 @@
             ClientSize = new Size(650, 354);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Order";
             Text = "Order";
             FormClosing += Order_FormClosing;

@@ -12,92 +12,84 @@ namespace Fireworks_Firing_Systems
 {
     public partial class Setup : Form
     {
-        public List<Firework> fireworks = new List<Firework>();
         public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
-        public Setup()
+        public int buttonTag => (int)(Int32.Parse(button2.Tag.ToString()) * numericUpDown1.Value);
+        public Setup(Dictionary<int, Tuple<Firework, bool>> ignitionPorts)
         {
+            IgnitionPorts = ignitionPorts;
+            if (IgnitionPorts.Count > 0)
+                IgnitionPorts[1] = new Tuple<Firework, bool>(IgnitionPorts[1].Item1, false);
             InitializeComponent();
-            #region comboBox.SelectedIndex = 0;
-            comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
-            comboBox4.SelectedIndex = 0;
-            comboBox5.SelectedIndex = 0;
-            comboBox6.SelectedIndex = 0;
-            comboBox7.SelectedIndex = 0;
-            comboBox8.SelectedIndex = 0;
-            #endregion
         }
 
         private void Setup_Load(object sender, EventArgs e)
         {
-            var folder = (Properties.Settings.Default.DataBaseLocatrion.Length > 0) ? Properties.Settings.Default.DataBaseLocatrion : System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            foreach (var item in Directory.GetFiles(folder, "*.Firework", SearchOption.AllDirectories))
-            {
-                fireworks.Add(Firework.FromJson(File.ReadAllText(item)));
-                #region comboBox.Items.Add(fireworks[^1]);
-                comboBox2.Items.Add(fireworks[^1]);
-                comboBox3.Items.Add(fireworks[^1]);
-                comboBox4.Items.Add(fireworks[^1]);
-                comboBox5.Items.Add(fireworks[^1]);
-                comboBox6.Items.Add(fireworks[^1]);
-                comboBox7.Items.Add(fireworks[^1]);
-                comboBox8.Items.Add(fireworks[^1]);
-                #endregion
-            }
+            Directory.GetFiles((Properties.Settings.Default.DataBaseLocatrion.Length > 0) ? Properties.Settings.Default.DataBaseLocatrion : Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "*.Firework", SearchOption.AllDirectories).ToList()
+                .ForEach(item => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
+                    .ForEach(x => x.Items.Add(Firework.FromJson(File.ReadAllText(item)))));
+            UpdateSelectedItem(buttonTag);
         }
+
+        private void Setup_FormClosing(object sender, FormClosingEventArgs e) => DialogResult = DialogResult.OK;
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = ((ComboBox)sender).SelectedIndex <= 0 ? SystemColors.ControlDark : Color.LightGreen;
+            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
+            int buttonTagCalc = buttonTag * 7 - 7;
             if (((ComboBox)sender).SelectedIndex > 0)
-                IgnitionPorts[Int32.Parse(((ComboBox)sender).Tag.ToString()) + (Int32.Parse(button2.Tag.ToString()) * 7 - 7)] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
+            {
+                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag].Item2 : true);
+                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag].Item2 ? Color.LightGreen : Color.Red;
+            }
             else
-                IgnitionPorts.Remove(Int32.Parse(((ComboBox)sender).Tag.ToString()) + (Int32.Parse(button2.Tag.ToString()) * 7 - 7));
+            {
+                IgnitionPorts.Remove(comboBoxTag + buttonTagCalc);
+                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = SystemColors.ControlDark;
+            }
+        }
+        private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
+            int buttonTagCalc = buttonTag * 7 - 7;
+            if (((ComboBox)sender).SelectedIndex > 0)
+            {
+                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
+                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = Color.LightGreen;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button2.Tag = Int32.Parse(button2.Tag.ToString()) + 1;
+            button2.Tag = buttonTag + 1;
             UpdateButtons();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button2.Tag = Int32.Parse(button2.Tag.ToString()) - 1;
+            button2.Tag = buttonTag - 1;
             UpdateButtons();
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
+            flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
+                .ForEach(x => x.SelectedIndex = 0);
         }
 
         private void UpdateButtons()
         {
-            string id = button2.Tag.ToString();
-            button2.Text = $"{Int32.Parse(id) * 7 - 6} / 56";
-            button1.Enabled = (Int32.Parse(id) != 1);
-            button3.Enabled = (Int32.Parse(id) != 8);
-            #region label.Text = (Int32.Parse(button2.Tag.ToString()) * 7 - n).ToString();
-            label2.Text = (Int32.Parse(id) * 7 - 6).ToString();
-            label3.Text = (Int32.Parse(id) * 7 - 5).ToString();
-            label4.Text = (Int32.Parse(id) * 7 - 4).ToString();
-            label5.Text = (Int32.Parse(id) * 7 - 3).ToString();
-            label6.Text = (Int32.Parse(id) * 7 - 2).ToString();
-            label7.Text = (Int32.Parse(id) * 7 - 1).ToString();
-            label8.Text = (Int32.Parse(id) * 7).ToString();
-            #endregion
-            #region if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - n)) comboBox.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - n].Item1;
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 6)) comboBox2.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 6].Item1;
-            else comboBox2.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 5)) comboBox3.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 5].Item1;
-            else comboBox3.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 4)) comboBox4.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 4].Item1;
-            else comboBox4.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 3)) comboBox5.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 3].Item1;
-            else comboBox5.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 2)) comboBox6.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 2].Item1;
-            else comboBox6.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7 - 1)) comboBox7.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7 - 1].Item1;
-            else comboBox7.SelectedItem = "None";
-            if (IgnitionPorts.ContainsKey(Int32.Parse(id) * 7)) comboBox8.SelectedItem = IgnitionPorts[Int32.Parse(id) * 7]?.Item1;
-            else comboBox8.SelectedItem = "None";
-            #endregion
+            int id = buttonTag;
+            button2.Text = $"{id * 7 - 6} / {56 * numericUpDown1.Value}";
+            button1.Enabled = (id != 1);
+            button3.Enabled = (id != 8);
+            UpdateText(id);
+            UpdateSelectedItem(id);
         }
+
+        private void UpdateText(int id) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Label>()).ToList()
+            .ForEach(x => x.Text = (id * 7 - (7 - Int32.Parse(x.Tag.ToString()))).ToString());
+        private void UpdateSelectedItem(int id) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
+            .ForEach(x => x.SelectedItem = IgnitionPorts.ContainsKey(id * 7 - (7 - Int32.Parse(x.Tag.ToString()))) ? IgnitionPorts[id * 7 - (7 - Int32.Parse(x.Tag.ToString()))].Item1 : "None");
+
     }
 }

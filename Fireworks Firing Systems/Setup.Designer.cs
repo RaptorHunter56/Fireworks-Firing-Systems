@@ -63,6 +63,7 @@
             button2 = new Button();
             button3 = new Button();
             numericUpDown1 = new NumericUpDown();
+            button4 = new Button();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -131,6 +132,7 @@
             comboBox2.TabIndex = 0;
             comboBox2.Tag = "1";
             comboBox2.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox2.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label2
             // 
@@ -184,6 +186,7 @@
             comboBox3.TabIndex = 0;
             comboBox3.Tag = "2";
             comboBox3.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox3.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label3
             // 
@@ -237,6 +240,7 @@
             comboBox4.TabIndex = 0;
             comboBox4.Tag = "3";
             comboBox4.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox4.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label4
             // 
@@ -290,6 +294,7 @@
             comboBox5.TabIndex = 0;
             comboBox5.Tag = "4";
             comboBox5.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox5.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label5
             // 
@@ -343,6 +348,7 @@
             comboBox6.TabIndex = 0;
             comboBox6.Tag = "5";
             comboBox6.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox6.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label6
             // 
@@ -396,6 +402,7 @@
             comboBox7.TabIndex = 0;
             comboBox7.Tag = "6";
             comboBox7.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox7.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label7
             // 
@@ -449,6 +456,7 @@
             comboBox8.TabIndex = 0;
             comboBox8.Tag = "7";
             comboBox8.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            comboBox8.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
             // 
             // label8
             // 
@@ -480,7 +488,7 @@
             button1.FlatAppearance.MouseOverBackColor = SystemColors.Control;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(144, 289);
+            button1.Location = new Point(138, 289);
             button1.Name = "button1";
             button1.Size = new Size(23, 23);
             button1.TabIndex = 1;
@@ -493,9 +501,9 @@
             button2.Enabled = false;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(173, 289);
+            button2.Location = new Point(167, 289);
             button2.Name = "button2";
-            button2.Size = new Size(51, 23);
+            button2.Size = new Size(62, 23);
             button2.TabIndex = 2;
             button2.Tag = "1";
             button2.Text = "1 / 56";
@@ -508,7 +516,7 @@
             button3.FlatAppearance.MouseOverBackColor = SystemColors.Control;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(230, 289);
+            button3.Location = new Point(235, 289);
             button3.Name = "button3";
             button3.Size = new Size(23, 23);
             button3.TabIndex = 3;
@@ -529,19 +537,36 @@
             numericUpDown1.TextAlign = HorizontalAlignment.Center;
             numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseOverBackColor = SystemColors.Control;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(12, 290);
+            button4.Name = "button4";
+            button4.Size = new Size(23, 23);
+            button4.TabIndex = 5;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // Setup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 324);
+            Controls.Add(button4);
             Controls.Add(numericUpDown1);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Setup";
             SizeGripStyle = SizeGripStyle.Hide;
             Text = "Setup";
+            FormClosing += Setup_FormClosing;
             Load += Setup_Load;
             groupBox1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
@@ -592,5 +617,6 @@
         private Button button2;
         private Button button3;
         private NumericUpDown numericUpDown1;
+        private Button button4;
     }
 }

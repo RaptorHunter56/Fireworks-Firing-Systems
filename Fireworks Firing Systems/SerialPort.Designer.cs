@@ -28,229 +28,222 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.regreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SerialPort));
+            groupBox1 = new GroupBox();
+            button2 = new Button();
+            textBox1 = new TextBox();
+            button1 = new Button();
+            comboBox2 = new ComboBox();
+            button3 = new Button();
+            comboBox1 = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            groupBox2 = new GroupBox();
+            richTextBox1 = new RichTextBox();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            groupBox3 = new GroupBox();
+            treeView1 = new TreeView();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            regreshToolStripMenuItem = new ToolStripMenuItem();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            groupBox3.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(595, 76);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Serial Port";
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(comboBox2);
+            groupBox1.Controls.Add(button3);
+            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Location = new Point(12, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(595, 76);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Serial Port";
             // 
             // button2
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(491, 45);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(98, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Send";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Enabled = false;
+            button2.Location = new Point(491, 45);
+            button2.Name = "button2";
+            button2.Size = new Size(98, 23);
+            button2.TabIndex = 19;
+            button2.Text = "Send";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // textBox1
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(6, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(479, 23);
-            this.textBox1.TabIndex = 18;
+            textBox1.Enabled = false;
+            textBox1.Location = new Point(6, 45);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(479, 23);
+            textBox1.TabIndex = 18;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(387, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(387, 16);
+            button1.Name = "button1";
+            button1.Size = new Size(98, 23);
+            button1.TabIndex = 17;
+            button1.Text = "Connect";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // comboBox2
             // 
-            this.comboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(268, 16);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(113, 23);
-            this.comboBox2.TabIndex = 16;
+            comboBox2.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(268, 16);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(113, 23);
+            comboBox2.TabIndex = 16;
             // 
             // button3
             // 
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(491, 16);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 23);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Test";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Enabled = false;
+            button3.Location = new Point(491, 16);
+            button3.Name = "button3";
+            button3.Size = new Size(98, 23);
+            button3.TabIndex = 15;
+            button3.Text = "Test";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // comboBox1
             // 
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(76, 16);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(113, 23);
-            this.comboBox1.TabIndex = 13;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(76, 16);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(113, 23);
+            comboBox1.TabIndex = 13;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(202, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 15);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Baud Rate";
+            label1.AutoSize = true;
+            label1.Location = new Point(202, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(60, 15);
+            label1.TabIndex = 12;
+            label1.Text = "Baud Rate";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 15);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Port Name";
+            label2.AutoSize = true;
+            label2.Location = new Point(6, 19);
+            label2.Name = "label2";
+            label2.Size = new Size(64, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Port Name";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.richTextBox1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 94);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(319, 288);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Output";
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(richTextBox1);
+            groupBox2.Location = new Point(12, 94);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(319, 288);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Output";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.Window;
-            this.richTextBox1.Location = new System.Drawing.Point(6, 22);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.richTextBox1.Size = new System.Drawing.Size(299, 260);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.BackColor = SystemColors.WindowFrame;
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.ForeColor = SystemColors.Window;
+            richTextBox1.Location = new Point(6, 22);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
+            richTextBox1.Size = new Size(299, 260);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "";
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 385);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(619, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Location = new Point(0, 385);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(619, 22);
+            statusStrip1.TabIndex = 2;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(0, 17);
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.treeView1);
-            this.groupBox3.Location = new System.Drawing.Point(337, 94);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(270, 288);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Available Ports";
+            groupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            groupBox3.Controls.Add(treeView1);
+            groupBox3.Location = new Point(337, 94);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(270, 288);
+            groupBox3.TabIndex = 3;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Available Ports";
             // 
             // treeView1
             // 
-            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 19);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(264, 266);
-            this.treeView1.TabIndex = 0;
+            treeView1.ContextMenuStrip = contextMenuStrip1;
+            treeView1.Dock = DockStyle.Fill;
+            treeView1.Location = new Point(3, 19);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(264, 266);
+            treeView1.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.regreshToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(114, 26);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { regreshToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(114, 26);
             // 
             // regreshToolStripMenuItem
             // 
-            this.regreshToolStripMenuItem.Name = "regreshToolStripMenuItem";
-            this.regreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.regreshToolStripMenuItem.Text = "Refresh";
-            this.regreshToolStripMenuItem.Click += new System.EventHandler(this.regreshToolStripMenuItem_Click);
+            regreshToolStripMenuItem.Name = "regreshToolStripMenuItem";
+            regreshToolStripMenuItem.Size = new Size(113, 22);
+            regreshToolStripMenuItem.Text = "Refresh";
+            regreshToolStripMenuItem.Click += regreshToolStripMenuItem_Click;
             // 
             // SerialPort
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 407);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "SerialPort";
-            this.Text = "SerialPort";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SerialPort_FormClosing);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(619, 407);
+            Controls.Add(groupBox3);
+            Controls.Add(statusStrip1);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "SerialPort";
+            Text = "SerialPort";
+            FormClosing += SerialPort_FormClosing;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            contextMenuStrip1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

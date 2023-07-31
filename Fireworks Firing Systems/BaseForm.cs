@@ -15,6 +15,7 @@ namespace Fireworks_Firing_Systems
     public partial class BaseForm : Form
     {
         public System.IO.Ports.SerialPort _serialPort;
+        public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
 
         public BaseForm()
         {
@@ -28,6 +29,7 @@ namespace Fireworks_Firing_Systems
 
         private void button1_Click(object sender, EventArgs e) => Connect_Disconnect();
         private void disConnectToolStripMenuItem_Click(object sender, EventArgs e) => Connect_Disconnect(false);
+        private void BaseForm_FormClosing(object sender, FormClosingEventArgs e) => Connect_Disconnect(false);
 
         #region SerialPort
         private void Connect_Disconnect(bool connect = true)
@@ -74,7 +76,12 @@ namespace Fireworks_Firing_Systems
 
         private void button3_Click(object sender, EventArgs e)
         {
-            new Setup().ShowDialog();
+            using (var form = new Setup(IgnitionPorts))
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                    IgnitionPorts = form.IgnitionPorts;
+            }
         }
+
     }
 }

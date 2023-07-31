@@ -74,6 +74,9 @@ namespace Fireworks_Firing_Systems
             };
         }
 
+        public override bool Equals(object obj) => Equals(obj as Firework);
+        public bool Equals(Firework obj) => obj != null && obj.ToJson() == this.ToJson();
+
         class ShortHandAttribute : Attribute
         {
             public string Name { get; }
