@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace Fireworks_Firing_Systems
 {
@@ -69,12 +71,15 @@ namespace Fireworks_Firing_Systems
             button2.Tag = buttonTag - 1;
             UpdateButtons();
         }
-        private void button4_Click(object sender, EventArgs e)
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).First(x => x.Tag == ((dynamic)((ContextMenuStrip)((ToolStripItem)sender).Owner).SourceControl).Tag).SelectedIndex = 0; 
+        private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
             flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
                 .ForEach(x => x.SelectedIndex = 0);
         }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e) => UpdateButtons();
 
         private void UpdateButtons()
         {
@@ -90,6 +95,5 @@ namespace Fireworks_Firing_Systems
             .ForEach(x => x.Text = (id * 7 - (7 - Int32.Parse(x.Tag.ToString()))).ToString());
         private void UpdateSelectedItem(int id) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
             .ForEach(x => x.SelectedItem = IgnitionPorts.ContainsKey(id * 7 - (7 - Int32.Parse(x.Tag.ToString()))) ? IgnitionPorts[id * 7 - (7 - Int32.Parse(x.Tag.ToString()))].Item1 : "None");
-
     }
 }

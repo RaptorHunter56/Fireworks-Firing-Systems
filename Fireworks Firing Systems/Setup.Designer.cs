@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             groupBox1 = new GroupBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -63,7 +64,10 @@
             button2 = new Button();
             button3 = new Button();
             numericUpDown1 = new NumericUpDown();
-            button4 = new Button();
+            toolTip1 = new ToolTip(components);
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            clearToolStripMenuItem = new ToolStripMenuItem();
+            clearAllToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
@@ -74,6 +78,7 @@
             tableLayoutPanel7.SuspendLayout();
             tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -123,6 +128,7 @@
             comboBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox2.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox2.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox2.ContextMenuStrip = contextMenuStrip1;
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.FormattingEnabled = true;
             comboBox2.Items.AddRange(new object[] { "None" });
@@ -150,6 +156,7 @@
             // 
             panel2.BackColor = SystemColors.ControlDark;
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.ContextMenuStrip = contextMenuStrip1;
             panel2.Location = new Point(330, 3);
             panel2.Name = "panel2";
             panel2.Size = new Size(24, 24);
@@ -177,6 +184,7 @@
             comboBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox3.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox3.ContextMenuStrip = contextMenuStrip1;
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.FormattingEnabled = true;
             comboBox3.Items.AddRange(new object[] { "None" });
@@ -204,6 +212,7 @@
             // 
             panel3.BackColor = SystemColors.ControlDark;
             panel3.BorderStyle = BorderStyle.FixedSingle;
+            panel3.ContextMenuStrip = contextMenuStrip1;
             panel3.Location = new Point(330, 3);
             panel3.Name = "panel3";
             panel3.Size = new Size(24, 24);
@@ -231,6 +240,7 @@
             comboBox4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox4.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox4.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox4.ContextMenuStrip = contextMenuStrip1;
             comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox4.FormattingEnabled = true;
             comboBox4.Items.AddRange(new object[] { "None" });
@@ -258,6 +268,7 @@
             // 
             panel4.BackColor = SystemColors.ControlDark;
             panel4.BorderStyle = BorderStyle.FixedSingle;
+            panel4.ContextMenuStrip = contextMenuStrip1;
             panel4.Location = new Point(330, 3);
             panel4.Name = "panel4";
             panel4.Size = new Size(24, 24);
@@ -285,6 +296,7 @@
             comboBox5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox5.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox5.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox5.ContextMenuStrip = contextMenuStrip1;
             comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox5.FormattingEnabled = true;
             comboBox5.Items.AddRange(new object[] { "None" });
@@ -312,6 +324,7 @@
             // 
             panel5.BackColor = SystemColors.ControlDark;
             panel5.BorderStyle = BorderStyle.FixedSingle;
+            panel5.ContextMenuStrip = contextMenuStrip1;
             panel5.Location = new Point(330, 3);
             panel5.Name = "panel5";
             panel5.Size = new Size(24, 24);
@@ -339,6 +352,7 @@
             comboBox6.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox6.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox6.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox6.ContextMenuStrip = contextMenuStrip1;
             comboBox6.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox6.FormattingEnabled = true;
             comboBox6.Items.AddRange(new object[] { "None" });
@@ -366,6 +380,7 @@
             // 
             panel6.BackColor = SystemColors.ControlDark;
             panel6.BorderStyle = BorderStyle.FixedSingle;
+            panel6.ContextMenuStrip = contextMenuStrip1;
             panel6.Location = new Point(330, 3);
             panel6.Name = "panel6";
             panel6.Size = new Size(24, 24);
@@ -393,6 +408,7 @@
             comboBox7.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox7.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox7.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox7.ContextMenuStrip = contextMenuStrip1;
             comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox7.FormattingEnabled = true;
             comboBox7.Items.AddRange(new object[] { "None" });
@@ -420,6 +436,7 @@
             // 
             panel7.BackColor = SystemColors.ControlDark;
             panel7.BorderStyle = BorderStyle.FixedSingle;
+            panel7.ContextMenuStrip = contextMenuStrip1;
             panel7.Location = new Point(330, 3);
             panel7.Name = "panel7";
             panel7.Size = new Size(24, 24);
@@ -447,6 +464,7 @@
             comboBox8.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBox8.AutoCompleteMode = AutoCompleteMode.Append;
             comboBox8.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox8.ContextMenuStrip = contextMenuStrip1;
             comboBox8.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox8.FormattingEnabled = true;
             comboBox8.Items.AddRange(new object[] { "None" });
@@ -474,6 +492,7 @@
             // 
             panel8.BackColor = SystemColors.ControlDark;
             panel8.BorderStyle = BorderStyle.FixedSingle;
+            panel8.ContextMenuStrip = contextMenuStrip1;
             panel8.Location = new Point(330, 3);
             panel8.Name = "panel8";
             panel8.Size = new Size(24, 24);
@@ -536,27 +555,33 @@
             numericUpDown1.TabIndex = 4;
             numericUpDown1.TextAlign = HorizontalAlignment.Center;
             numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
-            // button4
+            // contextMenuStrip1
             // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatAppearance.MouseOverBackColor = SystemColors.Control;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(12, 290);
-            button4.Name = "button4";
-            button4.Size = new Size(23, 23);
-            button4.TabIndex = 5;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { clearToolStripMenuItem, clearAllToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(181, 70);
+            // 
+            // clearToolStripMenuItem
+            // 
+            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            clearToolStripMenuItem.Size = new Size(180, 22);
+            clearToolStripMenuItem.Text = "Clear";
+            clearToolStripMenuItem.Click += clearToolStripMenuItem_Click;
+            // 
+            // clearAllToolStripMenuItem
+            // 
+            clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
+            clearAllToolStripMenuItem.Size = new Size(180, 22);
+            clearAllToolStripMenuItem.Text = "Clear All";
+            clearAllToolStripMenuItem.Click += clearAllToolStripMenuItem_Click;
             // 
             // Setup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(396, 324);
-            Controls.Add(button4);
             Controls.Add(numericUpDown1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -578,6 +603,7 @@
             tableLayoutPanel7.ResumeLayout(false);
             tableLayoutPanel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -617,6 +643,9 @@
         private Button button2;
         private Button button3;
         private NumericUpDown numericUpDown1;
-        private Button button4;
+        private ToolTip toolTip1;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem clearToolStripMenuItem;
+        private ToolStripMenuItem clearAllToolStripMenuItem;
     }
 }

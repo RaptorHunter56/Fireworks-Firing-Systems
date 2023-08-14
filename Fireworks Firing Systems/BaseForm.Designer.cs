@@ -37,21 +37,22 @@
             serialPortToolStripMenuItem = new ToolStripMenuItem();
             orderSettingsToolStripMenuItem = new ToolStripMenuItem();
             tabControl1 = new TabControl();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            disConnectToolStripMenuItem = new ToolStripMenuItem();
             tabPage1 = new TabPage();
+            button4 = new Button();
             button3 = new Button();
             tabPage2 = new TabPage();
             button2 = new Button();
             textBox1 = new TextBox();
             richTextBox1 = new RichTextBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            disConnectToolStripMenuItem = new ToolStripMenuItem();
             button1 = new Button();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
-            contextMenuStrip1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -100,7 +101,6 @@
             // 
             // tabControl1
             // 
-            tabControl1.ContextMenuStrip = contextMenuStrip1;
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Dock = DockStyle.Fill;
@@ -111,21 +111,9 @@
             tabControl1.Size = new Size(962, 553);
             tabControl1.TabIndex = 3;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { disConnectToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(134, 26);
-            // 
-            // disConnectToolStripMenuItem
-            // 
-            disConnectToolStripMenuItem.Name = "disConnectToolStripMenuItem";
-            disConnectToolStripMenuItem.Size = new Size(133, 22);
-            disConnectToolStripMenuItem.Text = "Disconnect";
-            disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
-            // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(button4);
             tabPage1.Controls.Add(button3);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -134,6 +122,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Setup";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(146, 126);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 1;
+            button4.Text = "button4";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // button3
             // 
@@ -190,6 +188,19 @@
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { disConnectToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(134, 26);
+            // 
+            // disConnectToolStripMenuItem
+            // 
+            disConnectToolStripMenuItem.Name = "disConnectToolStripMenuItem";
+            disConnectToolStripMenuItem.Size = new Size(133, 22);
+            disConnectToolStripMenuItem.Text = "Disconnect";
+            disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
+            // 
             // button1
             // 
             button1.Location = new Point(434, 241);
@@ -219,10 +230,10 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
-            contextMenuStrip1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,5 +256,6 @@
         private TextBox textBox1;
         private ToolStripStatusLabel toolStripStatusLabel1;
         private Button button3;
+        private Button button4;
     }
 }
