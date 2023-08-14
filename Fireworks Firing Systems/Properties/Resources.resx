@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icons8_Firework_Smoke_Ball_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8_Firework_Smoke_Ball_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_Firework_Mine_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8_Firework_Mine_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Firework_Fountain_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8_Firework_Fountain_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,16 +130,19 @@
   <data name="icons8_Firework_Roman_Candle_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8_Firework_Roman_Candle_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="square" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\square.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Firework_Sparkler_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8_Firework_Sparkler_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Firework_Cake_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\icons8_Firework_Cake_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_Firework_Mine_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\icons8_Firework_Mine_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_Firework_Smoke_Ball_100px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icons8_Firework_Smoke_Ball_100px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="square" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\square.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\On.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -40,8 +40,8 @@ namespace Fireworks_Firing_Systems
             int buttonTagCalc = buttonTag * 7 - 7;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
-                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag].Item2 : true);
-                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag].Item2 ? Color.LightGreen : Color.Red;
+                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag + buttonTagCalc].Item2 : true);
+                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag + buttonTagCalc].Item2 ? Color.LightGreen : Color.Red;
             }
             else
             {
