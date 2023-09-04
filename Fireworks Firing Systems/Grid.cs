@@ -20,7 +20,7 @@ namespace Fireworks_Firing_Systems
         {
             BaseForm = baseForm;
             InitializeComponent();
-            for (int i = 1; i < 57; i++) // 1
+            for (int i = 1; i < 61; i++) // 1
             {
                 AddButton(i);
             }
@@ -36,9 +36,9 @@ namespace Fireworks_Firing_Systems
             {
                 button.Enabled = true;
                 if (BaseForm.IgnitionPorts.First(x => x.Key == i).Value.Item2)
-                    pictureBox.Image = imageList1.Images[2];
+                    pictureBox.Image = Properties.Resources.On;
                 else
-                    pictureBox.Image = imageList1.Images[1];
+                    pictureBox.Image = Properties.Resources.Off;
             }
             else
                 button.Enabled = false;

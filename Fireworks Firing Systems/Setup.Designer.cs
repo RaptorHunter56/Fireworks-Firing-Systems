@@ -34,6 +34,9 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             comboBox2 = new ComboBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            clearToolStripMenuItem = new ToolStripMenuItem();
+            clearAllToolStripMenuItem = new ToolStripMenuItem();
             label2 = new Label();
             panel2 = new Panel();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -56,29 +59,21 @@
             comboBox7 = new ComboBox();
             label7 = new Label();
             panel7 = new Panel();
-            tableLayoutPanel8 = new TableLayoutPanel();
-            comboBox8 = new ComboBox();
-            label8 = new Label();
-            panel8 = new Panel();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             numericUpDown1 = new NumericUpDown();
             toolTip1 = new ToolTip(components);
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            clearToolStripMenuItem = new ToolStripMenuItem();
-            clearAllToolStripMenuItem = new ToolStripMenuItem();
             groupBox1.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             tableLayoutPanel6.SuspendLayout();
             tableLayoutPanel7.SuspendLayout();
-            tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
-            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -87,7 +82,7 @@
             groupBox1.Controls.Add(flowLayoutPanel1);
             groupBox1.Location = new Point(12, 6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(372, 277);
+            groupBox1.Size = new Size(372, 239);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -99,11 +94,10 @@
             flowLayoutPanel1.Controls.Add(tableLayoutPanel5);
             flowLayoutPanel1.Controls.Add(tableLayoutPanel6);
             flowLayoutPanel1.Controls.Add(tableLayoutPanel7);
-            flowLayoutPanel1.Controls.Add(tableLayoutPanel8);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(3, 19);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(366, 255);
+            flowLayoutPanel1.Size = new Size(366, 217);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -139,6 +133,26 @@
             comboBox2.Tag = "1";
             comboBox2.SelectedIndexChanged += comboBox_SelectedIndexChanged;
             comboBox2.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { clearToolStripMenuItem, clearAllToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(119, 48);
+            // 
+            // clearToolStripMenuItem
+            // 
+            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            clearToolStripMenuItem.Size = new Size(118, 22);
+            clearToolStripMenuItem.Text = "Clear";
+            clearToolStripMenuItem.Click += clearToolStripMenuItem_Click;
+            // 
+            // clearAllToolStripMenuItem
+            // 
+            clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
+            clearAllToolStripMenuItem.Size = new Size(118, 22);
+            clearAllToolStripMenuItem.Text = "Clear All";
+            clearAllToolStripMenuItem.Click += clearAllToolStripMenuItem_Click;
             // 
             // label2
             // 
@@ -443,62 +457,6 @@
             panel7.TabIndex = 2;
             panel7.Tag = "6";
             // 
-            // tableLayoutPanel8
-            // 
-            tableLayoutPanel8.ColumnCount = 3;
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
-            tableLayoutPanel8.Controls.Add(comboBox8, 1, 0);
-            tableLayoutPanel8.Controls.Add(label8, 0, 0);
-            tableLayoutPanel8.Controls.Add(panel8, 2, 0);
-            tableLayoutPanel8.Location = new Point(3, 219);
-            tableLayoutPanel8.Name = "tableLayoutPanel8";
-            tableLayoutPanel8.RowCount = 1;
-            tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel8.Size = new Size(357, 30);
-            tableLayoutPanel8.TabIndex = 2;
-            // 
-            // comboBox8
-            // 
-            comboBox8.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            comboBox8.AutoCompleteMode = AutoCompleteMode.Append;
-            comboBox8.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox8.ContextMenuStrip = contextMenuStrip1;
-            comboBox8.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox8.FormattingEnabled = true;
-            comboBox8.Items.AddRange(new object[] { "None" });
-            comboBox8.Location = new Point(34, 3);
-            comboBox8.Name = "comboBox8";
-            comboBox8.Size = new Size(290, 23);
-            comboBox8.TabIndex = 0;
-            comboBox8.Tag = "7";
-            comboBox8.SelectedIndexChanged += comboBox_SelectedIndexChanged;
-            comboBox8.SelectionChangeCommitted += comboBox_SelectionChangeCommitted;
-            // 
-            // label8
-            // 
-            label8.Anchor = AnchorStyles.None;
-            label8.Location = new Point(3, 7);
-            label8.MinimumSize = new Size(25, 15);
-            label8.Name = "label8";
-            label8.Size = new Size(25, 15);
-            label8.TabIndex = 1;
-            label8.Tag = "7";
-            label8.Text = "7";
-            label8.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // panel8
-            // 
-            panel8.BackColor = SystemColors.ControlDark;
-            panel8.BorderStyle = BorderStyle.FixedSingle;
-            panel8.ContextMenuStrip = contextMenuStrip1;
-            panel8.Location = new Point(330, 3);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(24, 24);
-            panel8.TabIndex = 2;
-            panel8.Tag = "7";
-            // 
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom;
@@ -507,7 +465,7 @@
             button1.FlatAppearance.MouseOverBackColor = SystemColors.Control;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(138, 289);
+            button1.Location = new Point(138, 251);
             button1.Name = "button1";
             button1.Size = new Size(23, 23);
             button1.TabIndex = 1;
@@ -520,12 +478,12 @@
             button2.Enabled = false;
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(167, 289);
+            button2.Location = new Point(167, 251);
             button2.Name = "button2";
             button2.Size = new Size(62, 23);
             button2.TabIndex = 2;
             button2.Tag = "1";
-            button2.Text = "1 / 56";
+            button2.Text = "1 / 60";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -535,7 +493,7 @@
             button3.FlatAppearance.MouseOverBackColor = SystemColors.Control;
             button3.FlatStyle = FlatStyle.Flat;
             button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(235, 289);
+            button3.Location = new Point(235, 251);
             button3.Name = "button3";
             button3.Size = new Size(23, 23);
             button3.TabIndex = 3;
@@ -547,7 +505,7 @@
             numericUpDown1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             numericUpDown1.BackColor = SystemColors.Control;
             numericUpDown1.BorderStyle = BorderStyle.None;
-            numericUpDown1.Location = new Point(348, 294);
+            numericUpDown1.Location = new Point(348, 256);
             numericUpDown1.Maximum = new decimal(new int[] { 11, 0, 0, 0 });
             numericUpDown1.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
@@ -557,31 +515,11 @@
             numericUpDown1.Value = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { clearToolStripMenuItem, clearAllToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 70);
-            // 
-            // clearToolStripMenuItem
-            // 
-            clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            clearToolStripMenuItem.Size = new Size(180, 22);
-            clearToolStripMenuItem.Text = "Clear";
-            clearToolStripMenuItem.Click += clearToolStripMenuItem_Click;
-            // 
-            // clearAllToolStripMenuItem
-            // 
-            clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-            clearAllToolStripMenuItem.Size = new Size(180, 22);
-            clearAllToolStripMenuItem.Text = "Clear All";
-            clearAllToolStripMenuItem.Click += clearAllToolStripMenuItem_Click;
-            // 
             // Setup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(396, 324);
+            ClientSize = new Size(396, 286);
             Controls.Add(numericUpDown1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -596,14 +534,13 @@
             groupBox1.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
+            contextMenuStrip1.ResumeLayout(false);
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel6.ResumeLayout(false);
             tableLayoutPanel7.ResumeLayout(false);
-            tableLayoutPanel8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
-            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -635,10 +572,6 @@
         private ComboBox comboBox7;
         private Label label7;
         private Panel panel7;
-        private TableLayoutPanel tableLayoutPanel8;
-        private ComboBox comboBox8;
-        private Label label8;
-        private Panel panel8;
         private Button button1;
         private Button button2;
         private Button button3;

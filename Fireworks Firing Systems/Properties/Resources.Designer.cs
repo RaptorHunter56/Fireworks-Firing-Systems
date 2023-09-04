@@ -63,69 +63,9 @@ namespace Fireworks_Firing_Systems.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Cake_100px {
+        internal static System.Drawing.Bitmap Off {
             get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Cake_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Fountain_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Fountain_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Mine_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Mine_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Missile_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Missile_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Roman_Candle_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Roman_Candle_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Smoke_Ball_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Smoke_Ball_100px", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icons8_Firework_Sparkler_100px {
-            get {
-                object obj = ResourceManager.GetObject("icons8_Firework_Sparkler_100px", resourceCulture);
+                object obj = ResourceManager.GetObject("Off", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,16 +76,6 @@ namespace Fireworks_Firing_Systems.Properties {
         internal static System.Drawing.Bitmap On {
             get {
                 object obj = ResourceManager.GetObject("On", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap square {
-            get {
-                object obj = ResourceManager.GetObject("square", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -109,5 +109,6 @@ namespace Fireworks_Firing_Systems
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
         #endregion
 
+
     }
 }

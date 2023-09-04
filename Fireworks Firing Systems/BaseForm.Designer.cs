@@ -114,6 +114,7 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(button4);
+            tabPage1.Controls.Add(button1);
             tabPage1.Controls.Add(button3);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
@@ -125,21 +126,21 @@
             // 
             // button4
             // 
-            button4.Location = new Point(146, 126);
+            button4.Location = new Point(8, 35);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 1;
-            button4.Text = "button4";
+            button4.Text = "Grid";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(144, 395);
+            button3.Location = new Point(8, 64);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 0;
-            button3.Text = "button3";
+            button3.Text = "Set Up";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
@@ -203,7 +204,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(434, 241);
+            button1.Location = new Point(8, 6);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 4;
@@ -216,7 +217,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(962, 599);
-            Controls.Add(button1);
             Controls.Add(tabControl1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);

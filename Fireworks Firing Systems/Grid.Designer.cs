@@ -42,7 +42,7 @@
             groupBox1.Controls.Add(flowLayoutPanel1);
             groupBox1.Location = new Point(12, 6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(608, 514);
+            groupBox1.Size = new Size(492, 514);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
@@ -51,7 +51,7 @@
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(3, 19);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(602, 492);
+            flowLayoutPanel1.Size = new Size(486, 492);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // imageList1
@@ -59,7 +59,7 @@
             imageList1.ColorDepth = ColorDepth.Depth8Bit;
             imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
             imageList1.TransparentColor = Color.Transparent;
-            imageList1.Images.SetKeyName(0, "Blank");
+            imageList1.Images.SetKeyName(0, "icons8_Firework_Blank_75px.png");
             imageList1.Images.SetKeyName(1, "Off.png");
             imageList1.Images.SetKeyName(2, "On.png");
             // 
@@ -67,7 +67,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(632, 532);
+            ClientSize = new Size(516, 532);
             Controls.Add(groupBox1);
             Name = "Grid";
             Text = "Grid";

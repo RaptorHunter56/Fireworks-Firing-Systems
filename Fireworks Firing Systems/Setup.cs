@@ -15,7 +15,7 @@ namespace Fireworks_Firing_Systems
     public partial class Setup : Form
     {
         public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
-        public int buttonTag => (int)(Int32.Parse(button2.Tag.ToString()) * numericUpDown1.Value);
+        public int buttonTag => (int)((Int32.Parse(button2.Tag.ToString()) * 6 - 5) + (60 * (numericUpDown1.Value - 1)));
         public Setup(Dictionary<int, Tuple<Firework, bool>> ignitionPorts)
         {
             IgnitionPorts = ignitionPorts;
@@ -37,7 +37,7 @@ namespace Fireworks_Firing_Systems
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
-            int buttonTagCalc = buttonTag * 7 - 7;
+            int buttonTagCalc = buttonTag * 6 - 6;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
                 IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag + buttonTagCalc].Item2 : true);
@@ -52,7 +52,7 @@ namespace Fireworks_Firing_Systems
         private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
-            int buttonTagCalc = buttonTag * 7 - 7;
+            int buttonTagCalc = buttonTag * 6 - 6;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
                 IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
@@ -62,16 +62,16 @@ namespace Fireworks_Firing_Systems
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button2.Tag = buttonTag + 1;
+            button2.Tag = Int32.Parse(button2.Tag.ToString()) + 1;
             UpdateButtons();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button2.Tag = buttonTag - 1;
+            button2.Tag = Int32.Parse(button2.Tag.ToString()) - 1;
             UpdateButtons();
         }
-        private void clearToolStripMenuItem_Click(object sender, EventArgs e) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).First(x => x.Tag == ((dynamic)((ContextMenuStrip)((ToolStripItem)sender).Owner).SourceControl).Tag).SelectedIndex = 0; 
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).First(x => x.Tag == ((dynamic)((ContextMenuStrip)((ToolStripItem)sender).Owner).SourceControl).Tag).SelectedIndex = 0;
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
@@ -84,16 +84,16 @@ namespace Fireworks_Firing_Systems
         private void UpdateButtons()
         {
             int id = buttonTag;
-            button2.Text = $"{id * 7 - 6} / {56 * numericUpDown1.Value}";
-            button1.Enabled = (id != 1);
-            button3.Enabled = (id != 8);
+            button2.Text = $"{id} / {60 * numericUpDown1.Value}";
+            button1.Enabled = (Int32.Parse(button2.Tag.ToString()) != 1);
+            button3.Enabled = (Int32.Parse(button2.Tag.ToString()) != 10);
             UpdateText(id);
             UpdateSelectedItem(id);
         }
 
         private void UpdateText(int id) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Label>()).ToList()
-            .ForEach(x => x.Text = (id * 7 - (7 - Int32.Parse(x.Tag.ToString()))).ToString());
+            .ForEach(x => x.Text = (id + (Int32.Parse(x.Tag.ToString()) - 1)).ToString());
         private void UpdateSelectedItem(int id) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
-            .ForEach(x => x.SelectedItem = IgnitionPorts.ContainsKey(id * 7 - (7 - Int32.Parse(x.Tag.ToString()))) ? IgnitionPorts[id * 7 - (7 - Int32.Parse(x.Tag.ToString()))].Item1 : "None");
+            .ForEach(x => x.SelectedItem = IgnitionPorts.ContainsKey(id + (Int32.Parse(x.Tag.ToString()) - 1)) ? IgnitionPorts[id + (Int32.Parse(x.Tag.ToString()) - 1)].Item1 : "None");
     }
 }
