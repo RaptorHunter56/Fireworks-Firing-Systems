@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fireworks Firing Systems", "Fireworks Firing Systems\Fireworks Firing Systems.csproj", "{1A62EE55-C5EF-4F15-80D1-B4123C66D340}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Arduino Code", "Arduino Code\Arduino Code.vcxitems", "{5E8A124F-ADFE-494E-8189-F45338CB5C44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
