@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Fierwork_Main_Box\Fierwork_Main_Box.ino" />
+  </ItemGroup>
 </Project>
