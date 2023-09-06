@@ -15,5 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Fierwork_Main_Box\Fierwork_Main_Box.ino" />
+    <None Include="$(MSBuildThisFileDirectory)Libraries\Centipede.zip" />
   </ItemGroup>
 </Project>

@@ -36,26 +36,24 @@ namespace Fireworks_Firing_Systems
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
-            int buttonTagCalc = buttonTag * 6 - 6;
+            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString()) - 1;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
-                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag + buttonTagCalc].Item2 : true);
-                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag + buttonTagCalc].Item2 ? Color.LightGreen : Color.Red;
+                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag + buttonTag].Item2 : true);
+                flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag + buttonTag].Item2 ? Color.LightGreen : Color.Red;
             }
             else
             {
-                IgnitionPorts.Remove(comboBoxTag + buttonTagCalc);
+                IgnitionPorts.Remove(comboBoxTag + buttonTag);
                 flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = SystemColors.ControlDark;
             }
         }
         private void comboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString());
-            int buttonTagCalc = buttonTag * 6 - 6;
+            int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString()) - 1;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
-                IgnitionPorts[comboBoxTag + buttonTagCalc] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
+                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
                 flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = Color.LightGreen;
             }
         }

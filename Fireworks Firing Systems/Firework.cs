@@ -64,15 +64,9 @@ namespace Fireworks_Firing_Systems
                     Tag = (propertyInfo.PropertyType == typeof(Color)) ? "Color" : null
                 };
         }
-        private static DataGridViewColumn CreateIndicatorColoumn()
-        {
-            return new DataGridViewTextBoxColumn()
-            {
-                Name = "🎨",
-                ReadOnly = true,
-                Width = 10
-            };
-        }
+        private static DataGridViewColumn CreateIndicatorColoumn() => new DataGridViewTextBoxColumn() { Name = "🎨", ReadOnly = true, Width = 10 };
+
+        public ListViewItem CreateListViewItem() => new ListViewItem(new string[] { FireworkName, $"{Type.ToString()} - {Colour.ToString()}"}, -1);
 
         public override bool Equals(object obj) => Equals(obj as Firework);
         public bool Equals(Firework obj) => obj != null && obj.ToJson() == this.ToJson();

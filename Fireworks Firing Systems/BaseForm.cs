@@ -21,13 +21,31 @@ namespace Fireworks_Firing_Systems
         public BaseForm()
         {
             InitializeComponent();
+            RefreshLabel();
+            RefreshList();
+        }
+
+        private void RefreshLabel()
+        {
+            label1.Text = "Serial Port: " + Properties.Settings.Default.SerialPort;
+            label2.Text = "Baud Rate: " + Properties.Settings.Default.BaudRate.ToString();
+        }
+        private void RefreshList()
+        {
+            listView1.Items.Clear();
+            foreach (var item in IgnitionPorts)
+            {
+                var temp = item.Value.Item1.CreateListViewItem();
+                temp.Text = $"[{item.Key}] {temp.Text}";
+                temp.Group = listView1.Groups[(int)(((item.Key % 60) - 0.1) / 6)];
+                listView1.Items.Add(temp);
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e) => OpenForm(new DataBase(), "Data Base");
-
         private void serialPortToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new SerialPort(), "Serial Port");
-
         private void orderSettingsToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new Order(), "Order");
+
         private void button3_Click(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = $"Opening Setup Settings";
@@ -36,6 +54,7 @@ namespace Fireworks_Firing_Systems
             {
                 if (form.ShowDialog() == DialogResult.OK)
                     IgnitionPorts = form.IgnitionPorts;
+                RefreshList();
             }
             this.Enabled = true;
             toolStripStatusLabel1.Text = $"Closed and Saved Setup Settings";
@@ -53,6 +72,7 @@ namespace Fireworks_Firing_Systems
             toolStripStatusLabel1.Text = $"Opening {name} Settings";
             this.Enabled = false;
             form.ShowDialog();
+            RefreshLabel();
             this.Enabled = true;
             toolStripStatusLabel1.Text = $"Closed and Saved {name} Settings";
         }
@@ -65,7 +85,7 @@ namespace Fireworks_Firing_Systems
         private void Connect_Disconnect(bool connect = true)
         {
             tabControl1.Enabled = connect;
-            toolStripMenuItem1.Enabled = serialPortToolStripMenuItem.Enabled = orderSettingsToolStripMenuItem.Enabled = button1.Visible = !connect;
+            toolStripMenuItem1.Enabled = serialPortToolStripMenuItem.Enabled = orderSettingsToolStripMenuItem.Enabled = groupBox1.Visible = !connect;
 
             try
             {
