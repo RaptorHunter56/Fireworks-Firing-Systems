@@ -19,8 +19,7 @@ namespace Fireworks_Firing_Systems
         public Setup(Dictionary<int, Tuple<Firework, bool>> ignitionPorts)
         {
             IgnitionPorts = ignitionPorts;
-            if (IgnitionPorts.Count > 0)
-                IgnitionPorts[1] = new Tuple<Firework, bool>(IgnitionPorts[1].Item1, false);
+            //if (IgnitionPorts.Count > 0) IgnitionPorts[1] = new Tuple<Firework, bool>(IgnitionPorts[1].Item1, false); //Dev
             InitializeComponent();
         }
 

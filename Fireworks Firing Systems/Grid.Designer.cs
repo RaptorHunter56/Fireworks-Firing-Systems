@@ -71,6 +71,7 @@
             Controls.Add(groupBox1);
             Name = "Grid";
             Text = "Grid";
+            FormClosing += Grid_FormClosing;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }

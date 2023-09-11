@@ -16,6 +16,9 @@ namespace Fireworks_Firing_Systems
     {
         public BaseForm BaseForm { get; }
 
+        public delegate void UnlinkForm();
+        public UnlinkForm updateButton = delegate { };
+
         public Grid(BaseForm baseForm)
         {
             BaseForm = baseForm;
@@ -48,6 +51,7 @@ namespace Fireworks_Firing_Systems
             button.Size = new Size(75, 75);
             button.TabIndex = i;
             button.UseVisualStyleBackColor = false;
+            button.Tag = i;
 
             pictureBox.Location = new Point(0, 0);
             pictureBox.Name = "pictureBox" + i.ToString();
@@ -68,11 +72,35 @@ namespace Fireworks_Firing_Systems
             label.TabIndex = i;
             label.Text = i.ToString();
             label.TextAlign = ContentAlignment.MiddleCenter;
+            label.Tag = i;
+            label.Click += button_Click;
 
 
             pictureBox.Controls.Add(label);
             button.Controls.Add(pictureBox);
             flowLayoutPanel1.Controls.Add(button);
         }
+        private void button_Click(object sender, EventArgs e) => BaseForm.Fire((int)((Label)sender).Tag);
+        public void UpdateButton()
+        {
+            for (int i = 1; i < 61; i++) // 1
+            {
+                if (BaseForm.IgnitionPorts.Where(x => x.Key == i).Count() > 0)
+                {
+                    flowLayoutPanel1.Controls.Find("button" + i.ToString(), false)[0].Enabled = true;
+                    if (BaseForm.IgnitionPorts.First(x => x.Key == i).Value.Item2)
+                        ((PictureBox)flowLayoutPanel1.Controls.Find("button" + i.ToString(), false)[0].Controls.Find("pictureBox" + i.ToString(), false)[0]).Image = Properties.Resources.On;
+                    else
+                        ((PictureBox)flowLayoutPanel1.Controls.Find("button" + i.ToString(), false)[0].Controls.Find("pictureBox" + i.ToString(), false)[0]).Image = Properties.Resources.Off;
+                }
+                else
+                {
+                    flowLayoutPanel1.Controls.Find("button" + i.ToString(), false)[0].Enabled = false;
+                    ((PictureBox)flowLayoutPanel1.Controls.Find("button" + i.ToString(), false)[0].Controls.Find("pictureBox" + i.ToString(), false)[0]).Image = null;
+                }
+            }
+        }
+
+        private void Grid_FormClosing(object sender, FormClosingEventArgs e) => updateButton();
     }
 }

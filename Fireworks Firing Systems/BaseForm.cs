@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +18,9 @@ namespace Fireworks_Firing_Systems
     {
         public System.IO.Ports.SerialPort _serialPort;
         public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
+
+        public delegate void UpdateButton();
+        public UpdateButton updateButton = delegate { };
 
         public BaseForm()
         {
@@ -33,10 +37,11 @@ namespace Fireworks_Firing_Systems
         private void RefreshList()
         {
             listView1.Items.Clear();
-            foreach (var item in IgnitionPorts)
+            foreach (var item in IgnitionPorts.Where(x => x.Value.Item2))
             {
                 var temp = item.Value.Item1.CreateListViewItem();
                 temp.Text = $"[{item.Key}] {temp.Text}";
+                temp.Tag = item;
                 temp.Group = listView1.Groups[(int)(((item.Key % 60) - 0.1) / 6)];
                 listView1.Items.Add(temp);
             }
@@ -55,6 +60,7 @@ namespace Fireworks_Firing_Systems
                 if (form.ShowDialog() == DialogResult.OK)
                     IgnitionPorts = form.IgnitionPorts;
                 RefreshList();
+                updateButton();
             }
             this.Enabled = true;
             toolStripStatusLabel1.Text = $"Closed and Saved Setup Settings";
@@ -63,9 +69,11 @@ namespace Fireworks_Firing_Systems
         {
             toolStripStatusLabel1.Text = $"Opening Grid Settings";
             var form = new Grid(this);
+            updateButton = form.UpdateButton;
             form.Show();
             toolStripStatusLabel1.Text = $"Closed and Saved Grid Settings";
         }
+        public void ClearForm() => updateButton = delegate { };
 
         private void OpenForm(Form form, string name)
         {
@@ -129,6 +137,13 @@ namespace Fireworks_Firing_Systems
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
         #endregion
 
-
+        #region Fire
+        public void Fire(int i)
+        {
+            IgnitionPorts[i] = new Tuple<Firework, bool>(IgnitionPorts[i].Item1, false);
+            RefreshList();
+            updateButton();
+        }
+        #endregion
     }
 }
