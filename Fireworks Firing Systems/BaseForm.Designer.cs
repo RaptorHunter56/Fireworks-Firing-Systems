@@ -53,6 +53,10 @@
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            label3 = new Label();
+            label4 = new Label();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             button4 = new Button();
             button3 = new Button();
             tabPage2 = new TabPage();
@@ -65,13 +69,16 @@
             button1 = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
             disConnectToolStripMenuItem = new ToolStripMenuItem();
+            button5 = new Button();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
@@ -156,6 +163,11 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(listView1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(tableLayoutPanel1);
+            splitContainer1.Panel2.Controls.Add(flowLayoutPanel1);
             splitContainer1.Size = new Size(857, 516);
             splitContainer1.SplitterDistance = 236;
             splitContainer1.TabIndex = 3;
@@ -197,6 +209,56 @@
             listView1.TabIndex = 2;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Tile;
+            listView1.ItemDrag += listView1_ItemDrag;
+            listView1.DragEnter += DragEnter;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.BackColor = Color.WhiteSmoke;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(label3, 0, 2);
+            tableLayoutPanel1.Controls.Add(label4, 0, 0);
+            tableLayoutPanel1.Controls.Add(button5, 0, 1);
+            tableLayoutPanel1.Location = new Point(327, 57);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(200, 62);
+            tableLayoutPanel1.TabIndex = 1;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 44);
+            label3.Name = "label3";
+            label3.Size = new Size(39, 15);
+            label3.TabIndex = 0;
+            label3.Text = "Delay:";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(3, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(40, 15);
+            label4.TabIndex = 1;
+            label4.Text = "Group";
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.AllowDrop = true;
+            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Location = new Point(3, 3);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(279, 436);
+            flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.DragDrop += flowLayoutPanel1_DragDrop;
+            flowLayoutPanel1.DragEnter += DragEnter;
             // 
             // button4
             // 
@@ -316,6 +378,16 @@
             disConnectToolStripMenuItem.Text = "Disconnect";
             disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
             // 
+            // button5
+            // 
+            button5.Dock = DockStyle.Fill;
+            button5.Location = new Point(3, 18);
+            button5.Name = "button5";
+            button5.Size = new Size(194, 23);
+            button5.TabIndex = 2;
+            button5.Text = "button5";
+            button5.UseVisualStyleBackColor = true;
+            // 
             // BaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -337,8 +409,12 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -374,5 +450,10 @@
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private SplitContainer splitContainer1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Label label3;
+        private Label label4;
+        private Button button5;
     }
 }

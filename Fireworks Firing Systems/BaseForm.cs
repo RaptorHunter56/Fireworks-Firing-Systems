@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 
 namespace Fireworks_Firing_Systems
 {
@@ -145,5 +146,62 @@ namespace Fireworks_Firing_Systems
             updateButton();
         }
         #endregion
+
+
+        private void listView1_ItemDrag(object sender, ItemDragEventArgs e) => listView1.DoDragDrop(e.Item, DragDropEffects.All);
+        private void DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
+        {
+            var control = FindControlAtPoint(splitContainer1.Panel2, new Point(PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y));
+            var controlAbove = FindControlAtPoint(splitContainer1.Panel2, new Point(PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y - 10));
+
+            if (control.GetType() == flowLayoutPanel1.GetType())
+            {
+                Button button = new Button() { Width = 226, AllowDrop = true, Text = (listView1.SelectedItems[0] as ListViewItem).Text };
+
+                button.DragDrop += new DragEventHandler(control_DragDrop);
+                button.DragEnter += new DragEventHandler(DragEnter);
+
+                flowLayoutPanel1.Controls.Add(button);
+
+                var index = 0;
+                if (controlAbove.GetType() != flowLayoutPanel1.GetType() && index == 0)
+                    flowLayoutPanel1.Controls.SetChildIndex(button, flowLayoutPanel1.Controls.IndexOf(controlAbove) + 1);
+                foreach (ListViewItem format in listView1.SelectedItems)
+                {
+                    if (index != 0)
+                        button.Text += format.Text;
+                    index++;
+                }
+
+            }
+            else
+                control.Text += (e.Data.GetData("System.Windows.Forms.ListViewItem") as ListViewItem).Text;
+        }
+        private void control_DragDrop(object sender, DragEventArgs e)
+        {
+            foreach (ListViewItem format in listView1.SelectedItems)
+            {
+                ((Button)sender).Text += format.Text;
+            }
+        }
+        public static Control FindControlAtPoint(Control container, Point pos)
+        {
+            Control child;
+            foreach (Control c in container.Controls)
+            {
+                var cPoint = c.FindForm().PointToClient(c.Parent.PointToScreen(c.Location));
+                var posPoint = new Point(pos.X - cPoint.X, pos.Y - cPoint.Y);
+                if (c.Visible && c.Bounds.Contains(posPoint))
+                {
+                    child = c.GetChildAtPoint(new Point(posPoint.X - c.Left, posPoint.Y - c.Top));
+                    if (child == null) 
+                        return c;
+                    else 
+                        return child;
+                }
+            }
+            return null;
+        }
     }
 }
