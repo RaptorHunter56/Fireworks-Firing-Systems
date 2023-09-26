@@ -112,7 +112,7 @@ namespace Fireworks_Firing_Systems
             };
             public int NullWeight => Weighted.Values.Sum() / Weighted.Count;
             public new string Name = "Order - Weighted";
-            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects) => ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(y => y.Type).Distinct().Select(y => Weighted[y]).DefaultIfEmpty(0).Sum() / x.fireworks.Select(y => y.Type).Distinct().Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
+            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects) => ignitionObjects = ignitionObjects.Values.SelectMany(x => Enumerable.Repeat(x, x.fireworks.Count() == 0 ? NullWeight : x.fireworks.Select(y => y.Value.Type).Distinct().Select(y => Weighted[y]).DefaultIfEmpty(0).Sum() / x.fireworks.Select(y => y.Value.Type).Distinct().Count())).OrderBy(a => rng.Next()).ToList().Distinct().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
             public override string ToString() => Name;
             public string ToJson() => Newtonsoft.Json.JsonConvert.SerializeObject(this);
             internal TreeNode ToTreeNode() => new TreeNode(Name, Weighted.Select(x => new TreeNode($"{x.Key} - {x.Value}")).ToArray());

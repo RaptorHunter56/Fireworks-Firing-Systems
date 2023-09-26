@@ -157,33 +157,45 @@ namespace Fireworks_Firing_Systems
 
             if (control.GetType() == flowLayoutPanel1.GetType())
             {
-                Button button = new Button() { Width = 226, AllowDrop = true, Text = (listView1.SelectedItems[0] as ListViewItem).Text };
-
-                button.DragDrop += new DragEventHandler(control_DragDrop);
-                button.DragEnter += new DragEventHandler(DragEnter);
-
-                flowLayoutPanel1.Controls.Add(button);
-
                 var index = 0;
-                if (controlAbove.GetType() != flowLayoutPanel1.GetType() && index == 0)
-                    flowLayoutPanel1.Controls.SetChildIndex(button, flowLayoutPanel1.Controls.IndexOf(controlAbove) + 1);
-                foreach (ListViewItem format in listView1.SelectedItems)
+                IgnitionObject @object = new IgnitionObject();
+                foreach (ListViewItem item in listView1.SelectedItems)
                 {
-                    if (index != 0)
-                        button.Text += format.Text;
-                    index++;
+                    @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Value.Item1);
                 }
 
+                TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
+
+                layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
+                layoutPanel.DragEnter += new DragEventHandler(DragEnter);
+
+                flowLayoutPanel1.Controls.Add(layoutPanel);
+
+                if (controlAbove.GetType() != flowLayoutPanel1.GetType())
+                    flowLayoutPanel1.Controls.SetChildIndex(layoutPanel, flowLayoutPanel1.Controls.IndexOf(controlAbove) + 1);
+
+                ResizeButtons();
             }
-            else
-                control.Text += (e.Data.GetData("System.Windows.Forms.ListViewItem") as ListViewItem).Text;
         }
         private void control_DragDrop(object sender, DragEventArgs e)
         {
-            foreach (ListViewItem format in listView1.SelectedItems)
+            IgnitionObject @object = (IgnitionObject)((TableLayoutPanel)sender).Tag;
+            foreach (ListViewItem item in listView1.SelectedItems)
             {
-                ((Button)sender).Text += format.Text;
+                @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Value.Item1);
             }
+
+            TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
+
+            layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
+            layoutPanel.DragEnter += new DragEventHandler(DragEnter);
+
+            ((TableLayoutPanel)sender).Controls.Clear();
+            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[0], 0, 0);
+            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[1], 0, 1);
+            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[2], 0, 2);
+
+            ResizeButtons();
         }
         public static Control FindControlAtPoint(Control container, Point pos)
         {
@@ -195,13 +207,26 @@ namespace Fireworks_Firing_Systems
                 if (c.Visible && c.Bounds.Contains(posPoint))
                 {
                     child = c.GetChildAtPoint(new Point(posPoint.X - c.Left, posPoint.Y - c.Top));
-                    if (child == null) 
+                    if (child == null)
                         return c;
-                    else 
+                    else
                         return child;
                 }
             }
             return null;
         }
+
+        private void ResizeButtons()
+        {
+            foreach (TableLayoutPanel tableLayoutPanel in flowLayoutPanel1.Controls.OfType<TableLayoutPanel>())
+            {
+                tableLayoutPanel.MinimumSize = tableLayoutPanel.Size = new Size(flowLayoutPanel1.Size.Width - 38, 0);
+                foreach (var button in tableLayoutPanel.Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
+                {
+                    button.MinimumSize = button.Size = new Size(flowLayoutPanel1.Size.Width - 38, button.Size.Height);
+                }
+            }
+        }
+
     }
 }

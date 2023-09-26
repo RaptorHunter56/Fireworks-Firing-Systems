@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Serialization;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace Fireworks_Firing_Systems
@@ -80,8 +81,64 @@ namespace Fireworks_Firing_Systems
 
     public class IgnitionObject
     {
-        public List<Firework> fireworks = new List<Firework>();
-        public int Length = 0;
+        public Dictionary<int, Firework> fireworks = new Dictionary<int, Firework>();
+        public decimal Length { get { return fireworks.Values.Select(x => x.Length + x.Delay).Max(); } }
+
+        public TableLayoutPanel CreateTableLayoutPanel()
+        {
+            Label groupLabel = new Label()
+            {
+                Text = $"Group ({fireworks.Count})"
+            };
+            Label lengthLabel = new Label()
+            {
+                AutoSize = true,
+                Text = $"M-Length: {fireworks.Values.Select(x => x.Length).Max()}, M-Delay: {fireworks.Values.Select(x => x.Delay).Max()}, Total: {Length}" 
+            };
+            FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
+            {
+                AutoSize = true,
+                Dock = DockStyle.Fill
+            };
+            TableLayoutPanel tableLayoutPanel = new TableLayoutPanel()
+            {
+                AllowDrop = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                AutoSize = true,
+                BackColor = Color.WhiteSmoke,
+                ColumnCount = 1,
+                RowCount = 3,
+                Size = new Size(279, 62),
+                Tag = this
+            };
+
+            tableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel.Controls.Add(groupLabel, 0, 0);
+
+            int i = 1;
+            foreach (var firework in fireworks.OrderBy(x => x.Key))
+            {
+                Button fireworkButton = new Button()
+                {
+                    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                    Dock = DockStyle.Top,
+                    Text = $"[{firework.Key}] {firework.Value.FireworkName}",
+                    Tag = firework
+                };
+                flowLayoutPanel.Controls.Add(fireworkButton);
+                flowLayoutPanel.Controls.SetChildIndex(fireworkButton, i);
+                i++;
+            }
+            tableLayoutPanel.Controls.Add(flowLayoutPanel, 0, 1);
+
+            tableLayoutPanel.Controls.Add(lengthLabel, 0, 2);
+            tableLayoutPanel.Controls.SetChildIndex(lengthLabel, 2);
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+            tableLayoutPanel.RowStyles.Add(new RowStyle());
+
+            return tableLayoutPanel;
+        }
     }
 
     /// <summary>
