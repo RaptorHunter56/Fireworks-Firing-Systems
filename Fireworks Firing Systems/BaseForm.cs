@@ -18,7 +18,7 @@ namespace Fireworks_Firing_Systems
     public partial class BaseForm : Form
     {
         public System.IO.Ports.SerialPort _serialPort;
-        public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
+        public Dictionary<int, Tuple<Firework, bool, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool, bool>>();
 
         public delegate void UpdateButton();
         public UpdateButton updateButton = delegate { };
@@ -38,13 +38,24 @@ namespace Fireworks_Firing_Systems
         private void RefreshList()
         {
             listView1.Items.Clear();
-            foreach (var item in IgnitionPorts.Where(x => x.Value.Item2))
+            foreach (var item in IgnitionPorts.Where(x => x.Value.Item2 && x.Value.Item3))
             {
                 var temp = item.Value.Item1.CreateListViewItem();
                 temp.Text = $"[{item.Key}] {temp.Text}";
                 temp.Tag = item;
                 temp.Group = listView1.Groups[(int)(((item.Key % 60) - 0.1) / 6)];
                 listView1.Items.Add(temp);
+            }
+            foreach (TableLayoutPanel item in flowLayoutPanel1.Controls)
+            {
+                IgnitionObject @object = UpdateIgnitionObjectList((IgnitionObject)(item).Tag);
+
+                foreach (var IgnitionPort in IgnitionPorts.Where(x => !x.Value.Item3 && !x.Value.Item2 && @object.fireworks.Keys.Contains(x.Key)))
+                {
+                    @object.fireworks.Remove(IgnitionPort.Key);
+                }
+                item.Tag = @object;
+                UpdateIgnitionObject(@object, item);
             }
         }
 
@@ -141,7 +152,7 @@ namespace Fireworks_Firing_Systems
         #region Fire
         public void Fire(int i)
         {
-            IgnitionPorts[i] = new Tuple<Firework, bool>(IgnitionPorts[i].Item1, false);
+            IgnitionPorts[i] = new Tuple<Firework, bool, bool>(IgnitionPorts[i].Item1, false, IgnitionPorts[i].Item3);
             RefreshList();
             updateButton();
         }
@@ -149,7 +160,7 @@ namespace Fireworks_Firing_Systems
 
 
         private void listView1_ItemDrag(object sender, ItemDragEventArgs e) => listView1.DoDragDrop(e.Item, DragDropEffects.All);
-        private void DragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
+        private void ControlDragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
         {
             var control = FindControlAtPoint(splitContainer1.Panel2, new Point(PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y));
@@ -158,16 +169,11 @@ namespace Fireworks_Firing_Systems
             if (control.GetType() == flowLayoutPanel1.GetType())
             {
                 var index = 0;
-                IgnitionObject @object = new IgnitionObject();
-                foreach (ListViewItem item in listView1.SelectedItems)
-                {
-                    @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Value.Item1);
-                }
-
+                IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
                 TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
 
                 layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
-                layoutPanel.DragEnter += new DragEventHandler(DragEnter);
+                layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
 
                 flowLayoutPanel1.Controls.Add(layoutPanel);
 
@@ -179,16 +185,16 @@ namespace Fireworks_Firing_Systems
         }
         private void control_DragDrop(object sender, DragEventArgs e)
         {
-            IgnitionObject @object = (IgnitionObject)((TableLayoutPanel)sender).Tag;
-            foreach (ListViewItem item in listView1.SelectedItems)
-            {
-                @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool>>)item.Tag).Value.Item1);
-            }
+            IgnitionObject @object = UpdateIgnitionObjectList((IgnitionObject)((TableLayoutPanel)sender).Tag);
+            UpdateIgnitionObject(@object, sender);
+        }
 
+        private void UpdateIgnitionObject(IgnitionObject @object, object sender)
+        {
             TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
 
             layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
-            layoutPanel.DragEnter += new DragEventHandler(DragEnter);
+            layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
 
             ((TableLayoutPanel)sender).Controls.Clear();
             ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[0], 0, 0);
@@ -196,6 +202,19 @@ namespace Fireworks_Firing_Systems
             ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[2], 0, 2);
 
             ResizeButtons();
+        }
+        private IgnitionObject UpdateIgnitionObjectList(IgnitionObject @object)
+        {
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Value.Item1);
+                listView1.Items.Remove(item);
+                IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key] = new Tuple<Firework, bool, bool>(
+                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item1, 
+                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item2, 
+                    false);
+            }
+            return @object;
         }
         public static Control FindControlAtPoint(Control container, Point pos)
         {

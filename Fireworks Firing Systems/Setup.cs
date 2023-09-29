@@ -14,9 +14,9 @@ namespace Fireworks_Firing_Systems
 {
     public partial class Setup : Form
     {
-        public Dictionary<int, Tuple<Firework, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
+        public Dictionary<int, Tuple<Firework, bool, bool>> IgnitionPorts = new Dictionary<int, Tuple<Firework, bool, bool>>();
         public int buttonTag => (int)((Int32.Parse(button2.Tag.ToString()) * 6 - 5) + (60 * (numericUpDown1.Value - 1)));
-        public Setup(Dictionary<int, Tuple<Firework, bool>> ignitionPorts)
+        public Setup(Dictionary<int, Tuple<Firework, bool, bool>> ignitionPorts)
         {
             IgnitionPorts = ignitionPorts;
             //if (IgnitionPorts.Count > 0) IgnitionPorts[1] = new Tuple<Firework, bool>(IgnitionPorts[1].Item1, false); //Dev
@@ -38,7 +38,10 @@ namespace Fireworks_Firing_Systems
             int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString()) - 1;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
-                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, (IgnitionPorts.Count > comboBoxTag) ? IgnitionPorts[comboBoxTag + buttonTag].Item2 : true);
+                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool, bool>(
+                    (Firework)((ComboBox)sender).SelectedItem, 
+                    (IgnitionPorts.Keys.Contains(comboBoxTag + buttonTag)) ? IgnitionPorts[comboBoxTag + buttonTag].Item2 : true,
+                    (IgnitionPorts.Keys.Contains(comboBoxTag + buttonTag)) ? IgnitionPorts[comboBoxTag + buttonTag].Item3 : true);
                 flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = IgnitionPorts[comboBoxTag + buttonTag].Item2 ? Color.LightGreen : Color.Red;
             }
             else
@@ -52,7 +55,10 @@ namespace Fireworks_Firing_Systems
             int comboBoxTag = Int32.Parse(((ComboBox)sender).Tag.ToString()) - 1;
             if (((ComboBox)sender).SelectedIndex > 0)
             {
-                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool>((Firework)((ComboBox)sender).SelectedItem, true);
+                IgnitionPorts[comboBoxTag + buttonTag] = new Tuple<Firework, bool, bool>(
+                    (Firework)((ComboBox)sender).SelectedItem, 
+                    true, 
+                    true);
                 flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<Panel>()).First(x => x.Tag == ((ComboBox)sender).Tag).BackColor = Color.LightGreen;
             }
         }
@@ -71,7 +77,7 @@ namespace Fireworks_Firing_Systems
         private void clearToolStripMenuItem_Click(object sender, EventArgs e) => flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).First(x => x.Tag == ((dynamic)((ContextMenuStrip)((ToolStripItem)sender).Owner).SourceControl).Tag).SelectedIndex = 0;
         private void clearAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IgnitionPorts = new Dictionary<int, Tuple<Firework, bool>>();
+            IgnitionPorts = new Dictionary<int, Tuple<Firework, bool, bool>>();
             flowLayoutPanel1.Controls.OfType<TableLayoutPanel>().SelectMany(x => x.Controls.OfType<ComboBox>()).ToList()
                 .ForEach(x => x.SelectedIndex = 0);
         }

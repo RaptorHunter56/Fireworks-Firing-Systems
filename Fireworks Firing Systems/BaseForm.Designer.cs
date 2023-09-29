@@ -205,7 +205,7 @@
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.View = View.Tile;
             listView1.ItemDrag += listView1_ItemDrag;
-            listView1.DragEnter += DragEnter;
+            listView1.DragEnter += ControlDragEnter;
             // 
             // flowLayoutPanel1
             // 
@@ -219,7 +219,7 @@
             flowLayoutPanel1.Size = new Size(255, 453);
             flowLayoutPanel1.TabIndex = 0;
             flowLayoutPanel1.DragDrop += flowLayoutPanel1_DragDrop;
-            flowLayoutPanel1.DragEnter += DragEnter;
+            flowLayoutPanel1.DragEnter += ControlDragEnter;
             // 
             // button4
             // 
