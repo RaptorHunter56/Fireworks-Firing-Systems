@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            ListViewGroup listViewGroup1 = new ListViewGroup("1-6", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup2 = new ListViewGroup("7-12", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup3 = new ListViewGroup("13-18", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup4 = new ListViewGroup("19-24", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup5 = new ListViewGroup("25-30", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup6 = new ListViewGroup("31-36", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup7 = new ListViewGroup("37-42", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup8 = new ListViewGroup("43-48", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup9 = new ListViewGroup("49-54", HorizontalAlignment.Left);
-            ListViewGroup listViewGroup10 = new ListViewGroup("55-60", HorizontalAlignment.Left);
-            ListViewItem listViewItem1 = new ListViewItem(new string[] { "Name", "Color", "Fierwok" }, -1);
+            ListViewGroup listViewGroup21 = new ListViewGroup("1-6", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup22 = new ListViewGroup("7-12", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup23 = new ListViewGroup("13-18", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup24 = new ListViewGroup("19-24", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup25 = new ListViewGroup("25-30", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup26 = new ListViewGroup("31-36", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup27 = new ListViewGroup("37-42", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup28 = new ListViewGroup("43-48", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup29 = new ListViewGroup("49-54", HorizontalAlignment.Left);
+            ListViewGroup listViewGroup30 = new ListViewGroup("55-60", HorizontalAlignment.Left);
+            ListViewItem listViewItem3 = new ListViewItem(new string[] { "Name", "Color", "Fierwok" }, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaseForm));
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
@@ -66,6 +66,12 @@
             button1 = new Button();
             contextMenuStrip1 = new ContextMenuStrip(components);
             disConnectToolStripMenuItem = new ToolStripMenuItem();
+            contextMenuStrip2 = new ContextMenuStrip(components);
+            deleateToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            addDelayToolStripMenuItem = new ToolStripMenuItem();
+            minusDelayToolStripMenuItem = new ToolStripMenuItem();
+            toolStripTextBox1 = new ToolStripTextBox();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -77,6 +83,7 @@
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
             // statusStrip1
@@ -173,30 +180,30 @@
             listView1.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2 });
             listView1.Dock = DockStyle.Fill;
             listView1.FullRowSelect = true;
-            listViewGroup1.Header = "1-6";
-            listViewGroup1.Name = "1-6";
-            listViewGroup2.Header = "7-12";
-            listViewGroup2.Name = "7-12";
-            listViewGroup3.Header = "13-18";
-            listViewGroup3.Name = "13-18";
-            listViewGroup4.Header = "19-24";
-            listViewGroup4.Name = "19-24";
-            listViewGroup5.Header = "25-30";
-            listViewGroup5.Name = "25-30";
-            listViewGroup6.Header = "31-36";
-            listViewGroup6.Name = "31-36";
-            listViewGroup7.Header = "37-42";
-            listViewGroup7.Name = "37-42";
-            listViewGroup8.Header = "43-48";
-            listViewGroup8.Name = "43-48";
-            listViewGroup9.Header = "49-54";
-            listViewGroup9.Name = "49-54";
-            listViewGroup10.Header = "55-60";
-            listViewGroup10.Name = "55-60";
-            listView1.Groups.AddRange(new ListViewGroup[] { listViewGroup1, listViewGroup2, listViewGroup3, listViewGroup4, listViewGroup5, listViewGroup6, listViewGroup7, listViewGroup8, listViewGroup9, listViewGroup10 });
+            listViewGroup21.Header = "1-6";
+            listViewGroup21.Name = "1-6";
+            listViewGroup22.Header = "7-12";
+            listViewGroup22.Name = "7-12";
+            listViewGroup23.Header = "13-18";
+            listViewGroup23.Name = "13-18";
+            listViewGroup24.Header = "19-24";
+            listViewGroup24.Name = "19-24";
+            listViewGroup25.Header = "25-30";
+            listViewGroup25.Name = "25-30";
+            listViewGroup26.Header = "31-36";
+            listViewGroup26.Name = "31-36";
+            listViewGroup27.Header = "37-42";
+            listViewGroup27.Name = "37-42";
+            listViewGroup28.Header = "43-48";
+            listViewGroup28.Name = "43-48";
+            listViewGroup29.Header = "49-54";
+            listViewGroup29.Name = "49-54";
+            listViewGroup30.Header = "55-60";
+            listViewGroup30.Name = "55-60";
+            listView1.Groups.AddRange(new ListViewGroup[] { listViewGroup21, listViewGroup22, listViewGroup23, listViewGroup24, listViewGroup25, listViewGroup26, listViewGroup27, listViewGroup28, listViewGroup29, listViewGroup30 });
             listView1.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            listViewItem1.Group = listViewGroup1;
-            listView1.Items.AddRange(new ListViewItem[] { listViewItem1 });
+            listViewItem3.Group = listViewGroup21;
+            listView1.Items.AddRange(new ListViewItem[] { listViewItem3 });
             listView1.Location = new Point(0, 0);
             listView1.Name = "listView1";
             listView1.Size = new Size(234, 514);
@@ -339,6 +346,46 @@
             disConnectToolStripMenuItem.Text = "Disconnect";
             disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
             // 
+            // contextMenuStrip2
+            // 
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { deleateToolStripMenuItem, toolStripSeparator1, addDelayToolStripMenuItem, minusDelayToolStripMenuItem, toolStripTextBox1 });
+            contextMenuStrip2.Name = "contextMenuStrip2";
+            contextMenuStrip2.Size = new Size(161, 101);
+            // 
+            // deleateToolStripMenuItem
+            // 
+            deleateToolStripMenuItem.Name = "deleateToolStripMenuItem";
+            deleateToolStripMenuItem.Size = new Size(160, 22);
+            deleateToolStripMenuItem.Text = "Remove";
+            deleateToolStripMenuItem.Click += deleateToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(157, 6);
+            // 
+            // addDelayToolStripMenuItem
+            // 
+            addDelayToolStripMenuItem.Name = "addDelayToolStripMenuItem";
+            addDelayToolStripMenuItem.Size = new Size(160, 22);
+            addDelayToolStripMenuItem.Text = "Add Delay";
+            addDelayToolStripMenuItem.Click += addDelayToolStripMenuItem_Click;
+            // 
+            // minusDelayToolStripMenuItem
+            // 
+            minusDelayToolStripMenuItem.Enabled = false;
+            minusDelayToolStripMenuItem.Name = "minusDelayToolStripMenuItem";
+            minusDelayToolStripMenuItem.Size = new Size(160, 22);
+            minusDelayToolStripMenuItem.Text = "Minus Delay";
+            minusDelayToolStripMenuItem.Click += minusDelayToolStripMenuItem_Click;
+            // 
+            // toolStripTextBox1
+            // 
+            toolStripTextBox1.Enabled = false;
+            toolStripTextBox1.Name = "toolStripTextBox1";
+            toolStripTextBox1.Size = new Size(100, 23);
+            toolStripTextBox1.Leave += toolStripTextBox1_Leave;
+            // 
             // BaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -368,6 +415,8 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             contextMenuStrip1.ResumeLayout(false);
+            contextMenuStrip2.ResumeLayout(false);
+            contextMenuStrip2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -399,5 +448,11 @@
         private ColumnHeader columnHeader2;
         private SplitContainer splitContainer1;
         private FlowLayoutPanel flowLayoutPanel1;
+        private ContextMenuStrip contextMenuStrip2;
+        private ToolStripMenuItem deleateToolStripMenuItem;
+        private ToolStripMenuItem addDelayToolStripMenuItem;
+        private ToolStripMenuItem minusDelayToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripTextBox toolStripTextBox1;
     }
 }

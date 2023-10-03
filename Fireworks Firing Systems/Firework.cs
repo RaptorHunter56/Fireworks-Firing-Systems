@@ -86,6 +86,7 @@ namespace Fireworks_Firing_Systems
 
         public TableLayoutPanel CreateTableLayoutPanel()
         {
+            if (fireworks.Count == 0) throw new ArgumentException("Parameter cannot be null", nameof(fireworks));
             Label groupLabel = new Label()
             {
                 Text = $"Group ({fireworks.Count})"

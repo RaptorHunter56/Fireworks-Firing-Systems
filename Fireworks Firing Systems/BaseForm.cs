@@ -50,12 +50,13 @@ namespace Fireworks_Firing_Systems
             {
                 IgnitionObject @object = UpdateIgnitionObjectList((IgnitionObject)(item).Tag);
 
-                foreach (var IgnitionPort in IgnitionPorts.Where(x => !x.Value.Item3 && !x.Value.Item2 && @object.fireworks.Keys.Contains(x.Key)))
+                foreach (var IgnitionPort in IgnitionPorts.Where(x => ((!x.Value.Item3 && !x.Value.Item2) || x.Value.Item3) && @object.fireworks.Keys.Contains(x.Key)))
                 {
                     @object.fireworks.Remove(IgnitionPort.Key);
                 }
                 item.Tag = @object;
-                UpdateIgnitionObject(@object, item);
+                if (!UpdateIgnitionObject(@object, item))
+                    flowLayoutPanel1.Controls.Remove(item);
             }
         }
 
@@ -172,6 +173,12 @@ namespace Fireworks_Firing_Systems
                 IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
                 TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
 
+
+                foreach (var button in layoutPanel.Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
+                {
+                    button.ContextMenuStrip = contextMenuStrip2;
+                }
+
                 layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
                 layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
 
@@ -189,19 +196,32 @@ namespace Fireworks_Firing_Systems
             UpdateIgnitionObject(@object, sender);
         }
 
-        private void UpdateIgnitionObject(IgnitionObject @object, object sender)
+        private bool UpdateIgnitionObject(IgnitionObject @object, object sender)
         {
-            TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
+            try
+            {
+                TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
 
-            layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
-            layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
+                layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
+                layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
 
-            ((TableLayoutPanel)sender).Controls.Clear();
-            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[0], 0, 0);
-            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[1], 0, 1);
-            ((TableLayoutPanel)sender).Controls.Add(@object.CreateTableLayoutPanel().Controls[2], 0, 2);
+                ((TableLayoutPanel)sender).Controls.Clear();
+                ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 0);
+                ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 1);
+                ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 2);
 
-            ResizeButtons();
+                foreach (var button in ((TableLayoutPanel)sender).Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
+                {
+                    button.ContextMenuStrip = contextMenuStrip2;
+                }
+
+                ResizeButtons();
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
         private IgnitionObject UpdateIgnitionObjectList(IgnitionObject @object)
         {
@@ -210,8 +230,8 @@ namespace Fireworks_Firing_Systems
                 @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Value.Item1);
                 listView1.Items.Remove(item);
                 IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key] = new Tuple<Firework, bool, bool>(
-                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item1, 
-                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item2, 
+                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item1,
+                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item2,
                     false);
             }
             return @object;
@@ -247,5 +267,25 @@ namespace Fireworks_Firing_Systems
             }
         }
 
+
+        private void deleateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
+            IgnitionPorts[tag.Key] = new Tuple<Firework, bool, bool>(IgnitionPorts[tag.Key].Item1, IgnitionPorts[tag.Key].Item2, true);
+            RefreshList();
+            updateButton();
+        }
+        private void addDelayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void minusDelayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void toolStripTextBox1_Leave(object sender, EventArgs e)
+        {
+
+        }
     }
 }
