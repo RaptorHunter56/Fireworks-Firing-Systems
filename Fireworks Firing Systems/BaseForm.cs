@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using Button = System.Windows.Forms.Button;
 
 namespace Fireworks_Firing_Systems
@@ -28,6 +29,8 @@ namespace Fireworks_Firing_Systems
             InitializeComponent();
             RefreshLabel();
             RefreshList();
+
+            toolStripTextBox1.LostFocus += ToolStripTextBox1_LostFocus;
         }
 
         private void RefreshLabel()
@@ -83,6 +86,7 @@ namespace Fireworks_Firing_Systems
             toolStripStatusLabel1.Text = $"Opening Grid Settings";
             var form = new Grid(this);
             updateButton = form.UpdateButton;
+            form.unlinkForm = ClearForm;
             form.Show();
             toolStripStatusLabel1.Text = $"Closed and Saved Grid Settings";
         }
@@ -172,6 +176,7 @@ namespace Fireworks_Firing_Systems
                 var index = 0;
                 IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
                 TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
+                layoutPanel.ContextMenuStrip = contextMenuStrip2;
 
 
                 foreach (var button in layoutPanel.Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
@@ -209,6 +214,7 @@ namespace Fireworks_Firing_Systems
                 ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 0);
                 ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 1);
                 ((TableLayoutPanel)sender).Controls.Add(layoutPanel.Controls[0], 0, 2);
+                ((TableLayoutPanel)sender).ContextMenuStrip = contextMenuStrip2;
 
                 foreach (var button in ((TableLayoutPanel)sender).Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
                 {
@@ -268,24 +274,70 @@ namespace Fireworks_Firing_Systems
         }
 
 
+        private void contextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+            if (((ContextMenuStrip)sender).SourceControl.GetType() == typeof(Button))
+            {
+                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = false;
+                deleateToolStripMenuItem.Text = "Remove";
+            }
+            else
+            {
+                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = true;
+                deleateToolStripMenuItem.Text = "Remove All";
+                IgnitionObject tag = (IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)sender).SourceControl).Tag;
+                if (tag.ExtraDelay == null)
+                {
+                    addDelayToolStripMenuItem.Enabled = true;
+                    minusDelayToolStripMenuItem.Enabled = toolStripTextBox1.Enabled = false;
+                    toolStripTextBox1.Text = string.Empty;
+                }
+                else
+                {
+
+                    addDelayToolStripMenuItem.Enabled = false;
+                    minusDelayToolStripMenuItem.Enabled = toolStripTextBox1.Enabled = true;
+                    toolStripTextBox1.Text = tag.ExtraDelay.ToString();
+                }
+            }
+        }
         private void deleateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
-            IgnitionPorts[tag.Key] = new Tuple<Firework, bool, bool>(IgnitionPorts[tag.Key].Item1, IgnitionPorts[tag.Key].Item2, true);
+            if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.GetType() == typeof(Button))
+            {
+                KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
+                IgnitionPorts[tag.Key] = new Tuple<Firework, bool, bool>(IgnitionPorts[tag.Key].Item1, IgnitionPorts[tag.Key].Item2, true);
+            }
+            else
+            {
+                IgnitionObject tag = (IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
+                foreach (var item in tag.fireworks)
+                {
+                    IgnitionPorts[item.Key] = new Tuple<Firework, bool, bool>(IgnitionPorts[item.Key].Item1, IgnitionPorts[item.Key].Item2, true);
+
+                }
+                flowLayoutPanel1.Controls.Remove(((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl));
+            }
             RefreshList();
             updateButton();
         }
-        private void addDelayToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addDelayToolStripMenuItem_Click(object sender, EventArgs e) => ((IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag).ExtraDelay = 0;
+        private void minusDelayToolStripMenuItem_Click(object sender, EventArgs e) => ((IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag).ExtraDelay = null;
+        private void ToolStripTextBox1_LostFocus(object sender, EventArgs e)
         {
-
+            ((IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripTextBox)sender).Owner).SourceControl).Tag).ExtraDelay = Convert.ToDecimal(toolStripTextBox1.Text);
+            RefreshList();
+            updateButton();
         }
-        private void minusDelayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
-        private void toolStripTextBox1_Leave(object sender, EventArgs e)
+        private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != '-'))
+                e.Handled = true;
+            if ((e.KeyChar == '.') && (((ToolStripTextBox)sender).Text.IndexOf('.') > -1))
+                e.Handled = true;
+            if ((e.KeyChar == '-') && (((ToolStripTextBox)sender).Text.IndexOf('-') > -1))
+                e.Handled = true;
         }
     }
 }

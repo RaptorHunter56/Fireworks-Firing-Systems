@@ -17,7 +17,7 @@ namespace Fireworks_Firing_Systems
         public BaseForm BaseForm { get; }
 
         public delegate void UnlinkForm();
-        public UnlinkForm updateButton = delegate { };
+        public UnlinkForm unlinkForm = delegate { };
 
         public Grid(BaseForm baseForm)
         {
@@ -101,6 +101,6 @@ namespace Fireworks_Firing_Systems
             }
         }
 
-        private void Grid_FormClosing(object sender, FormClosingEventArgs e) => updateButton();
+        private void Grid_FormClosing(object sender, FormClosingEventArgs e) => unlinkForm();
     }
 }

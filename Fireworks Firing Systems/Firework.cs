@@ -82,6 +82,7 @@ namespace Fireworks_Firing_Systems
     public class IgnitionObject
     {
         public Dictionary<int, Firework> fireworks = new Dictionary<int, Firework>();
+        public decimal? ExtraDelay = null;
         public decimal Length { get { return fireworks.Values.Select(x => x.Length + x.Delay).Max(); } }
 
         public TableLayoutPanel CreateTableLayoutPanel()
@@ -94,7 +95,7 @@ namespace Fireworks_Firing_Systems
             Label lengthLabel = new Label()
             {
                 AutoSize = true,
-                Text = $"M-Length: {fireworks.Values.Select(x => x.Length).Max()}, M-Delay: {fireworks.Values.Select(x => x.Delay).Max()}, Total: {Length}" 
+                Text = $"M-Delay: {fireworks.Values.Select(x => x.Delay).Max()}, M-Length: {fireworks.Values.Select(x => x.Length).Max()}, Total: {Length + (ExtraDelay ?? 0)}" 
             };
             FlowLayoutPanel flowLayoutPanel = new FlowLayoutPanel()
             {
