@@ -218,6 +218,7 @@
             listView1.View = View.Tile;
             listView1.ItemDrag += listView1_ItemDrag;
             listView1.DragEnter += ControlDragEnter;
+            listView1.MouseDoubleClick += listView1_MouseDoubleClick;
             // 
             // groupBox2
             // 
@@ -245,6 +246,7 @@
             // 
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(6, 21);
             comboBox1.Name = "comboBox1";

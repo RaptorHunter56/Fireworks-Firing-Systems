@@ -177,6 +177,15 @@ namespace Fireworks_Firing_Systems
 
 
         private void listView1_ItemDrag(object sender, ItemDragEventArgs e) => listView1.DoDragDrop(e.Item, DragDropEffects.All);
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem item = listView1.HitTest(e.X, e.Y).Item;
+            if (item != null)
+            {
+                AddNewIgnitionOptionGroup();
+                ResizeButtons();
+            }
+        }
         private void ControlDragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
         {
@@ -185,27 +194,28 @@ namespace Fireworks_Firing_Systems
 
             if (control.GetType() == flowLayoutPanel1.GetType())
             {
-                var index = 0;
-                IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
-                TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
-                layoutPanel.ContextMenuStrip = contextMenuStrip2;
-
-
-                foreach (var button in layoutPanel.Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
-                {
-                    button.ContextMenuStrip = contextMenuStrip2;
-                }
-
-                layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
-                layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
-
-                flowLayoutPanel1.Controls.Add(layoutPanel);
-
+                TableLayoutPanel layoutPanel = AddNewIgnitionOptionGroup();
                 if (controlAbove.GetType() != flowLayoutPanel1.GetType())
                     flowLayoutPanel1.Controls.SetChildIndex(layoutPanel, flowLayoutPanel1.Controls.IndexOf(controlAbove) + 1);
-
                 ResizeButtons();
             }
+        }
+        private TableLayoutPanel AddNewIgnitionOptionGroup()
+        {
+            IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
+            TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
+            layoutPanel.ContextMenuStrip = contextMenuStrip2;
+
+            foreach (var button in layoutPanel.Controls.OfType<FlowLayoutPanel>().First().Controls.OfType<Button>())
+            {
+                button.ContextMenuStrip = contextMenuStrip2;
+            }
+
+            layoutPanel.DragDrop += new DragEventHandler(control_DragDrop);
+            layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
+
+            flowLayoutPanel1.Controls.Add(layoutPanel);
+            return layoutPanel;
         }
         private void control_DragDrop(object sender, DragEventArgs e)
         {
