@@ -91,10 +91,7 @@ namespace Fireworks_Firing_Systems
         public class OrderRandom : OrderType
         {
             public new string Name = "Order - Random";
-            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects)
-            {
-                ignitionObjects = ignitionObjects.Values.OrderBy(a => rng.Next()).ToList().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
-            }
+            public override void Order(ref Dictionary<int, IgnitionObject> ignitionObjects) => ignitionObjects = ignitionObjects.Values.OrderBy(a => rng.Next()).ToList().Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
             public override string ToString() => Name;
         }
 

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static Fireworks_Firing_Systems.OrderType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using Button = System.Windows.Forms.Button;
@@ -31,6 +32,7 @@ namespace Fireworks_Firing_Systems
             RefreshList();
 
             toolStripTextBox1.LostFocus += ToolStripTextBox1_LostFocus;
+            UpdateOrderComboBox();
         }
 
         private void RefreshLabel()
@@ -100,6 +102,16 @@ namespace Fireworks_Firing_Systems
             RefreshLabel();
             this.Enabled = true;
             toolStripStatusLabel1.Text = $"Closed and Saved {name} Settings";
+            UpdateOrderComboBox();
+        }
+        private void UpdateOrderComboBox()
+        {
+            comboBox1.Items.Add(new OrderRandom());
+            foreach (var item in Properties.Settings.Default.Orders?.Cast<string>() ?? new List<string>())
+            {
+                comboBox1.Items.Add(OrderWeighted.FromJson(item));
+            }
+            comboBox1.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e) => Connect_Disconnect();
@@ -252,10 +264,7 @@ namespace Fireworks_Firing_Systems
                 if (c.Visible && c.Bounds.Contains(posPoint))
                 {
                     child = c.GetChildAtPoint(new Point(posPoint.X - c.Left, posPoint.Y - c.Top));
-                    if (child == null)
-                        return c;
-                    else
-                        return child;
+                    return (child == null) ? c : child;
                 }
             }
             return null;
@@ -294,7 +303,6 @@ namespace Fireworks_Firing_Systems
                 }
                 else
                 {
-
                     addDelayToolStripMenuItem.Enabled = false;
                     minusDelayToolStripMenuItem.Enabled = toolStripTextBox1.Enabled = true;
                     toolStripTextBox1.Text = tag.ExtraDelay.ToString();
@@ -314,7 +322,6 @@ namespace Fireworks_Firing_Systems
                 foreach (var item in tag.fireworks)
                 {
                     IgnitionPorts[item.Key] = new Tuple<Firework, bool, bool>(IgnitionPorts[item.Key].Item1, IgnitionPorts[item.Key].Item2, true);
-
                 }
                 flowLayoutPanel1.Controls.Remove(((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl));
             }
@@ -338,6 +345,16 @@ namespace Fireworks_Firing_Systems
                 e.Handled = true;
             if ((e.KeyChar == '-') && (((ToolStripTextBox)sender).Text.IndexOf('-') > -1))
                 e.Handled = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Dictionary<int, IgnitionObject> ignitionObjects = flowLayoutPanel1.Controls.Cast<TableLayoutPanel>().ToList().Select(x => (IgnitionObject)x.Tag).Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
+            ((OrderType)comboBox1.SelectedItem).Order(ref ignitionObjects);
+            foreach (var item in ignitionObjects)
+            {
+                flowLayoutPanel1.Controls.SetChildIndex((Control)flowLayoutPanel1.Controls.Cast<TableLayoutPanel>().ToList().Where(x => x.Tag == item.Value).First(), item.Key);
+            }
         }
     }
 }

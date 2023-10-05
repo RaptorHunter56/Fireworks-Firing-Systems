@@ -53,6 +53,9 @@
             listView1 = new ListView();
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
+            groupBox2 = new GroupBox();
+            button5 = new Button();
+            comboBox1 = new ComboBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             button4 = new Button();
             button3 = new Button();
@@ -80,6 +83,7 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            groupBox2.SuspendLayout();
             tabPage2.SuspendLayout();
             groupBox1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
@@ -169,6 +173,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(groupBox2);
             splitContainer1.Panel2.Controls.Add(flowLayoutPanel1);
             splitContainer1.Size = new Size(857, 516);
             splitContainer1.SplitterDistance = 236;
@@ -213,6 +218,38 @@
             listView1.View = View.Tile;
             listView1.ItemDrag += listView1_ItemDrag;
             listView1.DragEnter += ControlDragEnter;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            groupBox2.Controls.Add(button5);
+            groupBox2.Controls.Add(comboBox1);
+            groupBox2.Location = new Point(3, 462);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(255, 50);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Order";
+            // 
+            // button5
+            // 
+            button5.Location = new Point(200, 20);
+            button5.Name = "button5";
+            button5.Size = new Size(49, 23);
+            button5.TabIndex = 2;
+            button5.Text = "Order";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(6, 21);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(188, 23);
+            comboBox1.TabIndex = 2;
             // 
             // flowLayoutPanel1
             // 
@@ -350,25 +387,25 @@
             // 
             contextMenuStrip2.Items.AddRange(new ToolStripItem[] { deleateToolStripMenuItem, toolStripSeparator1, addDelayToolStripMenuItem, minusDelayToolStripMenuItem, toolStripTextBox1 });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(181, 123);
+            contextMenuStrip2.Size = new Size(161, 101);
             contextMenuStrip2.Opening += contextMenuStrip2_Opening;
             // 
             // deleateToolStripMenuItem
             // 
             deleateToolStripMenuItem.Name = "deleateToolStripMenuItem";
-            deleateToolStripMenuItem.Size = new Size(180, 22);
+            deleateToolStripMenuItem.Size = new Size(160, 22);
             deleateToolStripMenuItem.Text = "Remove";
             deleateToolStripMenuItem.Click += deleateToolStripMenuItem_Click;
             // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(177, 6);
+            toolStripSeparator1.Size = new Size(157, 6);
             // 
             // addDelayToolStripMenuItem
             // 
             addDelayToolStripMenuItem.Name = "addDelayToolStripMenuItem";
-            addDelayToolStripMenuItem.Size = new Size(180, 22);
+            addDelayToolStripMenuItem.Size = new Size(160, 22);
             addDelayToolStripMenuItem.Text = "Add Delay";
             addDelayToolStripMenuItem.Click += addDelayToolStripMenuItem_Click;
             // 
@@ -376,7 +413,7 @@
             // 
             minusDelayToolStripMenuItem.Enabled = false;
             minusDelayToolStripMenuItem.Name = "minusDelayToolStripMenuItem";
-            minusDelayToolStripMenuItem.Size = new Size(180, 22);
+            minusDelayToolStripMenuItem.Size = new Size(160, 22);
             minusDelayToolStripMenuItem.Text = "Minus Delay";
             minusDelayToolStripMenuItem.Click += minusDelayToolStripMenuItem_Click;
             // 
@@ -411,6 +448,7 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -455,5 +493,8 @@
         private ToolStripMenuItem minusDelayToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripTextBox toolStripTextBox1;
+        private GroupBox groupBox2;
+        private Button button5;
+        private ComboBox comboBox1;
     }
 }
