@@ -200,9 +200,9 @@ namespace Fireworks_Firing_Systems
                 ResizeButtons();
             }
         }
-        private TableLayoutPanel AddNewIgnitionOptionGroup()
+        private TableLayoutPanel AddNewIgnitionOptionGroup(bool split = false, KeyValuePair<int, Firework> tag = default)
         {
-            IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject());
+            IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject(), split, tag);
             TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
             layoutPanel.ContextMenuStrip = contextMenuStrip2;
 
@@ -251,16 +251,27 @@ namespace Fireworks_Firing_Systems
                 return false;
             }
         }
-        private IgnitionObject UpdateIgnitionObjectList(IgnitionObject @object)
+        private IgnitionObject UpdateIgnitionObjectList(IgnitionObject @object, bool split = false, KeyValuePair<int, Firework> tag = default)
         {
-            foreach (ListViewItem item in listView1.SelectedItems)
+            if (split)
             {
-                @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Value.Item1);
-                listView1.Items.Remove(item);
-                IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key] = new Tuple<Firework, bool, bool>(
-                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item1,
-                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item2,
+                @object.fireworks.Add(tag.Key, tag.Value);
+                IgnitionPorts[tag.Key] = new Tuple<Firework, bool, bool>(
+                    IgnitionPorts[tag.Key].Item1,
+                    IgnitionPorts[tag.Key].Item2,
                     false);
+            }
+            else
+            {
+                foreach (ListViewItem item in listView1.SelectedItems)
+                {
+                    @object.fireworks.Add(((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key, ((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Value.Item1);
+                    listView1.Items.Remove(item);
+                    IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key] = new Tuple<Firework, bool, bool>(
+                        IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item1,
+                        IgnitionPorts[((KeyValuePair<int, Tuple<Firework, bool, bool>>)item.Tag).Key].Item2,
+                        false);
+                }
             }
             return @object;
         }
@@ -297,13 +308,15 @@ namespace Fireworks_Firing_Systems
         {
             if (((ContextMenuStrip)sender).SourceControl.GetType() == typeof(Button))
             {
-                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = false;
+                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = moveUpToolStripMenuItem.Visible = moveDownToolStripMenuItem.Visible = false;
                 deleateToolStripMenuItem.Text = "Remove";
+                splitToolStripMenuItem.Text = "Split";
             }
             else
             {
-                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = true;
+                addDelayToolStripMenuItem.Visible = minusDelayToolStripMenuItem.Visible = toolStripTextBox1.Visible = toolStripSeparator1.Visible = moveUpToolStripMenuItem.Visible = moveDownToolStripMenuItem.Visible = true;
                 deleateToolStripMenuItem.Text = "Remove All";
+                splitToolStripMenuItem.Text = "Split All";
                 IgnitionObject tag = (IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)sender).SourceControl).Tag;
                 if (tag.ExtraDelay == null)
                 {
@@ -346,6 +359,36 @@ namespace Fireworks_Firing_Systems
             RefreshList();
             updateButton();
         }
+        private void splitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.GetType() == typeof(Button))
+            {
+                KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
+                TableLayoutPanel layoutPanel = AddNewIgnitionOptionGroup(true, tag);
+                ((IgnitionObject)((TableLayoutPanel)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Parent.Parent).Tag).fireworks.Remove(tag.Key);
+            }
+            else
+            {
+                IgnitionObject tag = (IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
+                foreach (var item in tag.fireworks)
+                {
+                    TableLayoutPanel layoutPanel = AddNewIgnitionOptionGroup(true, item);
+                }
+                flowLayoutPanel1.Controls.Remove(((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl));
+            }
+            RefreshList();
+            updateButton();
+        }
+        private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TableLayoutPanel table = (TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            flowLayoutPanel1.Controls.SetChildIndex(table, (flowLayoutPanel1.Controls.IndexOf(table) > 0) ? flowLayoutPanel1.Controls.IndexOf(table) - 1 : 0);
+        }
+        private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TableLayoutPanel table = (TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
+            flowLayoutPanel1.Controls.SetChildIndex(table, flowLayoutPanel1.Controls.IndexOf(table) + 1);
+        }
 
         private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -366,5 +409,6 @@ namespace Fireworks_Firing_Systems
                 flowLayoutPanel1.Controls.SetChildIndex((Control)flowLayoutPanel1.Controls.Cast<TableLayoutPanel>().ToList().Where(x => x.Tag == item.Value).First(), item.Key);
             }
         }
+
     }
 }

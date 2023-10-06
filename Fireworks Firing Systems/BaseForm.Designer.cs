@@ -71,7 +71,11 @@
             disConnectToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip2 = new ContextMenuStrip(components);
             deleateToolStripMenuItem = new ToolStripMenuItem();
+            splitToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator1 = new ToolStripSeparator();
+            moveUpToolStripMenuItem = new ToolStripMenuItem();
+            moveDownToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
             addDelayToolStripMenuItem = new ToolStripMenuItem();
             minusDelayToolStripMenuItem = new ToolStripMenuItem();
             toolStripTextBox1 = new ToolStripTextBox();
@@ -387,9 +391,9 @@
             // 
             // contextMenuStrip2
             // 
-            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { deleateToolStripMenuItem, toolStripSeparator1, addDelayToolStripMenuItem, minusDelayToolStripMenuItem, toolStripTextBox1 });
+            contextMenuStrip2.Items.AddRange(new ToolStripItem[] { deleateToolStripMenuItem, splitToolStripMenuItem, toolStripSeparator1, moveUpToolStripMenuItem, moveDownToolStripMenuItem, toolStripSeparator2, addDelayToolStripMenuItem, minusDelayToolStripMenuItem, toolStripTextBox1 });
             contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(161, 101);
+            contextMenuStrip2.Size = new Size(161, 173);
             contextMenuStrip2.Opening += contextMenuStrip2_Opening;
             // 
             // deleateToolStripMenuItem
@@ -399,10 +403,36 @@
             deleateToolStripMenuItem.Text = "Remove";
             deleateToolStripMenuItem.Click += deleateToolStripMenuItem_Click;
             // 
+            // splitToolStripMenuItem
+            // 
+            splitToolStripMenuItem.Name = "splitToolStripMenuItem";
+            splitToolStripMenuItem.Size = new Size(160, 22);
+            splitToolStripMenuItem.Text = "Split";
+            splitToolStripMenuItem.Click += splitToolStripMenuItem_Click;
+            // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(157, 6);
+            // 
+            // moveUpToolStripMenuItem
+            // 
+            moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
+            moveUpToolStripMenuItem.Size = new Size(160, 22);
+            moveUpToolStripMenuItem.Text = "Move Up";
+            moveUpToolStripMenuItem.Click += moveUpToolStripMenuItem_Click;
+            // 
+            // moveDownToolStripMenuItem
+            // 
+            moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
+            moveDownToolStripMenuItem.Size = new Size(160, 22);
+            moveDownToolStripMenuItem.Text = "Move Down";
+            moveDownToolStripMenuItem.Click += moveDownToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(157, 6);
             // 
             // addDelayToolStripMenuItem
             // 
@@ -498,5 +528,9 @@
         private GroupBox groupBox2;
         private Button button5;
         private ComboBox comboBox1;
+        private ToolStripMenuItem splitToolStripMenuItem;
+        private ToolStripMenuItem moveUpToolStripMenuItem;
+        private ToolStripMenuItem moveDownToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
     }
 }
