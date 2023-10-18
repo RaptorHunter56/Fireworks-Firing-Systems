@@ -262,6 +262,7 @@
             flowLayoutPanel1.AllowDrop = true;
             flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BackColor = SystemColors.ControlLightLight;
             flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel1.Location = new Point(3, 3);
             flowLayoutPanel1.MinimumSize = new Size(255, 0);
@@ -313,6 +314,7 @@
             button2.TabIndex = 21;
             button2.Text = "Send";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // textBox1
             // 

@@ -7,6 +7,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -33,6 +34,8 @@ namespace Fireworks_Firing_Systems
 
             toolStripTextBox1.LostFocus += ToolStripTextBox1_LostFocus;
             UpdateOrderComboBox();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            //flowLayoutPanel1
         }
 
         private void RefreshLabel()
@@ -162,8 +165,53 @@ namespace Fireworks_Firing_Systems
             Thread.Sleep(500);
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
+            switch (data)
+            {
+                case var val when new Regex(@"^Board Connected \[[0-9]{4}\]+$").IsMatch(val):
+                    GetReturnConnectToBoard = true;
+                    break;
+                default:
+                    break;
+            }
         }
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _serialPort.Write($"{textBox1.Text}\r\n");
+                toolStripStatusLabel1.Text = $"'{textBox1.Text}' Sent";
+                richTextBox1.Text += $"{DateTime.Now} ⏪ {textBox1.Text}\r\n";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error writing to serial port :: " + ex.Message, "Error!");
+                toolStripStatusLabel1.Text = "Error writing to serial port :: " + ex.Message;
+            }
+        }
+        #endregion
+        #region SerialPort Protocol
+        static bool GetValueConnectToBoard() { int trys = 0; while (!GetReturnConnectToBoard || trys < 8) { Thread.Sleep(500); trys++; } return GetReturnConnectToBoard; }
+        Func<bool> delegateConnectToBoard = GetValueConnectToBoard;
+        private static bool GetReturnConnectToBoard = false;
+        /// <remarks>
+        /// Connect To Board Protocol
+        /// <list type="table">
+        ///     <item>
+        ///         <term>Send</term>
+        ///         <description>Open Connection.</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>Receive</term>
+        ///         <description>Board Connected [XXXX]</description>
+        ///     </item>
+        /// </list>
+        /// </remarks>
+        public async Task<bool> ConnectToBoard()
+        {
+            SerialPortHelper serialPortHelper = new SerialPortHelper(_serialPort);
+            bool hasResponse = serialPortHelper.SendMessageAndWaitForResponse($"Open Connection.\r\n", out string response);
+        }
         #endregion
 
         #region Fire
@@ -189,6 +237,7 @@ namespace Fireworks_Firing_Systems
         private void ControlDragEnter(object sender, DragEventArgs e) => e.Effect = DragDropEffects.Move;
         private void flowLayoutPanel1_DragDrop(object sender, DragEventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             var control = FindControlAtPoint(splitContainer1.Panel2, new Point(PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y));
             var controlAbove = FindControlAtPoint(splitContainer1.Panel2, new Point(PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y - 10));
 
@@ -199,9 +248,11 @@ namespace Fireworks_Firing_Systems
                     flowLayoutPanel1.Controls.SetChildIndex(layoutPanel, flowLayoutPanel1.Controls.IndexOf(controlAbove) + 1);
                 ResizeButtons();
             }
+            flowLayoutPanel1.ResumeLayout();
         }
         private TableLayoutPanel AddNewIgnitionOptionGroup(bool split = false, KeyValuePair<int, Firework> tag = default)
         {
+            flowLayoutPanel1.SuspendLayout();
             IgnitionObject @object = UpdateIgnitionObjectList(new IgnitionObject(), split, tag);
             TableLayoutPanel layoutPanel = @object.CreateTableLayoutPanel();
             layoutPanel.ContextMenuStrip = contextMenuStrip2;
@@ -215,6 +266,7 @@ namespace Fireworks_Firing_Systems
             layoutPanel.DragEnter += new DragEventHandler(ControlDragEnter);
 
             flowLayoutPanel1.Controls.Add(layoutPanel);
+            flowLayoutPanel1.ResumeLayout();
             return layoutPanel;
         }
         private void control_DragDrop(object sender, DragEventArgs e)
@@ -334,6 +386,7 @@ namespace Fireworks_Firing_Systems
         }
         private void deleateToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.GetType() == typeof(Button))
             {
                 KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
@@ -350,6 +403,7 @@ namespace Fireworks_Firing_Systems
             }
             RefreshList();
             updateButton();
+            flowLayoutPanel1.ResumeLayout();
         }
         private void addDelayToolStripMenuItem_Click(object sender, EventArgs e) => ((IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag).ExtraDelay = 0;
         private void minusDelayToolStripMenuItem_Click(object sender, EventArgs e) => ((IgnitionObject)((TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag).ExtraDelay = null;
@@ -361,6 +415,7 @@ namespace Fireworks_Firing_Systems
         }
         private void splitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             if (((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl.GetType() == typeof(Button))
             {
                 KeyValuePair<int, Firework> tag = (KeyValuePair<int, Firework>)((Button)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl).Tag;
@@ -378,16 +433,21 @@ namespace Fireworks_Firing_Systems
             }
             RefreshList();
             updateButton();
+            flowLayoutPanel1.ResumeLayout();
         }
         private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             TableLayoutPanel table = (TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             flowLayoutPanel1.Controls.SetChildIndex(table, (flowLayoutPanel1.Controls.IndexOf(table) > 0) ? flowLayoutPanel1.Controls.IndexOf(table) - 1 : 0);
+            flowLayoutPanel1.ResumeLayout();
         }
         private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             TableLayoutPanel table = (TableLayoutPanel)((ContextMenuStrip)((ToolStripMenuItem)sender).Owner).SourceControl;
             flowLayoutPanel1.Controls.SetChildIndex(table, flowLayoutPanel1.Controls.IndexOf(table) + 1);
+            flowLayoutPanel1.ResumeLayout();
         }
 
         private void toolStripTextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -402,13 +462,14 @@ namespace Fireworks_Firing_Systems
 
         private void button5_Click(object sender, EventArgs e)
         {
+            flowLayoutPanel1.SuspendLayout();
             Dictionary<int, IgnitionObject> ignitionObjects = flowLayoutPanel1.Controls.Cast<TableLayoutPanel>().ToList().Select(x => (IgnitionObject)x.Tag).Select((s, i) => new { s, i }).ToDictionary(x => x.i, x => x.s);
             ((OrderType)comboBox1.SelectedItem).Order(ref ignitionObjects);
             foreach (var item in ignitionObjects)
             {
                 flowLayoutPanel1.Controls.SetChildIndex((Control)flowLayoutPanel1.Controls.Cast<TableLayoutPanel>().ToList().Where(x => x.Tag == item.Value).First(), item.Key);
             }
+            flowLayoutPanel1.ResumeLayout();
         }
-
     }
 }
