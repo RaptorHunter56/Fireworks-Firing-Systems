@@ -163,5 +163,10 @@ namespace Fireworks_Firing_Systems
             receivedResponse = ((System.IO.Ports.SerialPort)sender).ReadExisting();
             responseReceivedEvent.Set();
         }
+
+        enum ReturnType
+        {
+            ConnectToBoard
+        }
     }
 }

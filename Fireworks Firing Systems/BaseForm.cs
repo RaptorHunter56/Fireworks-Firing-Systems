@@ -165,14 +165,6 @@ namespace Fireworks_Firing_Systems
             Thread.Sleep(500);
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
-            switch (data)
-            {
-                case var val when new Regex(@"^Board Connected \[[0-9]{4}\]+$").IsMatch(val):
-                    GetReturnConnectToBoard = true;
-                    break;
-                default:
-                    break;
-            }
         }
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
         private void button2_Click(object sender, EventArgs e)
@@ -210,7 +202,8 @@ namespace Fireworks_Firing_Systems
         public async Task<bool> ConnectToBoard()
         {
             SerialPortHelper serialPortHelper = new SerialPortHelper(_serialPort);
-            bool hasResponse = serialPortHelper.SendMessageAndWaitForResponse($"Open Connection.\r\n", out string response);
+            bool hasResponse = serialPortHelper.SendMessageAndWaitForResponse($"Open Connection.\r\n", out string response); //ID = response
+            return hasResponse;
         }
         #endregion
 
