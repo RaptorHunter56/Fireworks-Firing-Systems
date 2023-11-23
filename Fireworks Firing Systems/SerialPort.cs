@@ -117,7 +117,10 @@ namespace Fireworks_Firing_Systems
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) => SendText();
+        private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
+
+        private void SendText()
         {
             try
             {

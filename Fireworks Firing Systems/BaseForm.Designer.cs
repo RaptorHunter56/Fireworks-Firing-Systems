@@ -323,6 +323,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(834, 23);
             textBox1.TabIndex = 20;
+            textBox1.KeyDown += textBox1_KeyDown;
             // 
             // richTextBox1
             // 

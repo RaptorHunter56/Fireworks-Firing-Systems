@@ -167,13 +167,17 @@ namespace Fireworks_Firing_Systems
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) => SendText();
+        private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
+        private void SendText()
         {
             try
             {
                 _serialPort.Write($"{textBox1.Text}\r\n");
                 toolStripStatusLabel1.Text = $"'{textBox1.Text}' Sent";
                 richTextBox1.Text += $"{DateTime.Now} ⏪ {textBox1.Text}\r\n";
+                textBox1.Text = "";
+                textBox1.Focus();
             }
             catch (Exception ex)
             {
