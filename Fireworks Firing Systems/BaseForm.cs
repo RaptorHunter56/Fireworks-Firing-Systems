@@ -156,6 +156,8 @@ namespace Fireworks_Firing_Systems
                 {
                     MessageBox.Show("Error opening to serial port :: " + ex.Message, "Error!");
                     toolStripStatusLabel1.Text = "Error opening to serial port :: " + ex.Message;
+                    tabControl1.Enabled = !connect;
+                    toolStripMenuItem1.Enabled = serialPortToolStripMenuItem.Enabled = orderSettingsToolStripMenuItem.Enabled = groupBox1.Visible = connect;
                 }
             }
         }
@@ -167,6 +169,7 @@ namespace Fireworks_Firing_Systems
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
         private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
+        private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
         private void button2_Click(object sender, EventArgs e) => SendText();
         private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
         private void SendText()
@@ -468,5 +471,6 @@ namespace Fireworks_Firing_Systems
             }
             flowLayoutPanel1.ResumeLayout();
         }
+
     }
 }

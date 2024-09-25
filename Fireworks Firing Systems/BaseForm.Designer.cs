@@ -330,6 +330,7 @@
             richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             richTextBox1.BackColor = SystemColors.WindowFrame;
             richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.ContextMenuStrip = contextMenuStrip1;
             richTextBox1.ForeColor = SystemColors.Window;
             richTextBox1.Location = new Point(8, 6);
             richTextBox1.Name = "richTextBox1";
@@ -338,6 +339,7 @@
             richTextBox1.Size = new Size(938, 487);
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
             // groupBox1
             // 
