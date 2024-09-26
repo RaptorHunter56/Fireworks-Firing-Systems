@@ -36,6 +36,8 @@ namespace Fireworks_Firing_Systems
             UpdateOrderComboBox();
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             //flowLayoutPanel1
+
+            Statuses = new Dictionary<int, int> { };
         }
 
         private void RefreshLabel()
@@ -168,7 +170,29 @@ namespace Fireworks_Firing_Systems
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
-        private void si_DataReceived(string data) { richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n"; }
+        private void si_DataReceived(string data) 
+        { 
+            richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
+            switch (data.Trim())
+            {
+                case var someVal when new Regex(@"^(\[Pin A\d: \d], )+\[Pin A\d: \d]$").IsMatch(someVal): //
+                    richTextBox1.Text += $"                       🔽 Running command for Get All Statuses...\r\n";
+                    foreach (var item in data.Split(", "))
+                    {
+                        var submatch = new Regex(@"^\[Pin A(\d+): (\d+)\]$").Match(item);
+                        UpdateStatus(int.Parse(submatch.Groups[1].Value), int.Parse(submatch.Groups[2].Value));
+                    }
+                    break;
+                case var someVal when new Regex(@"^\[Pin A(\d+): (\d+)\]$").IsMatch(someVal):
+                    richTextBox1.Text += $"                       🔽 Running command for Update Status...\r\n";
+                    var match = new Regex(@"^\[Pin A(\d+): (\d+)\]$").Match(data);
+                    UpdateStatus(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
+                    break;
+                default:
+                    richTextBox1.Text += $"                       🔽 Unknown command received...\r\n";
+                    break;
+            }
+        }
         private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
         private void button2_Click(object sender, EventArgs e) => SendText();
         private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
@@ -220,6 +244,14 @@ namespace Fireworks_Firing_Systems
             IgnitionPorts[i] = new Tuple<Firework, bool, bool>(IgnitionPorts[i].Item1, false, IgnitionPorts[i].Item3);
             RefreshList();
             updateButton();
+        }
+        #endregion
+
+        #region Status
+        public Dictionary<int,int> Statuses { get; set; }
+        public void UpdateStatus(int i, int Value)
+        {
+            Statuses[i] = Value;
         }
         #endregion
 

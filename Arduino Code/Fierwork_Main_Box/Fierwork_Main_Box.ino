@@ -41,7 +41,7 @@ void loop() {
     }
     /// Read for
     if (HC12End) {
-        if (strcmp(HC12ReadBuffer.c_str(), "Check All") == 0) { // Execute printAllValues() if buffer contains "Check All"
+        if (strcmp(HC12ReadBuffer.c_str(), "Get All Statuses") == 0) { // Execute printAllValues() if buffer contains "Check All"
             printAllValues();
         }
         HC12ReadBuffer = "";
@@ -55,7 +55,7 @@ void loop() {
         itoa(currentValue, cstr, 10);                                   // Convert value to string
 
         if (currentValue != previousValues[i]) {                    // Check if value has changed
-            sprintf(cstr, "Pin A%d: %s\n", i + 2, currentValue);    // Print pin label, pin number (A2 = 2, A3 = 3, etc.)
+            sprintf(cstr, "[Pin A%d: %s]\n", i + 2, currentValue);  // Print pin label, pin number (A2 = 2, A3 = 3, etc.)
             Serial.println(cstr);    
             HC12.write(cstr);
             previousValues[i] = currentValue;   // Update previous value
