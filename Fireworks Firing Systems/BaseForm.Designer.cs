@@ -63,12 +63,12 @@
             button2 = new Button();
             textBox1 = new TextBox();
             richTextBox1 = new RichTextBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            disConnectToolStripMenuItem = new ToolStripMenuItem();
             groupBox1 = new GroupBox();
             label2 = new Label();
             label1 = new Label();
             button1 = new Button();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            disConnectToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip2 = new ContextMenuStrip(components);
             deleateToolStripMenuItem = new ToolStripMenuItem();
             splitToolStripMenuItem = new ToolStripMenuItem();
@@ -89,8 +89,8 @@
             splitContainer1.SuspendLayout();
             groupBox2.SuspendLayout();
             tabPage2.SuspendLayout();
-            groupBox1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            groupBox1.SuspendLayout();
             contextMenuStrip2.SuspendLayout();
             SuspendLayout();
             // 
@@ -331,6 +331,7 @@
             richTextBox1.BackColor = SystemColors.WindowFrame;
             richTextBox1.BorderStyle = BorderStyle.None;
             richTextBox1.ContextMenuStrip = contextMenuStrip1;
+            richTextBox1.Font = new Font("Courier New", 9F, FontStyle.Regular, GraphicsUnit.Point);
             richTextBox1.ForeColor = SystemColors.Window;
             richTextBox1.Location = new Point(8, 6);
             richTextBox1.Name = "richTextBox1";
@@ -340,6 +341,19 @@
             richTextBox1.TabIndex = 1;
             richTextBox1.Text = "";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { disConnectToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(134, 26);
+            // 
+            // disConnectToolStripMenuItem
+            // 
+            disConnectToolStripMenuItem.Name = "disConnectToolStripMenuItem";
+            disConnectToolStripMenuItem.Size = new Size(133, 22);
+            disConnectToolStripMenuItem.Text = "Disconnect";
+            disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
             // 
             // groupBox1
             // 
@@ -380,19 +394,6 @@
             button1.Text = "Connect";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { disConnectToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(134, 26);
-            // 
-            // disConnectToolStripMenuItem
-            // 
-            disConnectToolStripMenuItem.Name = "disConnectToolStripMenuItem";
-            disConnectToolStripMenuItem.Size = new Size(133, 22);
-            disConnectToolStripMenuItem.Text = "Disconnect";
-            disConnectToolStripMenuItem.Click += disConnectToolStripMenuItem_Click;
             // 
             // contextMenuStrip2
             // 
@@ -488,9 +489,9 @@
             groupBox2.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            contextMenuStrip1.ResumeLayout(false);
             contextMenuStrip2.ResumeLayout(false);
             contextMenuStrip2.PerformLayout();
             ResumeLayout(false);

@@ -14,8 +14,10 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Fierwork_Main_Box\Fierwork_Main_Box - Testing.ino" />
     <None Include="$(MSBuildThisFileDirectory)Fierwork_Main_Box\Fierwork_Main_Box.ino" />
     <None Include="$(MSBuildThisFileDirectory)Libraries\Centipede.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)Fierwork_Main_Box\Fierwork_Main_Box_Testing.ino.txt" />
   </ItemGroup>
 </Project>

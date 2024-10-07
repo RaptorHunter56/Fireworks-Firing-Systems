@@ -166,30 +166,32 @@ namespace Fireworks_Firing_Systems
         private delegate void SetTextDeleg(string text);
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
         private void si_DataReceived(string data) 
         { 
             richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
+            Regex PinCheckAll = new Regex(@"^(\[(\d).(\d): (On|Disconnected|Off)])+(,(\[(\d).(\d): (On|Disconnected|Off)]))+$");
+            Regex PinCheck = new Regex(@"^\[(\d).(\d): (On|Disconnected|Off)]$");
             switch (data.Trim())
             {
-                case var someVal when new Regex(@"^(\[Pin A\d: \d], )+\[Pin A\d: \d]$").IsMatch(someVal): //
-                    richTextBox1.Text += $"                       🔽 Running command for Get All Statuses...\r\n";
+                case var someVal when PinCheckAll.IsMatch(someVal): //
+                    richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Running command for Get All Statuses...\r\n";
                     foreach (var item in data.Split(", "))
                     {
-                        var submatch = new Regex(@"^\[Pin A(\d+): (\d+)\]$").Match(item);
-                        UpdateStatus(int.Parse(submatch.Groups[1].Value), int.Parse(submatch.Groups[2].Value));
+                        var submatch = PinCheck.Match(item);
+                        UpdateStatus((int.Parse(submatch.Groups[1].Value) * 3) + int.Parse(submatch.Groups[2].Value), int.Parse(submatch.Groups[3].Value));
                     }
                     break;
-                case var someVal when new Regex(@"^\[Pin A(\d+): (\d+)\]$").IsMatch(someVal):
-                    richTextBox1.Text += $"                       🔽 Running command for Update Status...\r\n";
-                    var match = new Regex(@"^\[Pin A(\d+): (\d+)\]$").Match(data);
-                    UpdateStatus(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
+                case var someVal when PinCheck.IsMatch(someVal):
+                    richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Running command for Update Status...\r\n";
+                    var match = PinCheck.Match(someVal);
+                    UpdateStatus((int.Parse(match.Groups[1].Value) * 3) + int.Parse(match.Groups[2].Value), match.Groups[3].Value);
                     break;
                 default:
-                    richTextBox1.Text += $"                       🔽 Unknown command received...\r\n";
+                    richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Unknown command received...\r\n";
                     break;
             }
         }
@@ -198,18 +200,28 @@ namespace Fireworks_Firing_Systems
         private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
         private void SendText()
         {
-            try
+            switch (textBox1.Text)
             {
-                _serialPort.Write($"{textBox1.Text}\r\n");
-                toolStripStatusLabel1.Text = $"'{textBox1.Text}' Sent";
-                richTextBox1.Text += $"{DateTime.Now} ⏪ {textBox1.Text}\r\n";
-                textBox1.Text = "";
-                textBox1.Focus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error writing to serial port :: " + ex.Message, "Error!");
-                toolStripStatusLabel1.Text = "Error writing to serial port :: " + ex.Message;
+                case "cls":
+                    richTextBox1.Text = $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
+                    textBox1.Text = "";
+                    textBox1.Focus();
+                    break;
+                default:
+                    try
+                    {
+                        _serialPort.Write($"{textBox1.Text}\r\n");
+                        toolStripStatusLabel1.Text = $"'{textBox1.Text}' Sent";
+                        richTextBox1.Text += $"{DateTime.Now} ⏪ {textBox1.Text}\r\n";
+                        textBox1.Text = "";
+                        textBox1.Focus();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error writing to serial port :: " + ex.Message, "Error!");
+                        toolStripStatusLabel1.Text = "Error writing to serial port :: " + ex.Message;
+                    }
+                    break;
             }
         }
         #endregion
@@ -249,6 +261,7 @@ namespace Fireworks_Firing_Systems
 
         #region Status
         public Dictionary<int,int> Statuses { get; set; }
+        public void UpdateStatus(int i, string Value) => UpdateStatus(i, (Value == "On") ? 0 : (Value == "Off") ? 3 : 5);
         public void UpdateStatus(int i, int Value)
         {
             Statuses[i] = Value;
