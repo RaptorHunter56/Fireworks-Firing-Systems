@@ -47,6 +47,8 @@
             toolStripMenuItem1 = new ToolStripMenuItem();
             serialPortToolStripMenuItem = new ToolStripMenuItem();
             orderSettingsToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem2 = new ToolStripMenuItem();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             splitContainer1 = new SplitContainer();
@@ -110,7 +112,7 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, serialPortToolStripMenuItem, orderSettingsToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, serialPortToolStripMenuItem, orderSettingsToolStripMenuItem, settingsToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(962, 24);
@@ -137,6 +139,21 @@
             orderSettingsToolStripMenuItem.Size = new Size(94, 20);
             orderSettingsToolStripMenuItem.Text = "Order Settings";
             orderSettingsToolStripMenuItem.Click += orderSettingsToolStripMenuItem_Click;
+            // 
+            // settingsToolStripMenuItem
+            // 
+            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(61, 20);
+            settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // toolStripMenuItem2
+            // 
+            toolStripMenuItem2.Enabled = false;
+            toolStripMenuItem2.Name = "toolStripMenuItem2";
+            toolStripMenuItem2.Size = new Size(180, 22);
+            toolStripMenuItem2.Text = "Satellite Settings";
+            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
             // 
             // tabControl1
             // 
@@ -538,5 +555,7 @@
         private ToolStripMenuItem moveUpToolStripMenuItem;
         private ToolStripMenuItem moveDownToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem2;
     }
 }

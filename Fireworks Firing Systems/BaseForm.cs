@@ -73,6 +73,7 @@ namespace Fireworks_Firing_Systems
         private void toolStripMenuItem1_Click(object sender, EventArgs e) => OpenForm(new DataBase(), "Data Base");
         private void serialPortToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new SerialPort(), "Serial Port");
         private void orderSettingsToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new Order(), "Order");
+        private void toolStripMenuItem2_Click(object sender, EventArgs e) => OpenForm(new SatelliteSettings(this), "Satellite Settings");
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -99,7 +100,7 @@ namespace Fireworks_Firing_Systems
         }
         public void ClearForm() => updateButton = delegate { };
 
-        private void OpenForm(Form form, string name)
+        private void OpenForm(Form form, string name, bool serialPortPin = false)
         {
             toolStripStatusLabel1.Text = $"Opening {name} Settings";
             this.Enabled = false;
@@ -126,8 +127,8 @@ namespace Fireworks_Firing_Systems
         #region SerialPort
         private void Connect_Disconnect(bool connect = true)
         {
-            tabControl1.Enabled = connect;
-            toolStripMenuItem1.Enabled = serialPortToolStripMenuItem.Enabled = orderSettingsToolStripMenuItem.Enabled = groupBox1.Visible = !connect;
+            tabControl1.Enabled = toolStripMenuItem2.Enabled = connect;
+            serialPortToolStripMenuItem.Enabled = groupBox1.Visible = !connect;
 
             try
             {
@@ -153,6 +154,7 @@ namespace Fireworks_Firing_Systems
                     toolStripStatusLabel1.Text = "Serial Port Open";
                     richTextBox1.Text += $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
                     menuStrip1.ContextMenuStrip = contextMenuStrip1;
+                    SendText("Check All");
                 }
                 catch (Exception ex)
                 {
@@ -170,11 +172,12 @@ namespace Fireworks_Firing_Systems
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
-        private void si_DataReceived(string data) 
-        { 
+        private void si_DataReceived(string data)
+        {
             richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
             Regex PinCheckAll = new Regex(@"^(\[(\d).(\d): (On|Disconnected|Off)])+(,(\[(\d).(\d): (On|Disconnected|Off)]))+$");
             Regex PinCheck = new Regex(@"^\[(\d).(\d): (On|Disconnected|Off)]$");
+            Regex CheckIn = new Regex(@"\[ID\: ([0-9]+)\]");
             switch (data.Trim())
             {
                 case var someVal when PinCheckAll.IsMatch(someVal): //
@@ -190,6 +193,9 @@ namespace Fireworks_Firing_Systems
                     var match = PinCheck.Match(someVal);
                     UpdateStatus((int.Parse(match.Groups[1].Value) * 3) + int.Parse(match.Groups[2].Value), match.Groups[3].Value);
                     break;
+                case var someVal when CheckIn.IsMatch(someVal):
+                    richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Checking In...\r\n";
+                    break;
                 default:
                     richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Unknown command received...\r\n";
                     break;
@@ -198,22 +204,23 @@ namespace Fireworks_Firing_Systems
         private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
         private void button2_Click(object sender, EventArgs e) => SendText();
         private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
-        private void SendText()
+        private void SendText() => SendText(textBox1.Text);
+        public void SendText(string text)
         {
-            switch (textBox1.Text)
+            switch (text.ToLower())
             {
                 case "cls":
                     richTextBox1.Text = $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
-                    textBox1.Text = "";
+                    textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
                     textBox1.Focus();
                     break;
                 default:
                     try
                     {
-                        _serialPort.Write($"{textBox1.Text}\r\n");
-                        toolStripStatusLabel1.Text = $"'{textBox1.Text}' Sent";
-                        richTextBox1.Text += $"{DateTime.Now} ⏪ {textBox1.Text}\r\n";
-                        textBox1.Text = "";
+                        _serialPort.Write($"{text}\r\n");
+                        toolStripStatusLabel1.Text = $"'{text}' Sent";
+                        richTextBox1.Text += $"{DateTime.Now} ⏪ {text}\r\n";
+                        textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
                         textBox1.Focus();
                     }
                     catch (Exception ex)
@@ -226,30 +233,7 @@ namespace Fireworks_Firing_Systems
         }
         #endregion
         #region SerialPort Protocol
-        static bool GetValueConnectToBoard() { int trys = 0; while (!GetReturnConnectToBoard || trys < 8) { Thread.Sleep(500); trys++; } return GetReturnConnectToBoard; }
-        Func<bool> delegateConnectToBoard = GetValueConnectToBoard;
-        private static bool GetReturnConnectToBoard = false;
-        /// <remarks>
-        /// Connect To Board Protocol
-        /// <list type="table">
-        ///     <item>
-        ///         <term>Send</term>
-        ///         <description>Open Connection.</description>
-        ///     </item>
-        ///     <item>
-        ///         <term>Receive</term>
-        ///         <description>Board Connected [XXXX]</description>
-        ///     </item>
-        /// </list>
-        /// </remarks>
-        public async Task<bool> ConnectToBoard()
-        {
-            SerialPortHelper serialPortHelper = new SerialPortHelper(_serialPort);
-            bool hasResponse = serialPortHelper.SendMessageAndWaitForResponse($"Open Connection.\r\n", out string response); //ID = response
-            return hasResponse;
-        }
         #endregion
-
         #region Fire
         public void Fire(int i)
         {
@@ -258,16 +242,11 @@ namespace Fireworks_Firing_Systems
             updateButton();
         }
         #endregion
-
         #region Status
-        public Dictionary<int,int> Statuses { get; set; }
+        public Dictionary<int, int> Statuses { get; set; }
         public void UpdateStatus(int i, string Value) => UpdateStatus(i, (Value == "On") ? 0 : (Value == "Off") ? 3 : 5);
-        public void UpdateStatus(int i, int Value)
-        {
-            Statuses[i] = Value;
-        }
+        public void UpdateStatus(int i, int Value) => Statuses[i] = Value;
         #endregion
-
 
         private void listView1_ItemDrag(object sender, ItemDragEventArgs e) => listView1.DoDragDrop(e.Item, DragDropEffects.All);
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -516,6 +495,5 @@ namespace Fireworks_Firing_Systems
             }
             flowLayoutPanel1.ResumeLayout();
         }
-
     }
 }
