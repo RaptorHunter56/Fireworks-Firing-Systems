@@ -48,7 +48,7 @@
             groupBox2.Controls.Add(treeView1);
             groupBox2.Location = new Point(12, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(248, 279);
+            groupBox2.Size = new Size(248, 301);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "Available Satellite";
@@ -56,7 +56,7 @@
             // button1
             // 
             button1.Dock = DockStyle.Bottom;
-            button1.Location = new Point(3, 253);
+            button1.Location = new Point(3, 275);
             button1.Name = "button1";
             button1.Size = new Size(242, 23);
             button1.TabIndex = 18;
@@ -69,16 +69,16 @@
             treeView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             treeView1.Location = new Point(3, 17);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(239, 230);
+            treeView1.Size = new Size(239, 252);
             treeView1.TabIndex = 1;
             // 
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(richTextBox1);
-            groupBox1.Location = new Point(12, 297);
+            groupBox1.Location = new Point(12, 319);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(595, 85);
+            groupBox1.Size = new Size(599, 147);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Output";
@@ -93,16 +93,17 @@
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            richTextBox1.Size = new Size(589, 63);
+            richTextBox1.Size = new Size(593, 125);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            statusStrip1.Location = new Point(0, 385);
+            statusStrip1.Location = new Point(0, 469);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(619, 22);
+            statusStrip1.Size = new Size(623, 22);
             statusStrip1.TabIndex = 4;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -115,7 +116,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(619, 407);
+            ClientSize = new Size(623, 491);
             Controls.Add(statusStrip1);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);

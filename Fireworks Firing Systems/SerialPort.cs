@@ -90,6 +90,8 @@ namespace Fireworks_Firing_Systems
                 toolStripStatusLabel1.Text = "Error writing to serial port :: " + ex.Message;
             }
         }
+        private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
+
 
         private delegate void SetTextDeleg(string text);
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)

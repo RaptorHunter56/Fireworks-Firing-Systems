@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <Centipede.h>
 #include <SoftwareSerial.h>
+#include <EEPROM.h>
 
 Centipede CS;
 
@@ -11,12 +12,17 @@ boolean HC12End = false;
 
 // Pin Checking
 const int analogPins[] = { }; // 4, 5, 6, 9, 10, 11
-const int firePins[] = { 1, 2, 3, 14, 13, 12 };
-const int fiveVPins[] = { 8, 7 };
-int previousValues[6];
 int analognumPins = sizeof(analogPins) / sizeof(analogPins[0]);
-int firenumPins = sizeof(firePins) / sizeof(firePins[0]);
-int fiveVnumPins = sizeof(fiveVPins) / sizeof(fiveVPins[0]);
+
+const int maxFirePins = 6;
+const int maxFiveVPins = 2;
+
+int firePins[maxFirePins] = { /*1*/1, 2, 3, /*2*/14, 13, 12 };
+int fiveVPins[maxFiveVPins] = { /*1*/8, /*2*/7 };
+int previousValues[maxFirePins];
+
+int firenumPins = sizeof(firePins) / sizeof(firePins[0]);;
+int fiveVnumPins = sizeof(fiveVPins) / sizeof(fiveVPins[0]);;
 
 int satelliteID = 1;
 
@@ -63,6 +69,42 @@ void removeCount(int id) {
     }
 }
 #pragma endregion
+#pragma region EEPROM
+void loadPins() {
+    firenumPins = EEPROM.read(0);
+    for (int i = 0; i < firenumPins; i++) {
+        firePins[i] = EEPROM.read(i + 1);
+    }
+    fiveVnumPins = EEPROM.read(maxFirePins + 1);
+    for (int i = 0; i < fiveVnumPins; i++) {
+        fiveVPins[i] = EEPROM.read(maxFirePins + 2 + i);
+    }
+}
+void savePins() {
+    EEPROM.write(0, firenumPins);
+    for (int i = 0; i < firenumPins; i++) {
+        EEPROM.write(i + 1, firePins[i]);
+    }
+    EEPROM.write(maxFirePins + 1, fiveVnumPins);
+    for (int i = 0; i < fiveVnumPins; i++) {
+        EEPROM.write(maxFirePins + 2 + i, fiveVPins[i]);
+    }
+}
+#pragma endregion
+#pragma region Clean HC12
+String trimToAllowedCharacters(String input) {
+    if (input.length() == 0) { return input; }
+    int startIndex = 0;
+    while (startIndex < input.length() &&
+        !(input[startIndex] >= '0' && input[startIndex] <= '9') &&  // Check for numbers
+        !(input[startIndex] >= 'a' && input[startIndex] <= 'z') &&  // Check for lowercase letters
+        !(input[startIndex] >= 'A' && input[startIndex] <= 'Z') &&  // Check for lowercase letters
+        input[startIndex] != '[') {                                 // Check for '['
+        startIndex++;
+    }
+    return input.substring(startIndex);
+}
+#pragma endregion
 
 void setup() {
     Serial.begin(9600);
@@ -75,6 +117,9 @@ void setup() {
 
     pinMode(A2, OUTPUT);
     digitalWrite(A2, HIGH);
+
+    //savePins();
+    loadPins();
 
     for (int i = 0; i < analognumPins; i++) {
         CS.pinMode(analogPins[i], INPUT);
@@ -91,6 +136,7 @@ void setup() {
 
 bool switchlamp = false;
 
+//Serial.println();
 void loop() {
 #pragma region HC12
     while (HC12.available()) {
@@ -109,8 +155,8 @@ void loop() {
     if (HC12End) {
         HC12ReadBuffer.trim();
         char expectedString[50];
-        sprintf(expectedString, "[%d] Get All Settings", satelliteID);
-        if (strcmp(HC12ReadBuffer.c_str(), "Stop") == 0 || strcmp(HC12ReadBuffer.c_str(), "0") == 0) {
+        sprintf(expectedString, "[ID: %d] Get All Settings", satelliteID);
+        if (strcmp(trimToAllowedCharacters(HC12ReadBuffer).c_str(), "Stop") == 0 || strcmp(trimToAllowedCharacters(HC12ReadBuffer).c_str(), "0") == 0) {
             for (int i = 0; i < firenumPins; i++) {
                 CS.digitalWrite(firePins[i], LOW);
             }
@@ -118,15 +164,56 @@ void loop() {
                 removeCount(counts[i].id);
             }
         }
-        else if (strcmp(HC12ReadBuffer.c_str(), "Satellite Check In") == 0) {
+        else if (strcmp(trimToAllowedCharacters(HC12ReadBuffer).c_str(), "Satellite Check In") == 0) {
+            Serial.println("Check In");
             char cstr[20];
             sprintf(cstr, "[ID: %d]", satelliteID);
+            strcat(cstr, "\r\n");
             HC12.write(cstr);
         }
-        else if (strcmp(HC12ReadBuffer.c_str(), expectedString) == 0) {
+        else if (strcmp(trimToAllowedCharacters(HC12ReadBuffer).c_str(), expectedString) == 0) {
+            //firePins
+            char firePinsStr[100];
+            firePinsStr[0] = '\0';
+            for (int i = 0; i < maxFirePins; i++) {
+                char temp[20];
+                sprintf(temp, "%d", firePins[i]);
+                if (i == 0) {
+                    sprintf(firePinsStr, "[%s", temp);
+                }
+                else {
+                    sprintf(firePinsStr + strlen(firePinsStr), ", %s", temp);
+                }
+            }
+            sprintf(firePinsStr + strlen(firePinsStr), "]");
+            char finalStr[200];
+            sprintf(finalStr, "[ID: %d | maxFirePins : %d, firePins: %s]", satelliteID, maxFirePins, firePinsStr);
+            strcat(finalStr, "\r\n");
+            HC12.write(finalStr);
+            Serial.println(finalStr);
+
+            //fiveVPins
+            char fiveVPinsStr[100];
+            fiveVPinsStr[0] = '\0';
+            for (int i = 0; i < maxFiveVPins; i++) {
+                char temp[20];
+                sprintf(temp, "%d", fiveVPins[i]);
+                if (i == 0) {
+                    sprintf(fiveVPinsStr, "[%s", temp);
+                }
+                else {
+                    sprintf(fiveVPinsStr + strlen(fiveVPinsStr), ", %s", temp);
+                }
+            }
+            sprintf(fiveVPinsStr + strlen(fiveVPinsStr), "]");
+            char finalStrV[200];
+            sprintf(finalStrV, "[ID: %d | maxFiveVPins : %d, fiveVPins: %s]", satelliteID, maxFiveVPins, fiveVPinsStr);
+            strcat(finalStrV, "\r\n");
+            HC12.write(finalStrV);
+
         }
         else {
-            int pinNumber = atoi(HC12ReadBuffer.c_str());
+            int pinNumber = atoi(trimToAllowedCharacters(HC12ReadBuffer).c_str());
             if (pinNumber >= 1 + ((satelliteID - 1) * 120) && pinNumber <= 120 + ((satelliteID - 1) * 120)) {
                 int pinIndex = pinNumber - 1 - ((satelliteID - 1) * 120);
                 if (pinIndex < firenumPins) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -172,6 +173,8 @@ namespace Fireworks_Firing_Systems
             string data = _serialPort.ReadLine();
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
+        public delegate void _serialPortAddition(string data);
+        public _serialPortAddition portAddition;
         private void si_DataReceived(string data)
         {
             richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
@@ -200,6 +203,7 @@ namespace Fireworks_Firing_Systems
                     richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Unknown command received...\r\n";
                     break;
             }
+            portAddition(data);
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
         private void button2_Click(object sender, EventArgs e) => SendText();
@@ -207,10 +211,32 @@ namespace Fireworks_Firing_Systems
         private void SendText() => SendText(textBox1.Text);
         public void SendText(string text)
         {
+            int N = 3;
+            int n3000 = 3000;
             switch (text.ToLower())
             {
                 case "cls":
                     richTextBox1.Text = $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
+                    textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
+                    textBox1.Focus();
+                    break;
+                case "115":
+                    N = 15;
+                    n3000 = 10000;
+                    goto case "123";
+                case "123":
+                    for (int i = 1; i <= N; i++)
+                    {
+                        int threadNumber = i; // Capture the current value of i
+                        Thread thread = new Thread(() =>
+                        {
+                            // Wait for 3000 * N milliseconds
+                            Thread.Sleep(n3000 * threadNumber);
+                            _serialPort.Write($"{threadNumber}\r\n");
+                            richTextBox1.Text += $"{DateTime.Now} ⏪ {threadNumber}\r\n";
+                        });
+                        thread.Start(); // Start the thread
+                    }
                     textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
                     textBox1.Focus();
                     break;
