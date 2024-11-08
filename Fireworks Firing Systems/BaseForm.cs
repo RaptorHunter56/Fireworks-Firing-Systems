@@ -211,8 +211,11 @@ namespace Fireworks_Firing_Systems
         private void SendText() => SendText(textBox1.Text);
         public void SendText(string text)
         {
-            int N = 3;
-            int n3000 = 3000;
+            int startNo = 1;
+            int endNo = 3;
+            int n3000 = 300;
+            Regex RangeCheck = new Regex(@"^(\d+)-(\d+)$");
+            Regex RangePlusCheck = new Regex(@"^(\d+)-(\d+) \*(\d+)$");
             switch (text.ToLower())
             {
                 case "cls":
@@ -220,12 +223,21 @@ namespace Fireworks_Firing_Systems
                     textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
                     textBox1.Focus();
                     break;
-                case "115":
-                    N = 15;
+                case var someVal when RangePlusCheck.IsMatch(someVal):
+                    var matchRangePlus = RangePlusCheck.Match(someVal);
+                    startNo = int.Parse(matchRangePlus.Groups[1].Value);
+                    endNo = int.Parse(matchRangePlus.Groups[2].Value);
+                    n3000 = int.Parse(matchRangePlus.Groups[3].Value);
+                    goto case "123";
+                case var someVal when RangeCheck.IsMatch(someVal):
+                    var matchRange = RangeCheck.Match(someVal);
+                    startNo = int.Parse(matchRange.Groups[1].Value);
+                    endNo = int.Parse(matchRange.Groups[2].Value);
                     n3000 = 10000;
                     goto case "123";
                 case "123":
-                    for (int i = 1; i <= N; i++)
+                    richTextBox1.Text += $"{DateTime.Now} ⏪ Firing {startNo} to {endNo} at\r\n";
+                    for (int i = startNo; i <= endNo; i++)
                     {
                         int threadNumber = i; // Capture the current value of i
                         Thread thread = new Thread(() =>
@@ -233,7 +245,10 @@ namespace Fireworks_Firing_Systems
                             // Wait for 3000 * N milliseconds
                             Thread.Sleep(n3000 * threadNumber);
                             _serialPort.Write($"{threadNumber}\r\n");
-                            richTextBox1.Text += $"{DateTime.Now} ⏪ {threadNumber}\r\n";
+                            richTextBox1.Invoke((MethodInvoker)(() =>
+                            {
+                                richTextBox1.Text += $"{DateTime.Now} ✨ {threadNumber}\r\n";
+                            }));
                         });
                         thread.Start(); // Start the thread
                     }
