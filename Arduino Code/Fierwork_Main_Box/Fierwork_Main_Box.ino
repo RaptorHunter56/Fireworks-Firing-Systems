@@ -14,11 +14,11 @@ boolean HC12End = false;
 const int analogPins[] = { }; // 4, 5, 6, 9, 10, 11
 int analognumPins = sizeof(analogPins) / sizeof(analogPins[0]);
 
-const int maxFirePins = 6;
-const int maxFiveVPins = 2;
+const int maxFirePins = 31;
+const int maxFiveVPins = 1;
 
-int firePins[maxFirePins] = { /*1*/1, 2, 3, /*2*/14, 13, 12 };
-int fiveVPins[maxFiveVPins] = { /*1*/8, /*2*/7 };
+int firePins[maxFirePins] = { /*4*/29,15,6,4,16,21,17,26,9,11,30,5,22,3,0,27,20,23,10,25,1,24,14,2,28,8,13,18,12,19};
+int fiveVPins[maxFiveVPins] = { 7 };
 int previousValues[maxFirePins];
 
 int firenumPins = sizeof(firePins) / sizeof(firePins[0]);;
@@ -47,7 +47,7 @@ void addNewCount(int id, int value) {
         countSize++;
     }
 }
-int CountLength = 5;
+int CountLength = 50;
 void incrementAllCounts() {
     for (int i = 0; i < countSize; i++) {
         counts[i].value++;
@@ -91,7 +91,7 @@ void savePins() {
     }
 }
 #pragma endregion
-#pragma region Clean HC12
+#pragma region HC12
 String trimToAllowedCharacters(String input) {
     if (input.length() == 0) { return input; }
     int startIndex = 0;
@@ -103,6 +103,17 @@ String trimToAllowedCharacters(String input) {
         startIndex++;
     }
     return input.substring(startIndex);
+}
+void HC12Send(const String& message) {
+    char dataToSend[100]; // Buffer to hold the data to send
+
+    // Ensure the message fits in the buffer
+    if (message.length() < sizeof(dataToSend)) {
+        message.toCharArray(dataToSend, sizeof(dataToSend)); // Convert String to char array
+        HC12.println(dataToSend); // Send data to HC-12
+    } else {
+        Serial.println("Message too long to send.");
+    }
 }
 #pragma endregion
 
@@ -118,7 +129,7 @@ void setup() {
     pinMode(A2, OUTPUT);
     digitalWrite(A2, HIGH);
 
-    //savePins();
+    savePins();
     loadPins();
 
     for (int i = 0; i < analognumPins; i++) {
@@ -189,27 +200,8 @@ void loop() {
             char finalStr[200];
             sprintf(finalStr, "[ID: %d | maxFirePins : %d, firePins: %s]", satelliteID, maxFirePins, firePinsStr);
             strcat(finalStr, "\r\n");
-            HC12.write(finalStr);
-            Serial.println(finalStr);
-
-            //fiveVPins
-            char fiveVPinsStr[100];
-            fiveVPinsStr[0] = '\0';
-            for (int i = 0; i < maxFiveVPins; i++) {
-                char temp[20];
-                sprintf(temp, "%d", fiveVPins[i]);
-                if (i == 0) {
-                    sprintf(fiveVPinsStr, "[%s", temp);
-                }
-                else {
-                    sprintf(fiveVPinsStr + strlen(fiveVPinsStr), ", %s", temp);
-                }
-            }
-            sprintf(fiveVPinsStr + strlen(fiveVPinsStr), "]");
-            char finalStrV[200];
-            sprintf(finalStrV, "[ID: %d | maxFiveVPins : %d, fiveVPins: %s]", satelliteID, maxFiveVPins, fiveVPinsStr);
-            strcat(finalStrV, "\r\n");
-            HC12.write(finalStrV);
+            HC12Send("[ID: 1 | maxFirePins : 6, firePins: [1, 2, 3, 14, 13, 12]]");
+            Serial.println("[ID: 1 | maxFirePins : 6, firePins: [1, 2, 3, 14, 13, 12]]");
 
         }
         else {
