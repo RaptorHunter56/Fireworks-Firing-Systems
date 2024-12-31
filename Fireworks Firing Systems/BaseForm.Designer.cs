@@ -81,6 +81,7 @@
             addDelayToolStripMenuItem = new ToolStripMenuItem();
             minusDelayToolStripMenuItem = new ToolStripMenuItem();
             toolStripTextBox1 = new ToolStripTextBox();
+            toolStripMenuItem3 = new ToolStripMenuItem();
             statusStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
@@ -142,7 +143,7 @@
             // 
             // settingsToolStripMenuItem
             // 
-            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2 });
+            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem2, toolStripMenuItem3 });
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new Size(61, 20);
             settingsToolStripMenuItem.Text = "Settings";
@@ -479,6 +480,13 @@
             toolStripTextBox1.Size = new Size(100, 23);
             toolStripTextBox1.KeyPress += toolStripTextBox1_KeyPress;
             // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(180, 22);
+            toolStripMenuItem3.Text = "General Settings";
+            toolStripMenuItem3.Click += toolStripMenuItem3_Click;
+            // 
             // BaseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -557,5 +565,6 @@
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
+        private ToolStripMenuItem toolStripMenuItem3;
     }
 }

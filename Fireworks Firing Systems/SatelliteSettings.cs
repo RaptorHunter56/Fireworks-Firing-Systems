@@ -39,14 +39,14 @@ namespace Fireworks_Firing_Systems
         public void si_DataReceived(string data)
         {
             richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
-            Regex CheckIn = new Regex(@"\[ID\: [0-9]+\]");
-            Regex SettingsIn = new Regex(@"\[ID\: ([0-9]+) ^ ([a-zA-Z]+) : ([0-9]+)\]");
+            Regex CheckIn = new Regex(@"\[ID\:[0-9]+\]");
+            Regex SettingsIn = new Regex(@"\[ID\:([0-9]+)\|([a-zA-Z]+):([0-9]+)\]");
             switch (data.Trim())
             {
                 case var someVal when CheckIn.IsMatch(someVal):
                     richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Checking In...\r\n";
                     var CheckInmatch = CheckIn.Match(someVal);
-                    treeView1.Nodes.Add($"[ID: {CheckInmatch.Groups[0].Value}]");
+                    treeView1.Nodes.Add(CheckInmatch.Groups[0].Value);
                     CallSatellites($"{CheckInmatch.Groups[0].Value} Get All Settings");
                     break;
                 case var someVal when SettingsIn.IsMatch(someVal):

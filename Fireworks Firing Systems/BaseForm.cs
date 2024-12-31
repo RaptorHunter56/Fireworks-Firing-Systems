@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +76,7 @@ namespace Fireworks_Firing_Systems
         private void serialPortToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new SerialPort(), "Serial Port");
         private void orderSettingsToolStripMenuItem_Click(object sender, EventArgs e) => OpenForm(new Order(), "Order");
         private void toolStripMenuItem2_Click(object sender, EventArgs e) => OpenForm(new SatelliteSettings(this), "Satellite Settings");
+        private void toolStripMenuItem3_Click(object sender, EventArgs e) => OpenForm(new GeneralSettings(this), "General Settings");
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -123,7 +125,7 @@ namespace Fireworks_Firing_Systems
 
         private void button1_Click(object sender, EventArgs e) => Connect_Disconnect();
         private void disConnectToolStripMenuItem_Click(object sender, EventArgs e) => Connect_Disconnect(false);
-        private void BaseForm_FormClosing(object sender, FormClosingEventArgs e) => Connect_Disconnect(false);
+        private void BaseForm_FormClosing(object sender, FormClosingEventArgs e) { Connect_Disconnect(false); StopAllThreads(); }
 
         #region SerialPort
         private void Connect_Disconnect(bool connect = true)
@@ -155,7 +157,7 @@ namespace Fireworks_Firing_Systems
                     toolStripStatusLabel1.Text = "Serial Port Open";
                     richTextBox1.Text += $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
                     menuStrip1.ContextMenuStrip = contextMenuStrip1;
-                    SendText("Check All");
+                    //SendText("Check All");
                 }
                 catch (Exception ex)
                 {
@@ -169,9 +171,21 @@ namespace Fireworks_Firing_Systems
         private delegate void SetTextDeleg(string text);
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Thread.Sleep(100);
-            string data = _serialPort.ReadLine();
-            this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
+            Thread.Sleep(1000);
+            StringBuilder dataBuilder = new StringBuilder();
+            while (_serialPort.BytesToRead > 0)
+            {
+                char ch = (char)_serialPort.ReadChar();
+                if (ch == '\n')
+                    break;
+                dataBuilder.Append(ch);
+            }
+            string data = dataBuilder.ToString();
+            foreach (var item in data.Split('['))
+            {
+                if (item.Trim() != "")
+                    this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { $"[{item}" });
+            }
         }
         public delegate void _serialPortAddition(string data);
         public _serialPortAddition portAddition;
@@ -180,7 +194,7 @@ namespace Fireworks_Firing_Systems
             richTextBox1.Text += $"{DateTime.Now} ⏩ {data.Trim()}\r\n";
             Regex PinCheckAll = new Regex(@"^(\[(\d).(\d): (On|Disconnected|Off)])+(,(\[(\d).(\d): (On|Disconnected|Off)]))+$");
             Regex PinCheck = new Regex(@"^\[(\d).(\d): (On|Disconnected|Off)]$");
-            Regex CheckIn = new Regex(@"\[ID\: ([0-9]+)\]");
+            Regex CheckIn = new Regex(@"\[ID\:([0-9]+)\]");
             switch (data.Trim())
             {
                 case var someVal when PinCheckAll.IsMatch(someVal): //
@@ -203,21 +217,45 @@ namespace Fireworks_Firing_Systems
                     richTextBox1.Text += $"{new string(' ', $"{DateTime.Now} ".Length)}🔽 Unknown command received...\r\n";
                     break;
             }
-            portAddition(data);
+            if (portAddition != null)
+                portAddition(data);
         }
         private void richTextBox1_TextChanged(object sender, EventArgs e) { richTextBox1.SelectionStart = richTextBox1.Text.Length; richTextBox1.ScrollToCaret(); }
         private void button2_Click(object sender, EventArgs e) => SendText();
         private void textBox1_KeyDown(object sender, KeyEventArgs e) { if (e.KeyCode == Keys.Enter) SendText(); }
         private void SendText() => SendText(textBox1.Text);
+        private void HelpText()
+        {
+            richTextBox1.Text += $"Help:\r\n";
+            richTextBox1.Text += $"   cls    > Clear log\r\n";
+            richTextBox1.Text += $"   x      > Fire firework at position x\r\n";
+            richTextBox1.Text += $"   x-y    > Fire firework from position x to position y\r\n";
+            richTextBox1.Text += $"   x-y *z > Fire firework from position x to position y with a custom delay of z\r\n";
+            richTextBox1.Text += $"   stop   > Stop all\r\n";
+        }
+        private CancellationTokenSource cancellationTokenSource;
         public void SendText(string text)
         {
             int startNo = 1;
             int endNo = 3;
-            int n3000 = 300;
+            int n3000 = Properties.Settings.Default.RangeDelay;
             Regex RangeCheck = new Regex(@"^(\d+)-(\d+)$");
             Regex RangePlusCheck = new Regex(@"^(\d+)-(\d+) \*(\d+)$");
+            Regex HelpCheck = new Regex(@"^(help)|h|\?$");
             switch (text.ToLower())
             {
+                case "stop":
+                    StopAllThreads();
+                    richTextBox1.Text += $"{DateTime.Now} ‼ Stopping Threads ‼\r\n";
+                    textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
+                    textBox1.Focus();
+                    break;
+                case var someVal when HelpCheck.IsMatch(someVal):
+                    HelpText();
+                    break;
+                case var someVal when HelpCheck.IsMatch(someVal):
+                    HelpText();
+                    break;
                 case "cls":
                     richTextBox1.Text = $"{DateTime.Now} ⏺ Opened [{Properties.Settings.Default.SerialPort} - {Properties.Settings.Default.BaudRate}]\r\n";
                     textBox1.Text = (textBox1.Text == text) ? "" : textBox1.Text;
@@ -233,22 +271,32 @@ namespace Fireworks_Firing_Systems
                     var matchRange = RangeCheck.Match(someVal);
                     startNo = int.Parse(matchRange.Groups[1].Value);
                     endNo = int.Parse(matchRange.Groups[2].Value);
-                    n3000 = 10000;
+                    n3000 = Properties.Settings.Default.RangeDelay;
                     goto case "123";
                 case "123":
-                    richTextBox1.Text += $"{DateTime.Now} ⏪ Firing {startNo} to {endNo} at\r\n";
-                    for (int i = startNo; i <= endNo; i++)
+                    richTextBox1.Text += $"{DateTime.Now} ⏪ Firing {startNo} to {endNo} at {n3000} ({n3000 / 1000.0}s)\r\n";
+                    cancellationTokenSource = new CancellationTokenSource();
+                    CancellationToken token = cancellationTokenSource.Token;
+                    for (int i = startNo; (startNo > endNo) ? (i >= endNo) : (i <= endNo); i += startNo > endNo ? -1 : 1)
                     {
                         int threadNumber = i; // Capture the current value of i
                         Thread thread = new Thread(() =>
                         {
                             // Wait for 3000 * N milliseconds
-                            Thread.Sleep(n3000 * threadNumber);
-                            _serialPort.Write($"{threadNumber}\r\n");
-                            richTextBox1.Invoke((MethodInvoker)(() =>
+                            try
                             {
-                                richTextBox1.Text += $"{DateTime.Now} ✨ {threadNumber}\r\n";
-                            }));
+                                for (int j = 0; j < ((startNo > endNo) ? startNo - threadNumber + 1 : threadNumber) - (Properties.Settings.Default.RangeDelayStart ? 1 : 0); j++)
+                                {
+                                    Thread.Sleep(n3000);
+                                    token.ThrowIfCancellationRequested();
+                                }
+                                _serialPort.Write($"{threadNumber}\r\n");
+                                richTextBox1.Invoke((MethodInvoker)(() =>
+                                {
+                                    richTextBox1.Text += $"{DateTime.Now} ✨ {threadNumber}\r\n";
+                                }));
+                            }
+                            catch (Exception ex) { }
                         });
                         thread.Start(); // Start the thread
                     }
@@ -271,6 +319,11 @@ namespace Fireworks_Firing_Systems
                     }
                     break;
             }
+        }
+        public void StopAllThreads()
+        {
+            if (cancellationTokenSource != null)
+                cancellationTokenSource.Cancel();
         }
         #endregion
         #region SerialPort Protocol
